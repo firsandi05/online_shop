@@ -1,0 +1,5 @@
+category_id,category_name,category_image,product_id,product_name,price,product_image
+1,Sepatu,sepatu.png,1,Sepatu Hitam,250000,sepatu/hitam.png
+1,Sepatu,sepatu.png,2,Sepatu Putih,240000,sepatu/putih.png
+2,Tas,tas.png,3,Tas Kulit Coklat,350000,tas/coklat.png
+3,Jam,jam.png,4,Jam Tangan Pria,250000,jam/perak.png
