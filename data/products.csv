@@ -1,5 +1,9 @@
 category_id,category_name,category_image,product_id,product_name,price,product_image
-1,Sepatu,sepatu.png,1,Sepatu Hitam,250000,sepatu/hitam.png
-1,Sepatu,sepatu.png,2,Sepatu Putih,240000,sepatu/putih.png
-2,Tas,tas.png,3,Tas Kulit Coklat,350000,tas/coklat.png
-3,Jam,jam.png,4,Jam Tangan Pria,250000,jam/perak.png
+1,Analog,analog.png,1,Q series,160000,analog/q_series.png
+1,Analog,analog.png,1,S series,160000,analog/s_series.png
+2,Digital,digital.png,2,Sport Series,160000,digital/sport.png
+2,Digital,digital.png,2,Classy Series,160000,digital/classy.png
+3,Casio,casio.png,3,Casio,540000,casio/image.png
+4,QnQ,qnq.png,4,Analog QnQ,320000,qnq/analog.png
+4,QnQ,qnq.png,4,Sport Analog QnQ,360000,qnq/sport_analog.png
+4,QnQ,qnq.png,4,Digital,500000,qnq/digital.png

@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - Toko Online</title>
+    <title>Admin Panel - XWing Project</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/admin.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <!-- Login Section -->
     <div class="container" id="login-section">
@@ -30,12 +32,17 @@
         <!-- PANDUAN PENTING -->
         <div class="alert alert-info">
             <h3>📌 Panduan Menyimpan Perubahan (PENTING!)</h3>
-            <p>Karena website ini adalah <i>Static Website</i>, perubahan yang Anda lakukan di halaman ini <b>tidak akan otomatis tersimpan</b> di server. Ikuti langkah-langkah berikut:</p>
+            <p>Karena website ini adalah <i>Static Website</i>, perubahan yang Anda lakukan di halaman ini <b>tidak akan
+                    otomatis tersimpan</b> di server. Ikuti langkah-langkah berikut:</p>
             <ol>
                 <li>Lakukan penambahan/perubahan data produk atau pengaturan WA pada form di bawah.</li>
-                <li>Jika sudah selesai, klik tombol <b>"Download products.csv"</b> dan/atau <b>"Download config.js"</b>.</li>
-                <li>Buka repository GitHub Anda, lalu lakukan <b>Replace (timpa)</b> file lama yang ada di folder <code>data/products.csv</code> dan <code>config/config.js</code> dengan file yang baru saja didownload.</li>
-                <li><b>Untuk Gambar:</b> Anda wajib mengupload file gambar secara manual ke folder <code>assets/categories/</code> atau <code>assets/products/</code> di GitHub.</li>
+                <li>Jika sudah selesai, klik tombol <b>"Download products.csv"</b> dan/atau <b>"Download config.js"</b>.
+                </li>
+                <li>Buka repository GitHub Anda, lalu lakukan <b>Replace (timpa)</b> file lama yang ada di folder
+                    <code>data/products.csv</code> dan <code>config/config.js</code> dengan file yang baru saja
+                    didownload.</li>
+                <li><b>Untuk Gambar:</b> Anda wajib mengupload file gambar secara manual ke folder
+                    <code>assets/categories/</code> atau <code>assets/products/</code> di GitHub.</li>
             </ol>
         </div>
 
@@ -85,13 +92,20 @@
         <div class="modal-content">
             <h3 id="modal-title">Tambah Produk</h3>
             <div class="form-grid">
-                <div class="form-group"><label>Category ID (Angka)</label><input type="text" id="cat-id" class="form-control"></div>
-                <div class="form-group"><label>Category Name</label><input type="text" id="cat-name" class="form-control"></div>
-                <div class="form-group"><label>Category Image (Contoh: sepatu.jpg)</label><input type="text" id="cat-img" class="form-control"></div>
-                <div class="form-group"><label>Product ID (Angka Unik)</label><input type="text" id="prod-id" class="form-control"></div>
-                <div class="form-group"><label>Product Name</label><input type="text" id="prod-name" class="form-control"></div>
-                <div class="form-group"><label>Price (Hanya Angka)</label><input type="number" id="prod-price" class="form-control"></div>
-                <div class="form-group"><label>Product Image (Contoh: sepatu/hitam.jpg)</label><input type="text" id="prod-img" class="form-control"></div>
+                <div class="form-group"><label>Category ID (Angka)</label><input type="text" id="cat-id"
+                        class="form-control"></div>
+                <div class="form-group"><label>Category Name</label><input type="text" id="cat-name"
+                        class="form-control"></div>
+                <div class="form-group"><label>Category Image (Contoh: sepatu.jpg)</label><input type="text"
+                        id="cat-img" class="form-control"></div>
+                <div class="form-group"><label>Product ID (Angka Unik)</label><input type="text" id="prod-id"
+                        class="form-control"></div>
+                <div class="form-group"><label>Product Name</label><input type="text" id="prod-name"
+                        class="form-control"></div>
+                <div class="form-group"><label>Price (Hanya Angka)</label><input type="number" id="prod-price"
+                        class="form-control"></div>
+                <div class="form-group"><label>Product Image (Contoh: sepatu/hitam.jpg)</label><input type="text"
+                        id="prod-img" class="form-control"></div>
             </div>
             <div class="modal-actions mt-3">
                 <button id="save-product-btn" class="btn btn-primary">Simpan ke Tabel</button>
@@ -103,4 +117,5 @@
     <!-- Script Admin -->
     <script type="module" src="js/admin.js"></script>
 </body>
+
 </html>

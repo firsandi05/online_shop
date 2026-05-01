@@ -1,6 +1,6 @@
-# Toko Online - Static Catalog
+# XWing Project - Static Catalog
 
-Proyek ini adalah sebuah website katalog toko online statis yang dibangun menggunakan HTML, CSS, dan Vanilla JavaScript. Data produk dan kategori dimuat secara dinamis dari file CSV.
+Proyek ini adalah sebuah website katalog XWing Project statis yang dibangun menggunakan HTML, CSS, dan Vanilla JavaScript. Data produk dan kategori dimuat secara dinamis dari file CSV.
 
 ## Struktur Direktori
 - `index.html`: Halaman utama / landing page.
