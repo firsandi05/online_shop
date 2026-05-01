@@ -53,3 +53,28 @@ Jika Anda sudah menginstal Node.js:
 
 ## Mengubah Data Produk
 Anda dapat menambah, menghapus, atau mengubah data produk dengan mengedit file `data/products.csv`. Pastikan format kolom tetap sama (misal: ID, Kategori, Nama Produk, Harga, dll).
+
+## Panduan Menyimpan Perubahan ke GitHub (Git Push)
+
+Jika Anda baru saja mengubah kode atau gambar, ikuti langkah-langkah berikut di Terminal Anda untuk mengunggah pembaruan ke GitHub dengan aman (tanpa ditolak/rejected):
+
+1. **Tambahkan (Add) semua perubahan:**
+   ```bash
+   git add .
+   ```
+
+2. **Simpan (Commit) pembaruan Anda:**
+   ```bash
+   git commit -m "Deskripsi singkat tentang apa yang Anda ubah"
+   ```
+
+3. **Sinkronisasi (Pull & Push) ke GitHub:**
+   ```bash
+   # Langkah A: Selalu tarik data terbaru dari GitHub terlebih dahulu (agar tidak 'rejected')
+   git pull --rebase origin main
+   
+   # Langkah B: Jika Langkah A berhasil, dorong pembaruan Anda ke GitHub
+   git push origin main
+   ```
+
+> **Tips:** Error `! [rejected]` biasanya terjadi karena di GitHub sudah ada file baru (seperti README yang baru dibuat) sedangkan di komputer Anda belum ada file tersebut. Menjalankan `git pull --rebase origin main` akan menggabungkan perubahan secara otomatis sebelum Anda melakukan push. Pastikan selalu menggunakan branch `main` (bukan `master`).
