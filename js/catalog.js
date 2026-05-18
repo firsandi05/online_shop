@@ -136,18 +136,24 @@ export class Catalog {
             ) {
 
                 categoriesMap.set(
-                    item.category_id,
-                    {
-                        id:
-                            item.category_id,
+    item.category_id,
+    {
+        id:
+            item.category_id,
 
-                        name:
-                            item.category_name,
+        name:
+            item.category_name,
 
-                        image:
-                            item.category_image
-                    }
-                );
+        image:
+            item.category_image,
+
+        rating:
+            item.category_rating,
+
+        sold:
+            item.category_sold
+    }
+);
             }
         });
 
@@ -194,8 +200,8 @@ export class Catalog {
                     </h3>
 
                     <div class="category-rating">
-                        ⭐ 4.98 | 200+ terjual
-                    </div>
+    ⭐ ${category.rating} | ${category.sold} terjual
+</div>
 
                 </div>
             `;
