@@ -337,7 +337,7 @@ export class Catalog {
                         document.getElementById(
                             'modalImage'
                         );
-
+                    console.log(product.product_image)
                     modalImage.src =
                         `assets/products/${product.product_image}`;
 
