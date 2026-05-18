@@ -241,7 +241,7 @@ export class Catalog {
         </h3>
 
         <div class="category-rating">
-            ⭐ 4.98
+            ⭐ 4.98 | 200+ terjual
         </div>
 
     </div>
