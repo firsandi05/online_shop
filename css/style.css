@@ -708,3 +708,22 @@ h3 {
 .clickable-image {
     cursor: zoom-in;
 }
+/* Biar Home, Katalog, Cart sejajar */
+.navbar nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: nowrap;
+}
+
+/* Hilangin margin bawaan */
+.navbar nav a {
+    margin-left: 0;
+    display: flex;
+    align-items: center;
+}
+
+/* Navbar jangan turun ke bawah */
+.navbar-content {
+    flex-wrap: nowrap;
+}
