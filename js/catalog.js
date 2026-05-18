@@ -166,7 +166,19 @@ export class Catalog {
            // Add to cart event
 card.querySelector('.add-to-cart-btn').addEventListener('click', (e) => {
     e.stopPropagation();
+// Zoom image event
+card.querySelector('.clickable-image')
+.addEventListener('click', () => {
 
+    const modal =
+        document.getElementById('imageModal');
+
+    const modalImg =
+        document.getElementById('modalImage');
+
+    modal.style.display = 'block';
+    modalImg.src = product.product_image;
+});
    const selectedSize =
     card.querySelector('.size-select').value;
 
@@ -212,4 +224,20 @@ this.cart.addItem({
         const encodedMessage = encodeURIComponent(message);
         return `https://wa.me/${number}?text=${encodedMessage}`;
     }
+}
+
+const modal =
+    document.getElementById('imageModal');
+
+const closeBtn =
+    document.querySelector('.close-modal');
+
+if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    modal.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
 }
