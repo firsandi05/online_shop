@@ -138,22 +138,40 @@ export class Catalog {
                 <div class="card-content">
                     <h3 class="card-title">${product.product_name}</h3>
                     <div class="card-price">${formattedPrice}</div>
-                    <div class="card-actions">
-                        <button class="btn btn-cart add-to-cart-btn" data-id="${product.product_id}">
-                            + Keranjang
-                        </button>
-                        <a href="${whatsappLink}" target="_blank" class="btn btn-whatsapp btn-buy-now">
-                            Beli Sekarang
-                        </a>
-                    </div>
+
+<div class="product-size">
+    <label>Ukuran:</label>
+    <select class="size-select">
+        <option value="Small (12 cm)">Small (12 cm)</option>
+        <option value="Medium (15 cm)">Medium (15 cm)</option>
+        <option value="Large (20 cm)">Large (20 cm)</option>
+        <option value="Xtra Large (25 cm)">Xtra Large (25 cm)</option>
+    </select>
+</div>
+
+<div class="card-actions">
+    <button class="btn btn-cart add-to-cart-btn" data-id="${product.product_id}">
+        + Keranjang
+    </button>
+    <a href="${whatsappLink}" target="_blank" class="btn btn-whatsapp btn-buy-now">
+        Beli Sekarang
+    </a>
+</div>
                 </div>
             `;
             
-            // Add to cart event
-            card.querySelector('.add-to-cart-btn').addEventListener('click', (e) => {
-                e.stopPropagation();
-                this.cart.addItem(product);
-            });
+           // Add to cart event
+card.querySelector('.add-to-cart-btn').addEventListener('click', (e) => {
+    e.stopPropagation();
+
+    const selectedSize =
+        card.querySelector('.size-select').value;
+
+    this.cart.addItem({
+        ...product,
+        selectedSize
+    });
+});
 
             this.productsGrid.appendChild(card);
         });
