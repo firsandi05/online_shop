@@ -739,3 +739,22 @@ h3 {
     font-weight: 600;
     color: #f5a623;
 }
+.language-switch {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.lang-btn {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 6px 10px;
+    border-radius: 8px;
+}
+
+.lang-btn.active {
+    background: rgba(0,0,0,0.1);
+    font-weight: bold;
+}
