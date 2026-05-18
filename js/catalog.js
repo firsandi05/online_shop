@@ -245,6 +245,10 @@ export class Catalog {
                         ${formattedPrice}
                     </div>
 
+                    <div class="product-rating">
+    ⭐ ${product.rating || 4.8}
+</div>
+
                     <div class="product-size">
                         <label>Ukuran:</label>
 
