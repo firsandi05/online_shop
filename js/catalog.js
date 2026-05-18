@@ -17,24 +17,24 @@ export class Catalog {
     }
 
     initEvents() {
-        if (this.backButton) {
-            this.backButton.addEventListener('click', () => this.showCategories());
-        }
+    if (this.backButton) {
+        this.backButton.addEventListener('click', () => this.showCategories());
+    }
 
-        if (this.searchInput) {
-            this.searchInput.addEventListener('input', (e) => this.handleSearch(e.target.value));
-        }
-        const modal = document.getElementById('imageModal');
-const closeBtn = document.querySelector('.close-modal');
+    if (this.searchInput) {
+        this.searchInput.addEventListener('input', (e) =>
+            this.handleSearch(e.target.value)
+        );
+    }
 
-if (closeBtn) {
-    closeBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
-    });
+    const modal = document.getElementById('imageModal');
 
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.style.display = 'none';
+    if (modal) {
+        modal.addEventListener('click', () => {
+            modal.classList.remove('show');
+        });
+    }
+}
         }
     });
 }
