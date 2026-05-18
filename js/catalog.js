@@ -224,22 +224,28 @@ export class Catalog {
             card.className = 'card';
 
             card.innerHTML = `
-                <div class="card-img-wrapper">
+    <div class="card-img-wrapper">
+        <img 
+            src="assets/categories/${category.image}" 
+            alt="${category.name}" 
+            onerror="this.src='https://placehold.co/400x300?text=${encodeURIComponent(category.name)}'"
+        >
+    </div>
 
-                    <img
-                        src="assets/products/${product.product_image}"
-                        alt="${product.product_name}"
-                        class="product-image clickable-image"
-                        onerror="this.src='https://placehold.co/400x400?text=${encodeURIComponent(product.product_name)}'"
-                    >
+    <div class="card-content" 
+        style="justify-content:center; align-items:center;">
 
-                </div>
+        <h3 class="card-title" 
+            style="margin:0; font-size:1.5rem;">
+            ${category.name}
+        </h3>
 
-                <div class="card-content">
+        <div class="category-rating">
+            ⭐ 4.98
+        </div>
 
-                    <h3 class="card-title">
-                        ${product.product_name}
-                    </h3>
+    </div>
+`;
 
                     <div class="card-price">
                         ${formattedPrice}
