@@ -182,18 +182,20 @@ export class Catalog {
            // Add to cart event
 card.querySelector('.add-to-cart-btn').addEventListener('click', (e) => {
     e.stopPropagation();
+    this.cart.addItem(product);
+});
 // Zoom image event
+// Zoom image
 const image = card.querySelector('.clickable-image');
+
 image.addEventListener('click', () => {
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
 
-    const modal =
-        document.getElementById('imageModal');
+    modalImage.src =
+        `assets/products/${product.product_image}`;
 
-    const modalImg =
-        document.getElementById('modalImage');
-
-    modal.style.display = 'block';
-    modalImg.src = product.product_image;
+    modal.classList.add('show');
 });
    const selectedSize =
     card.querySelector('.size-select').value;
