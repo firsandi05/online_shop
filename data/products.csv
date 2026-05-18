@@ -1,102 +1,102 @@
-category_id,category_name,category_image,product_id,product_name,price,product_image,rating
-1,Q&Q Analog,analog.png,1,Rainbow Pink,150000,analog/qq1.jpg,5
-1,Q&Q Analog,analog.png,2,Fiery Pinkish,150000,analog/qq2.jpg,5
-1,Q&Q Analog,analog.png,3,Pastel Rare,150000,analog/qq3.jpg,5
-1,Q&Q Analog,analog.png,4,Red Navy,150000,analog/qq4.jpg,5
-1,Q&Q Analog,analog.png,5,Elegant Blue,150000,analog/qq5.jpg,5
-1,Q&Q Analog,analog.png,6,Elegant Pastel,150000,analog/qq6.jpg,5
-1,Q&Q Analog,analog.png,7,Purple Pinkish,150000,analog/qq7.jpg,5
-1,Q&Q Analog,analog.png,8,Purple,150000,analog/qq8.jpg,5
-1,Q&Q Analog,analog.png,9,Nature Green,150000,analog/qq9.jpg,5
-1,Q&Q Analog,analog.png,10,Tri Color,150000,analog/qq10.jpg,5
-1,Q&Q Analog,analog.png,11,Navy Grey,150000,analog/qq11.jpg,5
-1,Q&Q Analog,analog.png,12,Navy Grey 2,150000,analog/qq12.jpg,5
-1,Q&Q Analog,analog.png,13,Navy Grey 3,150000,analog/qq13.jpg,5
-1,Q&Q Analog,analog.png,14,Elegant White,150000,analog/qq14.jpg,4
-1,Q&Q Analog,analog.png,15,Lava,150000,analog/qq15.jpg,4
-1,Q&Q Analog,analog.png,16,LEGO Basic Color,150000,analog/qq16.jpg,4
-1,Q&Q Analog,analog.png,17,Buzz Lightyear,150000,analog/qq17.jpg,5
-1,Q&Q Analog,analog.png,18,Woody,150000,analog/qq18.jpg,5
-1,Q&Q Analog,analog.png,19,Rainbow Rare,150000,analog/qq19.jpg,5
-1,Q&Q Analog,analog.png,20,Purple Grad,150000,analog/qq20.jpg,5
-1,Q&Q Analog,analog.png,21,Elegant Pink,150000,analog/qq21.jpg,5
-1,Q&Q Analog,analog.png,22,Pastel Purple,150000,analog/qq22.jpg,5
-1,Q&Q Analog,analog.png,23,Rainbow Pink,150000,analog/qq23.jpg,5
-1,Q&Q Analog,analog.png,24,Deep Blue Sea,150000,analog/qq24.jpg,5
-1,Q&Q Analog,analog.png,25,Elegant Navy,150000,analog/qq25.jpg,5
-1,Q&Q Analog,analog.png,26,Pinkish Rare,150000,analog/qq26.jpg,5
-1,Q&Q Analog,analog.png,27,Pastel II,150000,analog/qq27.jpg,5
-1,Q&Q Analog,analog.png,28,Candy bar,150000,analog/qq28.jpg,5
-1,Q&Q Analog,analog.png,29,Red Fire,150000,analog/qq29.jpg,4
-1,Q&Q Analog,analog.png,30,Red Elegant,150000,analog/qq30.jpg,4
-1,Q&Q Analog,analog.png,31,Black - Red,150000,analog/qq31.jpg,4
-1,Q&Q Analog,analog.png,32,White Ice,150000,analog/qq32.jpg,4
-1,Q&Q Analog,analog.png,33,LEGO Basic Color 2,150000,analog/qq33.jpg,4
-1,Q&Q Analog,analog.png,34,Donald Duck,150000,analog/qq34.jpg,5
-1,Q&Q Analog,analog.png,35,Blue - White,150000,analog/qq35.jpg,5
-1,Q&Q Analog,analog.png,36,Blue Ice,150000,analog/qq36.jpg,5
-,,,,,,,
-,,,,,,,
-2,Casio Digital,digital.png,1,Lava,155000,digital/casio_digital_kw1.png,5
-2,Casio Digital,digital.png,2,The Deep Sea,155000,digital/casio_digital_kw2.png,4
-2,Casio Digital,digital.png,3,LEGO Basic Color,155000,digital/casio_digital_kw3.png,4
-2,Casio Digital,digital.png,4,Nature Green,155000,digital/casio_digital_kw4.png,5
-2,Casio Digital,digital.png,5,Elegant Silver,155000,digital/casio_digital_kw5.png,5
-2,Casio Digital,digital.png,6,Yellow Stone,155000,digital/casio_digital_kw6.png,5
-2,Casio Digital,digital.png,7,Golden Tan,155000,digital/casio_digital_kw7.png,5
-2,Casio Digital,digital.png,8,Lava Gold,155000,digital/casio_digital_kw8.png,5
-2,Casio Digital,digital.png,9,Elegant Pink,155000,digital/casio_digital_kw9.png,5
-2,Casio Digital,digital.png,10,Pastel Rare,155000,digital/casio_digital_kw10.png,5
-2,Casio Digital,digital.png,11,Rainbow Pastel,155000,digital/casio_digital_kw11.png,5
-2,Casio Digital,digital.png,12,Choco Brown,155000,digital/casio_digital_kw12.png,5
-,,,,,,,
-,,,,,,,
-3,Casio F91W Original,casio.png,1,Crystal Blue,500000,casio/casio2_f91w.jpg,5
-3,Casio F91W Original,casio.png,2,Pastel Rare,500000,casio/casio3_f91w.jpg,5
-3,Casio F91W Original,casio.png,3,LEGO Basic Color,500000,casio/casio4_f91w.jpg,5
-3,Casio F91W Original,casio.png,4,Golden Earth,500000,casio/casio5_f91w.jpg,5
-3,Casio F91W Original,casio.png,5,Donald Duck,500000,casio/casio6_f91w.jpg,5
-3,Casio F91W Original,casio.png,6,The Forest,500000,casio/casio7_f91w.jpg,5
-3,Casio F91W Original,casio.png,7,Elegant Purple,500000,casio/casio8_f91w.jpg,5
-3,Casio F91W Original,casio.png,8,Fiery Pink,500000,casio/casio9_f91w.jpg,5
-3,Casio F91W Original,casio.png,9,Buzz Lightyear,500000,casio/casio10_f91w.jpg,4
-3,Casio F91W Original,casio.png,10,Pastel Cute,500000,casio/casio11_f91w.jpg,4
-3,Casio F91W Original,casio.png,11,Elegant Mint,500000,casio/casio12_f91w.jpg,5
-3,Casio F91W Original,casio.png,12,Pinkish Pastel,500000,casio/casio13_f91w.jpg,5
-3,Casio F91W Original,casio.png,13,Light Pastel,500000,casio/casio14_f91w.jpg,5
-3,Casio F91W Original,casio.png,14,Pastel Rare,500000,casio/casio15_f91w.jpg,4
-3,Casio F91W Original,casio.png,15,Rainbow Pastel,500000,casio/casio16_f91w.jpg,4
-3,Casio F91W Original,casio.png,16,Elegant Black,500000,casio/casio17_f91w.jpg,5
-3,Casio F91W Original,casio.png,17,Mint 2,500000,casio/casio18_f91w.jpg,5
-3,Casio F91W Original,casio.png,18,Purple Gradient,500000,casio/casio19_f91w.jpg,5
-3,Casio F91W Original,casio.png,19,Choco,500000,casio/casio20_f91w.jpg,5
-3,Casio F91W Original,casio.png,20,Navy Elegant,500000,casio/casio21_f91w.jpg,5
-,,,,,,,
-4,Swatch,swatch.png,1,Pastel Girl,150000,swatch/swatch1.jpg,5
-4,Swatch,swatch.png,2,Pink - Red,150000,swatch/swatch2.jpg,5
-4,Swatch,swatch.png,3,Sullivan Monster INC,150000,swatch/swatch3.jpg,5
-4,Swatch,swatch.png,4,Lavender Pink,150000,swatch/swatch4.jpg,5
-4,Swatch,swatch.png,5,Pastel Lavender,150000,swatch/swatch5.jpg,5
-4,Swatch,swatch.png,6,Mint,150000,swatch/swatch6.jpg,4
-4,Swatch,swatch.png,7,Green Tea,150000,swatch/swatch7.jpg,4
-4,Swatch,swatch.png,8,Purple Gradient,150000,swatch/swatch8.jpg,5
-4,Swatch,swatch.png,9,Fiery Pink,150000,swatch/swatch9.jpg,5
-4,Swatch,swatch.png,10,Candy Bar,150000,swatch/swatch10.jpg,5
-4,Swatch,swatch.png,11,Mickey Mouse,150000,swatch/swatch11.jpg,5
-4,Swatch,swatch.png,12,Nature Green,150000,swatch/swatch12.jpg,5
-4,Swatch,swatch.png,13,Earth Color,150000,swatch/swatch13.jpg,4
-4,Swatch,swatch.png,14,Grey Gradient,150000,swatch/swatch14.jpg,4
-4,Swatch,swatch.png,15,Yellowstone,150000,swatch/swatch15.jpg,4
-4,Swatch,swatch.png,16,Elegant Color,150000,swatch/swatch16.jpg,5
-4,Swatch,swatch.png,17,Candy Crush,150000,swatch/swatch17.jpg,5
-4,Swatch,swatch.png,18,Buzz Lightyear,150000,swatch/swatch18.jpg,5
-4,Swatch,swatch.png,19,Lime - White,150000,swatch/swatch19.jpg,5
-4,Swatch,swatch.png,20,Lavender Gradient,150000,swatch/swatch20.jpg,5
-4,Swatch,swatch.png,21,Pastel Color,150000,swatch/swatch21.jpg,5
-4,Swatch,swatch.png,22,Deep Blue Sea,150000,swatch/swatch22.jpg,5
-4,Swatch,swatch.png,23,Mentos,150000,swatch/swatch23.jpg,5
-,,,,,,,
-,,,,,,,
-5,QnQ,qnq.png,6,Analog QnQ,320000,qnq/analog.png,5
-5,QnQ,qnq.png,7,Sport Analog QnQ,360000,qnq/sport_analog.png,5
-5,QnQ,qnq.png,8,Digital,500000,qnq/digital.png,5
+category_id,category_name,category_image,product_id,product_name,price,product_image,rating,category_rating,category_sold
+1,Q&Q Analog,analog.png,1,Rainbow Pink,150000,analog/qq1.jpg,5,4.88,600+
+1,Q&Q Analog,analog.png,2,Fiery Pinkish,150000,analog/qq2.jpg,5,4.88,600+
+1,Q&Q Analog,analog.png,3,Pastel Rare,150000,analog/qq3.jpg,5,4.88,600+
+1,Q&Q Analog,analog.png,4,Red Navy,150000,analog/qq4.jpg,5,4.88,600+
+1,Q&Q Analog,analog.png,5,Elegant Blue,150000,analog/qq5.jpg,5,4.88,600+
+1,Q&Q Analog,analog.png,6,Elegant Pastel,150000,analog/qq6.jpg,5,4.88,600+
+1,Q&Q Analog,analog.png,7,Purple Pinkish,150000,analog/qq7.jpg,5,4.88,600+
+1,Q&Q Analog,analog.png,8,Purple,150000,analog/qq8.jpg,5,4.88,600+
+1,Q&Q Analog,analog.png,9,Nature Green,150000,analog/qq9.jpg,5,4.88,600+
+1,Q&Q Analog,analog.png,10,Tri Color,150000,analog/qq10.jpg,5,4.88,600+
+1,Q&Q Analog,analog.png,11,Navy Grey,150000,analog/qq11.jpg,5,4.88,600+
+1,Q&Q Analog,analog.png,12,Navy Grey 2,150000,analog/qq12.jpg,5,4.88,600+
+1,Q&Q Analog,analog.png,13,Navy Grey 3,150000,analog/qq13.jpg,5,4.88,600+
+1,Q&Q Analog,analog.png,14,Elegant White,150000,analog/qq14.jpg,4,4.88,600+
+1,Q&Q Analog,analog.png,15,Lava,150000,analog/qq15.jpg,4,4.88,600+
+1,Q&Q Analog,analog.png,16,LEGO Basic Color,150000,analog/qq16.jpg,4,4.88,600+
+1,Q&Q Analog,analog.png,17,Buzz Lightyear,150000,analog/qq17.jpg,5,4.88,600+
+1,Q&Q Analog,analog.png,18,Woody,150000,analog/qq18.jpg,5,4.88,600+
+1,Q&Q Analog,analog.png,19,Rainbow Rare,150000,analog/qq19.jpg,5,4.88,600+
+1,Q&Q Analog,analog.png,20,Purple Grad,150000,analog/qq20.jpg,5,4.88,600+
+1,Q&Q Analog,analog.png,21,Elegant Pink,150000,analog/qq21.jpg,5,4.88,600+
+1,Q&Q Analog,analog.png,22,Pastel Purple,150000,analog/qq22.jpg,5,4.88,600+
+1,Q&Q Analog,analog.png,23,Rainbow Pink,150000,analog/qq23.jpg,5,4.88,600+
+1,Q&Q Analog,analog.png,24,Deep Blue Sea,150000,analog/qq24.jpg,5,4.88,600+
+1,Q&Q Analog,analog.png,25,Elegant Navy,150000,analog/qq25.jpg,5,4.88,600+
+1,Q&Q Analog,analog.png,26,Pinkish Rare,150000,analog/qq26.jpg,5,4.88,600+
+1,Q&Q Analog,analog.png,27,Pastel II,150000,analog/qq27.jpg,5,4.88,600+
+1,Q&Q Analog,analog.png,28,Candy bar,150000,analog/qq28.jpg,5,4.88,600+
+1,Q&Q Analog,analog.png,29,Red Fire,150000,analog/qq29.jpg,4,4.88,600+
+1,Q&Q Analog,analog.png,30,Red Elegant,150000,analog/qq30.jpg,4,4.88,600+
+1,Q&Q Analog,analog.png,31,Black - Red,150000,analog/qq31.jpg,4,4.88,600+
+1,Q&Q Analog,analog.png,32,White Ice,150000,analog/qq32.jpg,4,4.88,600+
+1,Q&Q Analog,analog.png,33,LEGO Basic Color 2,150000,analog/qq33.jpg,4,4.88,600+
+1,Q&Q Analog,analog.png,34,Donald Duck,150000,analog/qq34.jpg,5,4.88,600+
+1,Q&Q Analog,analog.png,35,Blue - White,150000,analog/qq35.jpg,5,4.88,600+
+1,Q&Q Analog,analog.png,36,Blue Ice,150000,analog/qq36.jpg,5,4.88,600+
+,,,,,,,,,
+,,,,,,,,,
+2,Casio Digital,digital.png,1,Lava,155000,digital/casio_digital_kw1.png,5,4.9,200+
+2,Casio Digital,digital.png,2,The Deep Sea,155000,digital/casio_digital_kw2.png,4,4.9,200+
+2,Casio Digital,digital.png,3,LEGO Basic Color,155000,digital/casio_digital_kw3.png,4,4.9,200+
+2,Casio Digital,digital.png,4,Nature Green,155000,digital/casio_digital_kw4.png,5,4.9,200+
+2,Casio Digital,digital.png,5,Elegant Silver,155000,digital/casio_digital_kw5.png,5,4.9,200+
+2,Casio Digital,digital.png,6,Yellow Stone,155000,digital/casio_digital_kw6.png,5,4.9,200+
+2,Casio Digital,digital.png,7,Golden Tan,155000,digital/casio_digital_kw7.png,5,4.9,200+
+2,Casio Digital,digital.png,8,Lava Gold,155000,digital/casio_digital_kw8.png,5,4.9,200+
+2,Casio Digital,digital.png,9,Elegant Pink,155000,digital/casio_digital_kw9.png,5,4.9,200+
+2,Casio Digital,digital.png,10,Pastel Rare,155000,digital/casio_digital_kw10.png,5,4.9,200+
+2,Casio Digital,digital.png,11,Rainbow Pastel,155000,digital/casio_digital_kw11.png,5,4.9,200+
+2,Casio Digital,digital.png,12,Choco Brown,155000,digital/casio_digital_kw12.png,5,4.9,200+
+,,,,,,,,,
+,,,,,,,,,
+3,Casio F91W Original,casio.png,1,Crystal Blue,500000,casio/casio2_f91w.jpg,5,4.8,10
+3,Casio F91W Original,casio.png,2,Pastel Rare,500000,casio/casio3_f91w.jpg,5,4.8,10
+3,Casio F91W Original,casio.png,3,LEGO Basic Color,500000,casio/casio4_f91w.jpg,5,4.8,10
+3,Casio F91W Original,casio.png,4,Golden Earth,500000,casio/casio5_f91w.jpg,5,4.8,10
+3,Casio F91W Original,casio.png,5,Donald Duck,500000,casio/casio6_f91w.jpg,5,4.8,10
+3,Casio F91W Original,casio.png,6,The Forest,500000,casio/casio7_f91w.jpg,5,4.8,10
+3,Casio F91W Original,casio.png,7,Elegant Purple,500000,casio/casio8_f91w.jpg,5,4.8,10
+3,Casio F91W Original,casio.png,8,Fiery Pink,500000,casio/casio9_f91w.jpg,5,4.8,10
+3,Casio F91W Original,casio.png,9,Buzz Lightyear,500000,casio/casio10_f91w.jpg,4,4.8,10
+3,Casio F91W Original,casio.png,10,Pastel Cute,500000,casio/casio11_f91w.jpg,4,4.8,10
+3,Casio F91W Original,casio.png,11,Elegant Mint,500000,casio/casio12_f91w.jpg,5,4.8,10
+3,Casio F91W Original,casio.png,12,Pinkish Pastel,500000,casio/casio13_f91w.jpg,5,4.8,10
+3,Casio F91W Original,casio.png,13,Light Pastel,500000,casio/casio14_f91w.jpg,5,4.8,10
+3,Casio F91W Original,casio.png,14,Pastel Rare,500000,casio/casio15_f91w.jpg,4,4.8,10
+3,Casio F91W Original,casio.png,15,Rainbow Pastel,500000,casio/casio16_f91w.jpg,4,4.8,10
+3,Casio F91W Original,casio.png,16,Elegant Black,500000,casio/casio17_f91w.jpg,5,4.8,10
+3,Casio F91W Original,casio.png,17,Mint 2,500000,casio/casio18_f91w.jpg,5,4.8,10
+3,Casio F91W Original,casio.png,18,Purple Gradient,500000,casio/casio19_f91w.jpg,5,4.8,10
+3,Casio F91W Original,casio.png,19,Choco,500000,casio/casio20_f91w.jpg,5,4.8,10
+3,Casio F91W Original,casio.png,20,Navy Elegant,500000,casio/casio21_f91w.jpg,5,4.8,10
+,,,,,,,,,
+4,Swatch,swatch.png,1,Pastel Girl,150000,swatch/swatch1.jpg,5,4.9,100+
+4,Swatch,swatch.png,2,Pink - Red,150000,swatch/swatch2.jpg,5,4.9,100+
+4,Swatch,swatch.png,3,Sullivan Monster INC,150000,swatch/swatch3.jpg,5,4.9,100+
+4,Swatch,swatch.png,4,Lavender Pink,150000,swatch/swatch4.jpg,5,4.9,100+
+4,Swatch,swatch.png,5,Pastel Lavender,150000,swatch/swatch5.jpg,5,4.9,100+
+4,Swatch,swatch.png,6,Mint,150000,swatch/swatch6.jpg,4,4.9,100+
+4,Swatch,swatch.png,7,Green Tea,150000,swatch/swatch7.jpg,4,4.9,100+
+4,Swatch,swatch.png,8,Purple Gradient,150000,swatch/swatch8.jpg,5,4.9,100+
+4,Swatch,swatch.png,9,Fiery Pink,150000,swatch/swatch9.jpg,5,4.9,100+
+4,Swatch,swatch.png,10,Candy Bar,150000,swatch/swatch10.jpg,5,4.9,100+
+4,Swatch,swatch.png,11,Mickey Mouse,150000,swatch/swatch11.jpg,5,4.9,100+
+4,Swatch,swatch.png,12,Nature Green,150000,swatch/swatch12.jpg,5,4.9,100+
+4,Swatch,swatch.png,13,Earth Color,150000,swatch/swatch13.jpg,4,4.9,100+
+4,Swatch,swatch.png,14,Grey Gradient,150000,swatch/swatch14.jpg,4,4.9,100+
+4,Swatch,swatch.png,15,Yellowstone,150000,swatch/swatch15.jpg,4,4.9,100+
+4,Swatch,swatch.png,16,Elegant Color,150000,swatch/swatch16.jpg,5,4.9,100+
+4,Swatch,swatch.png,17,Candy Crush,150000,swatch/swatch17.jpg,5,4.9,100+
+4,Swatch,swatch.png,18,Buzz Lightyear,150000,swatch/swatch18.jpg,5,4.9,100+
+4,Swatch,swatch.png,19,Lime - White,150000,swatch/swatch19.jpg,5,4.9,100+
+4,Swatch,swatch.png,20,Lavender Gradient,150000,swatch/swatch20.jpg,5,4.9,100+
+4,Swatch,swatch.png,21,Pastel Color,150000,swatch/swatch21.jpg,5,4.9,100+
+4,Swatch,swatch.png,22,Deep Blue Sea,150000,swatch/swatch22.jpg,5,4.9,100+
+4,Swatch,swatch.png,23,Mentos,150000,swatch/swatch23.jpg,5,4.9,100+
+,,,,,,,,,
+,,,,,,,,,
+5,QnQ,qnq.png,6,Analog QnQ,320000,qnq/analog.png,5,,
+5,QnQ,qnq.png,7,Sport Analog QnQ,360000,qnq/sport_analog.png,5,,
+5,QnQ,qnq.png,8,Digital,500000,qnq/digital.png,5,,
