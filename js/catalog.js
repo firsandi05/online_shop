@@ -102,74 +102,79 @@ export class Catalog {
     }
 
     buildCategories() {
+buildCategories() {
 
-        this.categoriesGrid.innerHTML = '';
+    this.categoriesGrid.innerHTML = '';
 
-        const categoriesMap = new Map();
+    const categoriesMap = new Map();
 
-        this.data.forEach(item => {
+    this.data.forEach(item => {
 
-            if (!categoriesMap.has(item.category_id)) {
+        if (!categoriesMap.has(item.category_id)) {
 
-                categoriesMap.set(
-                    item.category_id,
-                    {
-                        id: item.category_id,
-                        name: item.category_name,
-                        image: item.category_image
-                    }
-                );
-            }
-        });
-
-        const categories =
-            Array.from(categoriesMap.values());
-
-        if (categories.length === 0) {
-
-            this.categoriesGrid.innerHTML =
-                '<div class="loading">Tidak ada kategori ditemukan.</div>';
-
-            return;
+            categoriesMap.set(
+                item.category_id,
+                {
+                    id: item.category_id,
+                    name: item.category_name,
+                    image: item.category_image
+                }
+            );
         }
+    });
 
-        categories.forEach(category => {
+    const categories =
+        Array.from(categoriesMap.values());
 
-            const card =
-                document.createElement('div');
+    if (categories.length === 0) {
 
-            card.className = 'card';
+        this.categoriesGrid.innerHTML =
+            '<div class="loading">Tidak ada kategori ditemukan.</div>';
 
-            card.innerHTML = `
-                <div class="card-img-wrapper">
-                    <img 
-                        src="assets/categories/${category.image}" 
-                        alt="${category.name}" 
-                        onerror="this.src='https://placehold.co/400x300?text=${encodeURIComponent(category.name)}'"
-                    >
-                </div>
-
-                <div class="card-content" 
-                    style="justify-content:center; align-items:center;">
-
-                    <h3 class="card-title" 
-                        style="margin:0; font-size:1.5rem;">
-                        ${category.name}
-                    </h3>
-                </div>
-            `;
-
-            card.addEventListener('click', () => {
-                this.showProductsByCategory(
-                    category.id,
-                    category.name
-                );
-            });
-
-            this.categoriesGrid.appendChild(card);
-        });
+        return;
     }
 
+    categories.forEach(category => {
+
+        const card =
+            document.createElement('div');
+
+        card.className = 'card';
+
+        card.innerHTML = `
+            <div class="card-img-wrapper">
+                <img 
+                    src="assets/categories/${category.image}" 
+                    alt="${category.name}" 
+                    onerror="this.src='https://placehold.co/400x300?text=${encodeURIComponent(category.name)}'"
+                >
+            </div>
+
+            <div class="card-content" 
+                style="justify-content:center; align-items:center;">
+
+                <h3 class="card-title" 
+                    style="margin:0; font-size:1.5rem;">
+                    ${category.name}
+                </h3>
+
+                <div class="category-rating">
+                    ⭐ 4.98 | 200+ terjual
+                </div>
+
+            </div>
+        `;
+
+        card.addEventListener('click', () => {
+            this.showProductsByCategory(
+                category.id,
+                category.name
+            );
+        });
+
+        this.categoriesGrid.appendChild(card);
+    });
+}
     showProductsByCategory(category_id, category_name) {
 
         this.categoriesSection
