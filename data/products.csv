@@ -1,1 +1,32 @@
-
+category_id,category_name,category_image,product_id,product_name,price,product_image
+1,Analog,analog.png,1,Elegant Blue,160000,analog/qq1.jpg
+1,Analog,analog.png,2,Swatch elegant,160000,analog/qq2.jpg
+1,Analog,analog.png,3,Nature green,160000,analog/qq3.jpg
+1,Analog,analog.png,4,Pinkish,160000,analog/qq4.jpg
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+2,Digital,digital.png,3,Sport Series,160000,digital/sport.png
+2,Digital,digital.png,4,Classy Series,160000,digital/classy.png
+3,Casio,casio.png,5,Casio,540000,casio/image.png
+4,QnQ,qnq.png,6,Analog QnQ,320000,qnq/analog.png
+4,QnQ,qnq.png,7,Sport Analog QnQ,360000,qnq/sport_analog.png
+4,QnQ,qnq.png,8,Digital,500000,qnq/digital.png
