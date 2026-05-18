@@ -2,7 +2,9 @@ import { STORE_CONFIG } from '../config/config.js';
 import { Cart } from './cart.js';
 
 export class Catalog {
+
     constructor(data) {
+
         this.data = data;
 
         this.categoriesSection =
@@ -35,26 +37,39 @@ export class Catalog {
 
         // Tombol kembali
         if (this.backButton) {
-            this.backButton.addEventListener('click', () => {
-                this.showCategories();
-            });
+            this.backButton.addEventListener(
+                'click',
+                () => this.showCategories()
+            );
         }
 
         // Search
         if (this.searchInput) {
-            this.searchInput.addEventListener('input', (e) => {
-                this.handleSearch(e.target.value);
-            });
+            this.searchInput.addEventListener(
+                'input',
+                (e) => {
+                    this.handleSearch(
+                        e.target.value
+                    );
+                }
+            );
         }
 
-        // Close modal zoom image
+        // Close image modal
         const modal =
-            document.getElementById('imageModal');
+            document.getElementById(
+                'imageModal'
+            );
 
         if (modal) {
-            modal.addEventListener('click', () => {
-                modal.classList.remove('show');
-            });
+            modal.addEventListener(
+                'click',
+                () => {
+                    modal.classList.remove(
+                        'show'
+                    );
+                }
+            );
         }
     }
 
@@ -68,15 +83,19 @@ export class Catalog {
             return;
         }
 
-        const results = this.data.filter(product =>
-            product.product_name
-                .toLowerCase()
-                .includes(searchTerm)
-            ||
-            product.category_name
-                .toLowerCase()
-                .includes(searchTerm)
-        );
+        const results =
+            this.data.filter(product =>
+
+                product.product_name
+                    .toLowerCase()
+                    .includes(searchTerm)
+
+                ||
+
+                product.category_name
+                    .toLowerCase()
+                    .includes(searchTerm)
+            );
 
         this.showSearchResults(
             results,
@@ -102,103 +121,139 @@ export class Catalog {
     }
 
     buildCategories() {
-buildCategories() {
 
-    this.categoriesGrid.innerHTML = '';
+        this.categoriesGrid.innerHTML = '';
 
-    const categoriesMap = new Map();
+        const categoriesMap =
+            new Map();
 
-    this.data.forEach(item => {
+        this.data.forEach(item => {
 
-        if (!categoriesMap.has(item.category_id)) {
+            if (
+                !categoriesMap.has(
+                    item.category_id
+                )
+            ) {
 
-            categoriesMap.set(
-                item.category_id,
-                {
-                    id: item.category_id,
-                    name: item.category_name,
-                    image: item.category_image
-                }
-            );
-        }
-    });
+                categoriesMap.set(
+                    item.category_id,
+                    {
+                        id:
+                            item.category_id,
 
-    const categories =
-        Array.from(categoriesMap.values());
+                        name:
+                            item.category_name,
 
-    if (categories.length === 0) {
-
-        this.categoriesGrid.innerHTML =
-            '<div class="loading">Tidak ada kategori ditemukan.</div>';
-
-        return;
-    }
-
-    categories.forEach(category => {
-
-        const card =
-            document.createElement('div');
-
-        card.className = 'card';
-
-        card.innerHTML = `
-            <div class="card-img-wrapper">
-                <img 
-                    src="assets/categories/${category.image}" 
-                    alt="${category.name}" 
-                    onerror="this.src='https://placehold.co/400x300?text=${encodeURIComponent(category.name)}'"
-                >
-            </div>
-
-            <div class="card-content" 
-                style="justify-content:center; align-items:center;">
-
-                <h3 class="card-title" 
-                    style="margin:0; font-size:1.5rem;">
-                    ${category.name}
-                </h3>
-
-                <div class="category-rating">
-                    ⭐ 4.98 | 200+ terjual
-                </div>
-
-            </div>
-        `;
-
-        card.addEventListener('click', () => {
-            this.showProductsByCategory(
-                category.id,
-                category.name
-            );
+                        image:
+                            item.category_image
+                    }
+                );
+            }
         });
 
-        this.categoriesGrid.appendChild(card);
-    });
-}
-    showProductsByCategory(category_id, category_name) {
+        const categories =
+            Array.from(
+                categoriesMap.values()
+            );
+
+        if (
+            categories.length === 0
+        ) {
+
+            this.categoriesGrid.innerHTML =
+                '<div class="loading">Tidak ada kategori ditemukan.</div>';
+
+            return;
+        }
+
+        categories.forEach(category => {
+
+            const card =
+                document.createElement(
+                    'div'
+                );
+
+            card.className =
+                'card';
+
+            card.innerHTML = `
+                <div class="card-img-wrapper">
+                    <img 
+                        src="assets/categories/${category.image}" 
+                        alt="${category.name}"
+                        onerror="this.src='https://placehold.co/400x300?text=${encodeURIComponent(category.name)}'"
+                    >
+                </div>
+
+                <div class="card-content"
+                    style="justify-content:center; align-items:center;">
+
+                    <h3 class="card-title"
+                        style="margin:0; font-size:1.5rem;">
+                        ${category.name}
+                    </h3>
+
+                    <div class="category-rating">
+                        ⭐ 4.98 | 200+ terjual
+                    </div>
+
+                </div>
+            `;
+
+            card.addEventListener(
+                'click',
+                () => {
+
+                    this.showProductsByCategory(
+                        category.id,
+                        category.name
+                    );
+                }
+            );
+
+            this.categoriesGrid
+                .appendChild(card);
+        });
+    }
+
+    showProductsByCategory(
+        category_id,
+        category_name
+    ) {
 
         this.categoriesSection
-            .classList.add('hidden');
+            .classList.add(
+                'hidden'
+            );
 
         this.productsSection
-            .classList.remove('hidden');
+            .classList.remove(
+                'hidden'
+            );
 
         this.categoryTitle.textContent =
             `Produk: ${category_name}`;
 
         const products =
-            this.data.filter(item =>
-                item.category_id === category_id
+            this.data.filter(
+                item =>
+                    item.category_id ===
+                    category_id
             );
 
-        this.renderProducts(products);
+        this.renderProducts(
+            products
+        );
     }
 
     renderProducts(products) {
 
-        this.productsGrid.innerHTML = '';
+        this.productsGrid.innerHTML =
+            '';
 
-        if (products.length === 0) {
+        if (
+            products.length === 0
+        ) {
 
             this.productsGrid.innerHTML =
                 '<div class="loading">Tidak ada produk ditemukan.</div>';
@@ -212,11 +267,18 @@ buildCategories() {
                 new Intl.NumberFormat(
                     'id-ID',
                     {
-                        style: 'currency',
-                        currency: 'IDR',
-                        minimumFractionDigits: 0
+                        style:
+                            'currency',
+
+                        currency:
+                            'IDR',
+
+                        minimumFractionDigits:
+                            0
                     }
-                ).format(product.price);
+                ).format(
+                    product.price
+                );
 
             const whatsappLink =
                 this.createWhatsAppLink(
@@ -224,41 +286,38 @@ buildCategories() {
                 );
 
             const card =
-                document.createElement('div');
+                document.createElement(
+                    'div'
+                );
 
-            card.className = 'card';
+            card.className =
+                'card';
 
             card.innerHTML = `
-    <div class="card-img-wrapper">
-        <img 
-            src="assets/categories/${category.image}" 
-            alt="${category.name}" 
-            onerror="this.src='https://placehold.co/400x300?text=${encodeURIComponent(category.name)}'"
-        >
-    </div>
+                <div class="card-img-wrapper">
 
-    <div class="card-content" 
-        style="justify-content:center; align-items:center;">
+                    <img
+                        src="assets/products/${product.product_image}"
+                        alt="${product.product_name}"
+                        class="product-image clickable-image"
+                        onerror="this.src='https://placehold.co/400x400?text=${encodeURIComponent(product.product_name)}'"
+                    >
 
-        <h3 class="card-title" 
-            style="margin:0; font-size:1.5rem;">
-            ${category.name}
-        </h3>
+                </div>
 
-        <div class="category-rating">
-            ⭐ 4.98 | 200+ terjual
-        </div>
+                <div class="card-content">
 
-    </div>
-`;
+                    <h3 class="card-title">
+                        ${product.product_name}
+                    </h3>
 
                     <div class="card-price">
                         ${formattedPrice}
                     </div>
 
                     <div class="product-rating">
-    ⭐ ${product.rating || 4.8}
-</div>
+                        ⭐ ${product.rating || 4.8}
+                    </div>
 
                     <div class="product-size">
                         <label>Ukuran:</label>
@@ -294,44 +353,56 @@ buildCategories() {
 
                             Beli Sekarang
                         </a>
+
                     </div>
                 </div>
             `;
 
             // Add to cart
-            card.querySelector('.add-to-cart-btn')
-            .addEventListener('click', (e) => {
+            card.querySelector(
+                '.add-to-cart-btn'
+            )
+            .addEventListener(
+                'click',
+                (e) => {
 
-                e.stopPropagation();
+                    e.stopPropagation();
 
-                const selectedSize =
-                    card.querySelector('.size-select')
-                    .value;
+                    const selectedSize =
+                        card.querySelector(
+                            '.size-select'
+                        ).value;
 
-                let extraPrice = 0;
+                    let extraPrice =
+                        0;
 
-                if (
-                    selectedSize ===
-                    'Large (20 cm)'
-                ) {
-                    extraPrice = 15000;
+                    if (
+                        selectedSize ===
+                        'Large (20 cm)'
+                    ) {
+                        extraPrice =
+                            15000;
+                    }
+
+                    else if (
+                        selectedSize ===
+                        'Xtra Large (25 cm)'
+                    ) {
+                        extraPrice =
+                            30000;
+                    }
+
+                    this.cart.addItem({
+                        ...product,
+                        selectedSize,
+                        price:
+                            parseFloat(
+                                product.price
+                            ) +
+                            extraPrice
+                    });
                 }
-
-                else if (
-                    selectedSize ===
-                    'Xtra Large (25 cm)'
-                ) {
-                    extraPrice = 30000;
-                }
-
-                this.cart.addItem({
-                    ...product,
-                    selectedSize,
-                    finalPrice:
-                        parseFloat(product.price)
-                        + extraPrice
-                });
-            });
+            );
 
             // Zoom image
             const image =
@@ -352,42 +423,58 @@ buildCategories() {
                         document.getElementById(
                             'modalImage'
                         );
-                    console.log(product.product_image)
+
                     modalImage.src =
                         `assets/products/${product.product_image}`;
 
-                    modal.classList.add('show');
+                    modal.classList.add(
+                        'show'
+                    );
                 }
             );
 
             this.productsGrid
-                .appendChild(card);
+                .appendChild(
+                    card
+                );
         });
     }
 
     showCategories() {
 
         this.productsSection
-            .classList.add('hidden');
+            .classList.add(
+                'hidden'
+            );
 
         this.categoriesSection
-            .classList.remove('hidden');
+            .classList.remove(
+                'hidden'
+            );
 
-        if (this.searchInput) {
-            this.searchInput.value = '';
+        if (
+            this.searchInput
+        ) {
+            this.searchInput.value =
+                '';
         }
     }
 
-    createWhatsAppLink(productName) {
+    createWhatsAppLink(
+        productName
+    ) {
 
         const number =
-            STORE_CONFIG.whatsappNumber;
+            STORE_CONFIG
+                .whatsappNumber;
 
         const message =
             `Halo, saya tertarik membeli ${productName}`;
 
         const encodedMessage =
-            encodeURIComponent(message);
+            encodeURIComponent(
+                message
+            );
 
         return `https://wa.me/${number}?text=${encodedMessage}`;
     }
