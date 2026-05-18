@@ -164,13 +164,27 @@ export class Catalog {
 card.querySelector('.add-to-cart-btn').addEventListener('click', (e) => {
     e.stopPropagation();
 
-    const selectedSize =
-        card.querySelector('.size-select').value;
+   const selectedSize =
+    card.querySelector('.size-select').value;
 
-    this.cart.addItem({
-        ...product,
-        selectedSize
-    });
+// Harga tambahan berdasarkan ukuran
+let extraPrice = 0;
+
+if (selectedSize === 'Medium (15 cm)') {
+    extraPrice = 0;
+} 
+else if (selectedSize === 'Large (20 cm)') {
+    extraPrice = 15000;
+} 
+else if (selectedSize === 'Xtra Large (25 cm)') {
+    extraPrice = 30000;
+}
+
+this.cart.addItem({
+    ...product,
+    selectedSize,
+    finalPrice: parseFloat(product.price) + extraPrice
+});
 });
 
             this.productsGrid.appendChild(card);
