@@ -26,18 +26,23 @@ export class Cart {
     addItem(product) {
         if (!product || !product.product_id) return;
 
-        const existingItem = this.items.find(item => String(item.product_id) === String(product.product_id));
+        const existingItem = this.items.find(
+    item =>
+        String(item.product_id) === String(product.product_id) &&
+        item.size === product.selectedSize
+);
 
         if (existingItem) {
             existingItem.qty += 1;
         } else {
             this.items.push({
-                product_id: product.product_id,
-                name: product.product_name,
-                price: parseFloat(product.price),
-                image: product.product_image,
-                qty: 1
-            });
+    product_id: product.product_id,
+    name: product.product_name,
+    price: parseFloat(product.price),
+    image: product.product_image,
+    size: product.selectedSize,
+    qty: 1
+});
         }
 
         this.save();
@@ -110,7 +115,8 @@ export class Cart {
                     <img src="assets/products/${item.image}" alt="${item.name}" class="cart-item-img" onerror="this.src='https://placehold.co/100x100?text=${encodeURIComponent(item.name)}'">
                     <div class="cart-item-details">
                         <h4>${item.name}</h4>
-                        <p class="cart-item-price">${formattedPrice}</p>
+<p>Ukuran: ${item.size}</p>
+<p class="cart-item-price">${formattedPrice}</p>
                     </div>
                 </div>
                 <div class="cart-item-controls">
