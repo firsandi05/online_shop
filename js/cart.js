@@ -92,7 +92,13 @@ export class Cart {
         if (!this.cartItemsElement) return;
 
         if (this.items.length === 0) {
-            this.cartItemsElement.innerHTML = '<div class="cart-empty">Keranjang masih kosong</div>';
+            const lang =
+    window.currentLanguage;
+
+this.cartItemsElement.innerHTML =
+`<div class="cart-empty">
+${lang?.emptyCart || 'Keranjang masih kosong'}
+</div>`;
             this.cartSummaryElement?.classList.add('hidden');
             return;
         }
@@ -115,7 +121,10 @@ export class Cart {
                     <img src="assets/products/${item.image}" alt="${item.name}" class="cart-item-img" onerror="this.src='https://placehold.co/100x100?text=${encodeURIComponent(item.name)}'">
                     <div class="cart-item-details">
                         <h4>${item.name}</h4>
-<p>Ukuran: ${item.size}</p>
+<p>
+${window.currentLanguage?.size || 'Ukuran'}:
+${item.size}
+</p>
 <p class="cart-item-price">${formattedPrice}</p>
                     </div>
                 </div>
