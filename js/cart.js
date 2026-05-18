@@ -38,7 +38,7 @@ export class Cart {
             this.items.push({
     product_id: product.product_id,
     name: product.product_name,
-    price: parseFloat(product.price),
+    price: parseFloat(product.finalPrice || product.price),
     image: product.product_image,
     size: product.selectedSize,
     qty: 1
