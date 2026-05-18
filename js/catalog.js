@@ -133,7 +133,10 @@ export class Catalog {
             
             card.innerHTML = `
                 <div class="card-img-wrapper">
-                    <img src="assets/products/${product.product_image}" alt="${product.product_name}" onerror="this.src='https://placehold.co/400x400?text=${encodeURIComponent(product.product_name)}'">
+                    <img 
+    src="assets/products/${product.product_image}" 
+    alt="${product.product_name}"
+    class="product-image clickable-image" > onerror="this.src='https://placehold.co/400x400?text=${encodeURIComponent(product.product_name)}'">
                 </div>
                 <div class="card-content">
                     <h3 class="card-title">${product.product_name}</h3>
