@@ -24,6 +24,20 @@ export class Catalog {
         if (this.searchInput) {
             this.searchInput.addEventListener('input', (e) => this.handleSearch(e.target.value));
         }
+        const modal = document.getElementById('imageModal');
+const closeBtn = document.querySelector('.close-modal');
+
+if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+}
     }
 
     handleSearch(query) {
@@ -169,8 +183,8 @@ export class Catalog {
 card.querySelector('.add-to-cart-btn').addEventListener('click', (e) => {
     e.stopPropagation();
 // Zoom image event
-card.querySelector('.clickable-image')
-.addEventListener('click', () => {
+const image = card.querySelector('.clickable-image');
+image.addEventListener('click', () => {
 
     const modal =
         document.getElementById('imageModal');
