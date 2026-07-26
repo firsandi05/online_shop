@@ -96,28 +96,28 @@ category_id,category_name,category_image,product_id,product_name,price,product_i
 4,Swatch,swatch.png,22,Deep Blue Sea,150000,swatch/swatch22.jpg,5,4.9,100+
 4,Swatch,swatch.png,23,Mentos,150000,swatch/swatch23.jpg,5,4.9,100+
 ,,,,,,,,,
-5,Casio Analog,casio_analog_kw1.png,1,,150000,casio_analog/casio_analog_kw1.png,5,4.9,60+
-5,Casio Analog,casio_analog_kw2.png,2,,150000,casio_analog/casio_analog_kw2.png,5,4.9,60+
-5,Casio Analog,casio_analog_kw3.png,3,,150000,casio_analog/casio_analog_kw3.png,4,4.9,60+
-5,Casio Analog,casio_analog_kw4.png,4,,150000,casio_analog/casio_analog_kw4.png,5,4.9,60+
-5,Casio Analog,casio_analog_kw5.png,5,,150000,casio_analog/casio_analog_kw5.png,5,4.9,60+
+5,Casio Analog,casio_analog_kw.png,1,,150000,casio_analog/casio_analog_kw1.png,5,4.9,60+
+5,Casio Analog,casio_analog_kw.png,2,,150000,casio_analog/casio_analog_kw2.png,5,4.9,60+
+5,Casio Analog,casio_analog_kw.png,3,,150000,casio_analog/casio_analog_kw3.png,4,4.9,60+
+5,Casio Analog,casio_analog_kw.png,4,,150000,casio_analog/casio_analog_kw4.png,5,4.9,60+
+5,Casio Analog,casio_analog_kw.png,5,,150000,casio_analog/casio_analog_kw5.png,5,4.9,60+
+,,,,,,,,,
+6,Q&Q Trans,qq_ori_trans,1,1,300000,1.jpg,5,4.9,100+
+6,Q&Q Trans,qq_ori_trans,2,2,300000,2.jpg,5,4.9,100+
+6,Q&Q Trans,qq_ori_trans,3,3,300000,3.jpg,4,4.9,100+
+6,Q&Q Trans,qq_ori_trans,4,4,300000,4.jpg,5,4.9,100+
+6,Q&Q Trans,qq_ori_trans,5,5,300000,5.jpg,5,4.9,100+
+6,Q&Q Trans,qq_ori_trans,6,6,300000,6.jpg,4.8,4.9,100+
+6,Q&Q Trans,qq_ori_trans,7,7,300000,7.jpg,4.8,4.9,100+
+6,Q&Q Trans,qq_ori_trans,8,8,300000,8.jpg,4.8,4.9,100+
+6,Q&Q Trans,qq_ori_trans,9,9,300000,9.jpg,4.8,4.9,100+
+6,Q&Q Trans,qq_ori_trans,10,10,300000,10.jpg,4.8,4.9,100+
+6,Q&Q Trans,qq_ori_trans,11,11,300000,11.jpg,4.8,4.9,100+
+6,Q&Q Trans,qq_ori_trans,12,12,300000,12.jpg,4.8,4.9,100+
 ,,,,,,,,,
 ,,,,,,,,,
 ,,,,,,,,,
 ,,,,,,,,,
-,,,,,,,,,
-,,,,,,,,,
-,,,,,,,,,
-,,,,,,,,,
-,,,,,,,,,
-,,,,,,,,,
-,,,,,,,,,
-,,,,,,,,,
-,,,,,,,,,
-,,,,,,,,,
-,,,,,,,,,
-,,,,,,,,,
-,,,,,,,,,
-5,QnQ,qnq.png,6,Analog QnQ,320000,qnq/analog.png,5,,
-5,QnQ,qnq.png,7,Sport Analog QnQ,360000,qnq/sport_analog.png,5,,
-5,QnQ,qnq.png,8,Digital,500000,qnq/digital.png,5,,
+6,QnQ,qnq.png,6,Analog QnQ,320000,qnq/analog.png,5,,
+6,QnQ,qnq.png,7,Sport Analog QnQ,360000,qnq/sport_analog.png,5,,
+6,QnQ,qnq.png,8,Digital,500000,qnq/digital.png,5,,
