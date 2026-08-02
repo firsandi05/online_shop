@@ -102,19 +102,32 @@ category_id,category_name,category_image,product_id,product_name,price,product_i
 5,Casio Analog,casio_analog_kw.png,4,,150000,casio_analog/casio_analog_kw4.png,5,4.9,60+
 5,Casio Analog,casio_analog_kw.png,5,,150000,casio_analog/casio_analog_kw5.png,5,4.9,60+
 ,,,,,,,,,
-6,Q&Q Trans,qq_ori_trans,1,1,300000,1.png,5,4.9,100+
-6,Q&Q Trans,qq_ori_trans,2,2,300000,2.png,5,4.9,100+
-6,Q&Q Trans,qq_ori_trans,3,3,300000,3.png,4,4.9,100+
-6,Q&Q Trans,qq_ori_trans,4,4,300000,4.png,5,4.9,100+
-6,Q&Q Trans,qq_ori_trans,5,5,300000,5.png,5,4.9,100+
-6,Q&Q Trans,qq_ori_trans,6,6,300000,6.png,4.8,4.9,100+
-6,Q&Q Trans,qq_ori_trans,7,7,300000,7.png,4.8,4.9,100+
-6,Q&Q Trans,qq_ori_trans,8,8,300000,8.png,4.8,4.9,100+
-6,Q&Q Trans,qq_ori_trans,9,9,300000,9.png,4.8,4.9,100+
-6,Q&Q Trans,qq_ori_trans,10,10,300000,10.png,4.8,4.9,100+
-6,Q&Q Trans,qq_ori_trans,11,11,300000,11.png,4.8,4.9,100+
-6,Q&Q Trans,qq_ori_trans,12,12,300000,12.png,4.8,4.9,100+
-,,,,,,,,,
+6,Q&Q Trans,qq_ori_trans.png,1,1,300000,qq_ori_trans/1.png,5,4.9,100+
+6,Q&Q Trans,qq_ori_trans.png,2,2,300000,qq_ori_trans/2.png,5,4.9,100+
+6,Q&Q Trans,qq_ori_trans.png,3,3,300000,qq_ori_trans/3.png,4,4.9,100+
+6,Q&Q Trans,qq_ori_trans.png,4,4,300000,qq_ori_trans/4.png,5,4.9,100+
+6,Q&Q Trans,qq_ori_trans.png,5,5,300000,qq_ori_trans/5.png,5,4.9,100+
+6,Q&Q Trans,qq_ori_trans.png,6,6,300000,qq_ori_trans/6.png,4.8,4.9,100+
+6,Q&Q Trans,qq_ori_trans.png,7,7,300000,qq_ori_trans/7.png,4.8,4.9,100+
+6,Q&Q Trans,qq_ori_trans.png,8,8,300000,qq_ori_trans/8.png,4.8,4.9,100+
+6,Q&Q Trans,qq_ori_trans.png,9,9,300000,qq_ori_trans/9.png,4.8,4.9,100+
+6,Q&Q Trans,qq_ori_trans.png,10,10,300000,qq_ori_trans/10.png,4.8,4.9,100+
+6,Q&Q Trans,qq_ori_trans.png,11,11,300000,qq_ori_trans/11.png,4.8,4.9,100+
+6,Q&Q Trans,qq_ori_trans.png,12,12,300000,qq_ori_trans/12.png,4.8,4.9,100+
+6,Q&Q Trans,qq_ori_trans.png,12,13,300000,qq_ori_trans/13.png,5,4.9,100+
+6,Q&Q Trans,qq_ori_trans.png,12,14,300000,qq_ori_trans/14.png,5,4.9,100+
+6,Q&Q Trans,qq_ori_trans.png,12,15,300000,qq_ori_trans/15.png,5,4.9,100+
+6,Q&Q Trans,qq_ori_trans.png,12,16,300000,qq_ori_trans/16.png,5,4.9,100+
+6,Q&Q Trans,qq_ori_trans.png,12,17,300000,qq_ori_trans/17.png,5,4.9,100+
+6,Q&Q Trans,qq_ori_trans.png,12,18,300000,qq_ori_trans/18.png,5,4.9,100+
+6,Q&Q Trans,qq_ori_trans.png,12,19,300000,qq_ori_trans/19.png,5,4.9,100+
+6,Q&Q Trans,qq_ori_trans.png,12,20,300000,qq_ori_trans/20.png,5,4.9,100+
+6,Q&Q Trans,qq_ori_trans.png,12,21,300000,qq_ori_trans/21.png,5,4.9,100+
+6,Q&Q Trans,qq_ori_trans.png,12,22,300000,qq_ori_trans/22.png,5,4.9,100+
+6,Q&Q Trans,qq_ori_trans.png,12,23,300000,qq_ori_trans/23.png,5,4.9,100+
+6,Q&Q Trans,qq_ori_trans.png,12,24,300000,qq_ori_trans/24.png,5,4.9,100+
+6,Q&Q Trans,qq_ori_trans.png,12,25,300000,qq_ori_trans/25.png,5,4.9,100+
+6,Q&Q Trans,qq_ori_trans.png,12,26,300000,qq_ori_trans/26.png,5,4.9,100+
 ,,,,,,,,,
 ,,,,,,,,,
 ,,,,,,,,,
