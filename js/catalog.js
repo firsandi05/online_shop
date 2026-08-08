@@ -161,7 +161,7 @@ export class Catalog {
         // =================================================
 
         // 1 USD = Rp10.000
-        const USD_RATE = 10000;
+        const USD_RATE = 15000;
 
         const usdPrice =
             numericPrice / USD_RATE;
@@ -960,7 +960,7 @@ console.log(
                 ) {
 
                     const USD_RATE =
-                        10000;
+                        15000;
 
 
                     const usdPrice =
