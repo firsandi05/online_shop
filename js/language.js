@@ -1,222 +1,712 @@
-document.addEventListener(
-    'DOMContentLoaded',
-    () => {
+document.addEventListener('DOMContentLoaded', () => {
 
-        const langId =
-            document.getElementById(
-                'lang-id'
-            );
+    /* =====================================================
+       LANGUAGE BUTTON
+    ====================================================== */
 
-        const langEn =
-            document.getElementById(
-                'lang-en'
-            );
+    const langId = document.getElementById('lang-id');
+    const langEn = document.getElementById('lang-en');
 
-        const translations = {
 
-            id: {
+    /* =====================================================
+       TRANSLATIONS
+    ====================================================== */
 
-                search:
-                    'Cari produk...',
+    const translations = {
 
-                category:
-                    'Kategori Produk',
+        /* =================================================
+           INDONESIAN
+        ================================================= */
 
-                cart:
-                    'Keranjang Belanja',
+        id: {
 
-                back:
-                    '← Kembali ke Kategori',
+            search:
+                'Cari produk...',
 
-                order:
-                    'Pesan (WA)',
+            category:
+                'Kategori Produk',
 
-                clear:
-                    'Kosongkan',
+            cart:
+                'Keranjang Belanja',
 
-                emptyCart:
-                    'Keranjang masih kosong',
+            back:
+                '← Kembali ke Kategori',
 
-                total:
-                    'Total Keseluruhan:',
+            order:
+                'Pesan (WA)',
 
-                home:
-                    'Home',
+            clear:
+                'Kosongkan',
 
-                catalog:
-                    'Katalog',
+            emptyCart:
+                'Keranjang masih kosong',
 
-                size:
-                    'Ukuran',
+            total:
+                'Total Keseluruhan:',
 
-                buy:
-                    'Beli Sekarang',
+            home:
+                'Home',
 
-                addCart:
-                    '+ Keranjang',
+            catalog:
+                'Katalog',
 
-                searchResult:
-                    'Hasil Pencarian:',
+            size:
+                'Ukuran',
 
-                product:
-                    'Produk:'
-            },
+            buy:
+                'Beli Sekarang',
 
-            en: {
+            addCart:
+                '+ Keranjang',
 
-                search:
-                    'Search products...',
+            searchResult:
+                'Hasil Pencarian:',
 
-                category:
-                    'Product Categories',
+            product:
+                'Produk:',
 
-                cart:
-                    'Shopping Cart',
+            heroButton:
+                'Lihat Katalog',
 
-                back:
-                    '← Back to Categories',
+            loadingCategories:
+                'Memuat kategori...',
 
-                order:
-                    'Order (WA)',
+            loadingProducts:
+                'Memuat produk...',
 
-                clear:
-                    'Clear',
+            footerDescription:
+                'Temukan produk terbaik kami dengan harga yang terjangkau. Belanja aman, mudah, dan terpercaya.',
 
-                emptyCart:
-                    'Cart is empty',
+            findUs:
+                'Temukan Kami di',
 
-                total:
-                    'Grand Total:',
+            variant:
+                'Varian',
 
-                home:
-                    'Home',
+            color:
+                'Warna',
 
-                catalog:
-                    'Catalog',
+            quantity:
+                'Jumlah',
 
-                size:
-                    'Size',
+            price:
+                'Harga',
 
-                buy:
-                    'Buy Now',
+            description:
+                'Deskripsi',
 
-                addCart:
-                    '+ Cart',
+            selectSize:
+                'Pilih Ukuran',
 
-                searchResult:
-                    'Search Results:',
+            selectVariant:
+                'Pilih Varian',
 
-                product:
-                    'Products:'
-            }
-        };
+            addToCart:
+                'Tambah ke Keranjang',
 
-        function setLanguage(lang) {
+            continueShopping:
+                'Lanjut Belanja',
 
-            localStorage.setItem(
-                'language',
-                lang
-            );
+            noProducts:
+                'Produk tidak ditemukan',
 
-            const t =
-                translations[lang];
+            chooseProduct:
+                'Pilih Produk',
 
-            // Navbar
-            document.getElementById(
-                'nav-home'
-            ).textContent =
+            available:
+                'Tersedia',
+
+            outOfStock:
+                'Stok Habis',
+
+            loading:
+                'Memuat...'
+
+        },
+
+
+        /* =================================================
+           ENGLISH
+        ================================================= */
+
+        en: {
+
+            search:
+                'Search products...',
+
+            category:
+                'Product Categories',
+
+            cart:
+                'Shopping Cart',
+
+            back:
+                '← Back to Categories',
+
+            order:
+                'Order (WA)',
+
+            clear:
+                'Clear',
+
+            emptyCart:
+                'Cart is empty',
+
+            total:
+                'Grand Total:',
+
+            home:
+                'Home',
+
+            catalog:
+                'Catalog',
+
+            size:
+                'Size',
+
+            buy:
+                'Buy Now',
+
+            addCart:
+                '+ Cart',
+
+            searchResult:
+                'Search Results:',
+
+            product:
+                'Products:',
+
+            heroButton:
+                'View Catalog',
+
+            loadingCategories:
+                'Loading categories...',
+
+            loadingProducts:
+                'Loading products...',
+
+            footerDescription:
+                'Find our best products at affordable prices. Shop safely, easily, and confidently.',
+
+            findUs:
+                'Find Us On',
+
+            variant:
+                'Variant',
+
+            color:
+                'Color',
+
+            quantity:
+                'Quantity',
+
+            price:
+                'Price',
+
+            description:
+                'Description',
+
+            selectSize:
+                'Select Size',
+
+            selectVariant:
+                'Select Variant',
+
+            addToCart:
+                'Add to Cart',
+
+            continueShopping:
+                'Continue Shopping',
+
+            noProducts:
+                'No products found',
+
+            chooseProduct:
+                'Choose Product',
+
+            available:
+                'Available',
+
+            outOfStock:
+                'Out of Stock',
+
+            loading:
+                'Loading...'
+
+        }
+
+    };
+
+
+    /* =====================================================
+       SET LANGUAGE
+    ====================================================== */
+
+    function setLanguage(lang) {
+
+        /* Safety check */
+
+        if (!translations[lang]) {
+            lang = 'id';
+        }
+
+
+        /* Save language */
+
+        localStorage.setItem(
+            'language',
+            lang
+        );
+
+
+        /* Current translation */
+
+        const t =
+            translations[lang];
+
+
+        /* =================================================
+           NAVBAR
+        ================================================= */
+
+        const navHome =
+            document.getElementById('nav-home');
+
+        if (navHome) {
+            navHome.textContent =
                 t.home;
+        }
 
-            document.getElementById(
-                'nav-catalog'
-            ).textContent =
+
+        const navCatalog =
+            document.getElementById('nav-catalog');
+
+        if (navCatalog) {
+            navCatalog.textContent =
                 t.catalog;
+        }
 
-            // Search
-            document.getElementById(
-                'search-input'
-            ).placeholder =
+
+        /* =================================================
+           SEARCH
+        ================================================= */
+
+        const searchInput =
+            document.getElementById('search-input');
+
+        if (searchInput) {
+
+            searchInput.placeholder =
                 t.search;
 
-            // Section title
+        }
+
+
+        /* =================================================
+           HERO BUTTON
+        ================================================= */
+
+        const heroButton =
+            document.getElementById(
+                'hero-catalog-button'
+            );
+
+        if (heroButton) {
+
+            heroButton.textContent =
+                t.heroButton;
+
+        }
+
+
+        /* =================================================
+           CATEGORY SECTION
+        ================================================= */
+
+        const categoryTitle =
             document.querySelector(
                 '#categories-section .section-title'
-            ).textContent =
+            );
+
+        if (categoryTitle) {
+
+            categoryTitle.textContent =
                 t.category;
 
-            document.querySelector(
-                '#cart-section .section-title'
-            ).textContent =
-                t.cart;
+        }
 
-            // Buttons
+
+        /* =================================================
+           PRODUCT SECTION
+        ================================================= */
+
+        const backButton =
             document.getElementById(
                 'back-button'
-            ).textContent =
+            );
+
+        if (backButton) {
+
+            backButton.textContent =
                 t.back;
 
+        }
+
+
+        /* =================================================
+           CART SECTION
+        ================================================= */
+
+        const cartTitle =
+            document.querySelector(
+                '#cart-section .section-title'
+            );
+
+        if (cartTitle) {
+
+            cartTitle.textContent =
+                t.cart;
+
+        }
+
+
+        /* =================================================
+           CART EMPTY
+        ================================================= */
+
+        const emptyCart =
+            document.getElementById(
+                'cart-empty-text'
+            );
+
+        if (emptyCart) {
+
+            emptyCart.textContent =
+                t.emptyCart;
+
+        }
+
+
+        /* =================================================
+           CART TOTAL
+        ================================================= */
+
+        const totalLabel =
+            document.getElementById(
+                'cart-total-label'
+            );
+
+        if (totalLabel) {
+
+            totalLabel.textContent =
+                t.total;
+
+        }
+
+
+        /* =================================================
+           CLEAR CART
+        ================================================= */
+
+        const clearCart =
             document.getElementById(
                 'clear-cart'
-            ).textContent =
+            );
+
+        if (clearCart) {
+
+            clearCart.textContent =
                 t.clear;
 
+        }
+
+
+        /* =================================================
+           CHECKOUT WHATSAPP
+        ================================================= */
+
+        const checkout =
             document.getElementById(
                 'checkout-whatsapp'
-            ).lastChild.textContent =
-                ` ${t.order}`;
+            );
 
-            // Save translation globally
-            window.currentLanguage =
-                t;
+        if (checkout) {
 
-            // Refresh cart UI
-            if (
-                window.catalog &&
-                window.catalog.cart
-            ) {
-                window.catalog.cart
-                    .updateUI();
+            /*
+             * Preserve SVG icon.
+             * Only change text node.
+             */
+
+            let textNode = null;
+
+            checkout.childNodes.forEach(
+                node => {
+
+                    if (
+                        node.nodeType ===
+                        Node.TEXT_NODE
+                    ) {
+
+                        if (
+                            node.textContent.trim()
+                        ) {
+
+                            textNode = node;
+
+                        }
+
+                    }
+
+                }
+            );
+
+
+            if (textNode) {
+
+                textNode.textContent =
+                    ` ${t.order}`;
+
+            } else {
+
+                checkout.appendChild(
+                    document.createTextNode(
+                        ` ${t.order}`
+                    )
+                );
+
             }
 
-            // Active button
+        }
+
+
+        /* =================================================
+           LOADING CATEGORY
+        ================================================= */
+
+        const categoryLoading =
+            document.getElementById(
+                'categories-loading'
+            );
+
+        if (categoryLoading) {
+
+            categoryLoading.textContent =
+                t.loadingCategories;
+
+        }
+
+
+        /* =================================================
+           LOADING PRODUCTS
+        ================================================= */
+
+        const productLoading =
+            document.getElementById(
+                'products-loading'
+            );
+
+        if (productLoading) {
+
+            productLoading.textContent =
+                t.loadingProducts;
+
+        }
+
+
+        /* =================================================
+           FOOTER
+        ================================================= */
+
+        const footerDescription =
+            document.querySelector(
+                '.footer-brand p'
+            );
+
+        if (footerDescription) {
+
+            footerDescription.textContent =
+                t.footerDescription;
+
+        }
+
+
+        const findUs =
+            document.querySelector(
+                '.footer-social h4'
+            );
+
+        if (findUs) {
+
+            findUs.textContent =
+                t.findUs;
+
+        }
+
+
+        /* =================================================
+           CATEGORY TITLE
+        ================================================= */
+
+        const categoryTitleDynamic =
+            document.getElementById(
+                'category-title'
+            );
+
+        if (
+            categoryTitleDynamic &&
+            (
+                categoryTitleDynamic.textContent.trim() ===
+                'Produk' ||
+
+                categoryTitleDynamic.textContent.trim() ===
+                'Products'
+            )
+        ) {
+
+            categoryTitleDynamic.textContent =
+                t.product;
+
+        }
+
+
+        /* =================================================
+           GLOBAL TRANSLATION
+        ================================================= */
+
+        /*
+         * app.js bisa mengambil translation
+         * melalui window.currentLanguage
+         */
+
+        window.currentLanguage = t;
+
+        window.currentLanguageCode = lang;
+
+
+        /*
+         * Simpan juga object lengkap.
+         */
+
+        window.translations =
+            translations;
+
+
+        /* =================================================
+           REFRESH CART
+        ================================================= */
+
+        if (
+            window.catalog &&
+            window.catalog.cart &&
+            typeof
+            window.catalog.cart.updateUI ===
+            'function'
+        ) {
+
+            window.catalog.cart.updateUI();
+
+        }
+
+
+        /* =================================================
+           ACTIVE LANGUAGE BUTTON
+        ================================================= */
+
+        if (langId) {
+
             langId.classList.remove(
                 'active'
             );
+
+        }
+
+
+        if (langEn) {
 
             langEn.classList.remove(
                 'active'
             );
 
-            if (lang === 'id') {
+        }
+
+
+        if (lang === 'id') {
+
+            if (langId) {
+
                 langId.classList.add(
                     'active'
                 );
-            } else {
+
+            }
+
+        } else {
+
+            if (langEn) {
+
                 langEn.classList.add(
                     'active'
                 );
+
             }
+
         }
+
+    }
+
+
+    /* =====================================================
+       LANGUAGE BUTTON EVENTS
+    ====================================================== */
+
+    if (langId) {
 
         langId.addEventListener(
             'click',
-            () => setLanguage(
-                'id'
-            )
+            () => {
+
+                setLanguage('id');
+
+            }
         );
+
+    }
+
+
+    if (langEn) {
 
         langEn.addEventListener(
             'click',
-            () => setLanguage(
-                'en'
-            )
+            () => {
+
+                setLanguage('en');
+
+            }
         );
 
-        const savedLang =
-            localStorage.getItem(
-                'language'
-            ) || 'id';
-
-        setLanguage(savedLang);
     }
-);
+
+
+    /* =====================================================
+       LOAD SAVED LANGUAGE
+    ====================================================== */
+
+    const savedLanguage =
+        localStorage.getItem(
+            'language'
+        ) || 'id';
+
+
+    setLanguage(
+        savedLanguage
+    );
+
+
+    /* =====================================================
+       MAKE FUNCTION GLOBAL
+    ====================================================== */
+
+    window.setLanguage =
+        setLanguage;
+
+});
