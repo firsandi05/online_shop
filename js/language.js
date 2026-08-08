@@ -1,103 +1,257 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    /* =====================================================
+       LANGUAGE BUTTON
+    ====================================================== */
+
     const langId = document.getElementById('lang-id');
     const langEn = document.getElementById('lang-en');
 
+
+    /* =====================================================
+       TRANSLATIONS
+    ====================================================== */
+
     const translations = {
+
+        /* =================================================
+           INDONESIAN
+        ================================================= */
 
         id: {
 
-            search: 'Cari produk...',
+            search:
+                'Cari produk...',
 
-            category: 'Kategori Produk',
+            category:
+                'Kategori Produk',
 
-            cart: 'Keranjang Belanja',
+            cart:
+                'Keranjang Belanja',
 
-            back: '← Kembali ke Kategori',
+            back:
+                '← Kembali ke Kategori',
 
-            order: 'Pesan (WA)',
+            order:
+                'Pesan (WA)',
 
-            clear: 'Kosongkan',
+            clear:
+                'Kosongkan',
 
-            emptyCart: 'Keranjang masih kosong',
+            emptyCart:
+                'Keranjang masih kosong',
 
-            total: 'Total Keseluruhan:',
+            total:
+                'Total Keseluruhan:',
 
-            home: 'Home',
+            home:
+                'Home',
 
-            catalog: 'Katalog',
+            catalog:
+                'Katalog',
 
-            size: 'Ukuran',
+            size:
+                'Ukuran',
 
-            buy: 'Beli Sekarang',
+            buy:
+                'Beli Sekarang',
 
-            addCart: '+ Keranjang',
+            addCart:
+                '+ Keranjang',
 
-            searchResult: 'Hasil Pencarian:',
+            searchResult:
+                'Hasil Pencarian:',
 
-            product: 'Produk:',
+            product:
+                'Produk:',
 
-            sold: 'Terjual'
+            heroButton:
+                'Lihat Katalog',
+
+            loadingCategories:
+                'Memuat kategori...',
+
+            loadingProducts:
+                'Memuat produk...',
+
+            footerDescription:
+                'Temukan produk terbaik kami dengan harga yang terjangkau. Belanja aman, mudah, dan terpercaya.',
+
+            findUs:
+                'Temukan Kami di',
+
+            variant:
+                'Varian',
+
+            color:
+                'Warna',
+
+            quantity:
+                'Jumlah',
+
+            price:
+                'Harga',
+
+            description:
+                'Deskripsi',
+
+            selectSize:
+                'Pilih Ukuran',
+
+            selectVariant:
+                'Pilih Varian',
+
+            addToCart:
+                'Tambah ke Keranjang',
+
+            continueShopping:
+                'Lanjut Belanja',
+
+            noProducts:
+                'Produk tidak ditemukan',
+
+            chooseProduct:
+                'Pilih Produk',
+
+            available:
+                'Tersedia',
+
+            outOfStock:
+                'Stok Habis',
+
+            loading:
+                'Memuat...'
 
         },
 
+
+        /* =================================================
+           ENGLISH
+        ================================================= */
+
         en: {
 
-            search: 'Search products...',
+            search:
+                'Search products...',
 
-            category: 'Product Categories',
+            category:
+                'Product Categories',
 
-            cart: 'Shopping Cart',
+            cart:
+                'Shopping Cart',
 
-            back: '← Back to Categories',
+            back:
+                '← Back to Categories',
 
-            order: 'Order (WA)',
+            order:
+                'Order (WA)',
 
-            clear: 'Clear',
+            clear:
+                'Clear',
 
-            emptyCart: 'Cart is empty',
+            emptyCart:
+                'Cart is empty',
 
-            total: 'Grand Total:',
+            total:
+                'Grand Total:',
 
-            home: 'Home',
+            home:
+                'Home',
 
-            catalog: 'Catalog',
+            catalog:
+                'Catalog',
 
-            size: 'Size',
+            size:
+                'Size',
 
-            buy: 'Buy Now',
+            buy:
+                'Buy Now',
 
-            addCart: '+ Cart',
+            addCart:
+                '+ Cart',
 
-            searchResult: 'Search Results:',
+            searchResult:
+                'Search Results:',
 
-            product: 'Product:',
+            product:
+                'Products:',
 
-            sold: 'Sold'
+            heroButton:
+                'View Catalog',
+
+            loadingCategories:
+                'Loading categories...',
+
+            loadingProducts:
+                'Loading products...',
+
+            footerDescription:
+                'Find our best products at affordable prices. Shop safely, easily, and confidently.',
+
+            findUs:
+                'Find Us On',
+
+            variant:
+                'Variant',
+
+            color:
+                'Color',
+
+            quantity:
+                'Quantity',
+
+            price:
+                'Price',
+
+            description:
+                'Description',
+
+            selectSize:
+                'Select Size',
+
+            selectVariant:
+                'Select Variant',
+
+            addToCart:
+                'Add to Cart',
+
+            continueShopping:
+                'Continue Shopping',
+
+            noProducts:
+                'No products found',
+
+            chooseProduct:
+                'Choose Product',
+
+            available:
+                'Available',
+
+            outOfStock:
+                'Out of Stock',
+
+            loading:
+                'Loading...'
 
         }
 
     };
 
 
+    /* =====================================================
+       SET LANGUAGE
+    ====================================================== */
+
     function setLanguage(lang) {
 
-        /*
-        ==========================================
-        PASTIKAN BAHASA VALID
-        ==========================================
-        */
+        /* Safety check */
 
         if (!translations[lang]) {
             lang = 'id';
         }
 
 
-        /*
-        ==========================================
-        SIMPAN BAHASA
-        ==========================================
-        */
+        /* Save language */
 
         localStorage.setItem(
             'language',
@@ -105,29 +259,18 @@ document.addEventListener('DOMContentLoaded', () => {
         );
 
 
+        /* Current translation */
+
         const t =
             translations[lang];
 
 
-        /*
-        ==========================================
-        SIMPAN KE GLOBAL
-        ==========================================
-        */
-
-        window.currentLanguage = t;
-
-
-        /*
-        ==========================================
-        NAVBAR - HOME
-        ==========================================
-        */
+        /* =================================================
+           NAVBAR
+        ================================================= */
 
         const navHome =
-            document.getElementById(
-                'nav-home'
-            );
+            document.getElementById('nav-home');
 
         if (navHome) {
             navHome.textContent =
@@ -135,16 +278,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
 
-        /*
-        ==========================================
-        NAVBAR - KATALOG
-        ==========================================
-        */
-
         const navCatalog =
-            document.getElementById(
-                'nav-catalog'
-            );
+            document.getElementById('nav-catalog');
 
         if (navCatalog) {
             navCatalog.textContent =
@@ -152,16 +287,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
 
-        /*
-        ==========================================
-        SEARCH
-        ==========================================
-        */
+        /* =================================================
+           SEARCH
+        ================================================= */
 
         const searchInput =
-            document.getElementById(
-                'search-input'
-            );
+            document.getElementById('search-input');
 
         if (searchInput) {
 
@@ -171,49 +302,43 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
 
-        /*
-        ==========================================
-        CATEGORY TITLE
-        ==========================================
-        */
+        /* =================================================
+           HERO BUTTON
+        ================================================= */
 
-        const categoriesTitle =
+        const heroButton =
+            document.getElementById(
+                'hero-catalog-button'
+            );
+
+        if (heroButton) {
+
+            heroButton.textContent =
+                t.heroButton;
+
+        }
+
+
+        /* =================================================
+           CATEGORY SECTION
+        ================================================= */
+
+        const categoryTitle =
             document.querySelector(
                 '#categories-section .section-title'
             );
 
-        if (categoriesTitle) {
+        if (categoryTitle) {
 
-            categoriesTitle.textContent =
+            categoryTitle.textContent =
                 t.category;
 
         }
 
 
-        /*
-        ==========================================
-        CART TITLE
-        ==========================================
-        */
-
-        const cartTitle =
-            document.querySelector(
-                '#cart-section .section-title'
-            );
-
-        if (cartTitle) {
-
-            cartTitle.textContent =
-                t.cart;
-
-        }
-
-
-        /*
-        ==========================================
-        BACK BUTTON
-        ==========================================
-        */
+        /* =================================================
+           PRODUCT SECTION
+        ================================================= */
 
         const backButton =
             document.getElementById(
@@ -228,11 +353,60 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
 
-        /*
-        ==========================================
-        CLEAR CART
-        ==========================================
-        */
+        /* =================================================
+           CART SECTION
+        ================================================= */
+
+        const cartTitle =
+            document.querySelector(
+                '#cart-section .section-title'
+            );
+
+        if (cartTitle) {
+
+            cartTitle.textContent =
+                t.cart;
+
+        }
+
+
+        /* =================================================
+           CART EMPTY
+        ================================================= */
+
+        const emptyCart =
+            document.getElementById(
+                'cart-empty-text'
+            );
+
+        if (emptyCart) {
+
+            emptyCart.textContent =
+                t.emptyCart;
+
+        }
+
+
+        /* =================================================
+           CART TOTAL
+        ================================================= */
+
+        const totalLabel =
+            document.getElementById(
+                'cart-total-label'
+            );
+
+        if (totalLabel) {
+
+            totalLabel.textContent =
+                t.total;
+
+        }
+
+
+        /* =================================================
+           CLEAR CART
+        ================================================= */
 
         const clearCart =
             document.getElementById(
@@ -247,11 +421,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
 
-        /*
-        ==========================================
-        WHATSAPP CHECKOUT
-        ==========================================
-        */
+        /* =================================================
+           CHECKOUT WHATSAPP
+        ================================================= */
 
         const checkout =
             document.getElementById(
@@ -261,9 +433,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (checkout) {
 
             /*
-            Cari text node yang berisi
-            "Pesan (WA)"
-            */
+             * Preserve SVG icon.
+             * Only change text node.
+             */
+
+            let textNode = null;
 
             checkout.childNodes.forEach(
                 node => {
@@ -277,8 +451,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             node.textContent.trim()
                         ) {
 
-                            node.textContent =
-                                ` ${t.order}`;
+                            textNode = node;
 
                         }
 
@@ -287,14 +460,157 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             );
 
+
+            if (textNode) {
+
+                textNode.textContent =
+                    ` ${t.order}`;
+
+            } else {
+
+                checkout.appendChild(
+                    document.createTextNode(
+                        ` ${t.order}`
+                    )
+                );
+
+            }
+
         }
 
 
+        /* =================================================
+           LOADING CATEGORY
+        ================================================= */
+
+        const categoryLoading =
+            document.getElementById(
+                'categories-loading'
+            );
+
+        if (categoryLoading) {
+
+            categoryLoading.textContent =
+                t.loadingCategories;
+
+        }
+
+
+        /* =================================================
+           LOADING PRODUCTS
+        ================================================= */
+
+        const productLoading =
+            document.getElementById(
+                'products-loading'
+            );
+
+        if (productLoading) {
+
+            productLoading.textContent =
+                t.loadingProducts;
+
+        }
+
+
+        /* =================================================
+           FOOTER
+        ================================================= */
+
+        const footerDescription =
+            document.querySelector(
+                '.footer-brand p'
+            );
+
+        if (footerDescription) {
+
+            footerDescription.textContent =
+                t.footerDescription;
+
+        }
+
+
+        const findUs =
+            document.querySelector(
+                '.footer-social h4'
+            );
+
+        if (findUs) {
+
+            findUs.textContent =
+                t.findUs;
+
+        }
+
+
+        /* =================================================
+           CATEGORY TITLE
+        ================================================= */
+
+        const categoryTitleDynamic =
+            document.getElementById(
+                'category-title'
+            );
+
+        if (
+            categoryTitleDynamic &&
+            (
+                categoryTitleDynamic.textContent.trim() ===
+                'Produk' ||
+
+                categoryTitleDynamic.textContent.trim() ===
+                'Products'
+            )
+        ) {
+
+            categoryTitleDynamic.textContent =
+                t.product;
+
+        }
+
+
+        /* =================================================
+           GLOBAL TRANSLATION
+        ================================================= */
+
         /*
-        ==========================================
-        ACTIVE LANGUAGE BUTTON
-        ==========================================
-        */
+         * app.js bisa mengambil translation
+         * melalui window.currentLanguage
+         */
+
+        window.currentLanguage = t;
+
+        window.currentLanguageCode = lang;
+
+
+        /*
+         * Simpan juga object lengkap.
+         */
+
+        window.translations =
+            translations;
+
+
+        /* =================================================
+           REFRESH CART
+        ================================================= */
+
+        if (
+            window.catalog &&
+            window.catalog.cart &&
+            typeof
+            window.catalog.cart.updateUI ===
+            'function'
+        ) {
+
+            window.catalog.cart.updateUI();
+
+        }
+
+
+        /* =================================================
+           ACTIVE LANGUAGE BUTTON
+        ================================================= */
 
         if (langId) {
 
@@ -324,10 +640,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             }
 
-        }
-
-
-        if (lang === 'en') {
+        } else {
 
             if (langEn) {
 
@@ -339,52 +652,61 @@ document.addEventListener('DOMContentLoaded', () => {
 
         }
 
-
-        /*
-        ==========================================
-        REFRESH CATALOG
-        ==========================================
-        */
-
-        /*
-        Kalau catalog.js sudah selesai
-        dibuat, refresh katalog.
-
-        Kalau belum selesai, tidak masalah.
-        */
-
-        if (
-            window.catalog &&
-            typeof window.catalog.refreshLanguage ===
-            'function'
-        ) {
-
-            window.catalog.refreshLanguage();
-
-        }
+    }
 
 
-        /*
-        ==========================================
-        REFRESH CART
-        ==========================================
-        */
+    /* =====================================================
+       LANGUAGE BUTTON EVENTS
+    ====================================================== */
 
-        if (
-            window.catalog &&
-            window.catalog.cart &&
-            typeof window.catalog.cart.updateUI ===
-            'function'
-        ) {
+    if (langId) {
 
-            window.catalog.cart.updateUI();
+        langId.addEventListener(
+            'click',
+            () => {
 
-        }
+                setLanguage('id');
+
+            }
+        );
 
     }
 
 
-    /*
-    ==============================================
-    BUTTON INDONESIA
-   
+    if (langEn) {
+
+        langEn.addEventListener(
+            'click',
+            () => {
+
+                setLanguage('en');
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       LOAD SAVED LANGUAGE
+    ====================================================== */
+
+    const savedLanguage =
+        localStorage.getItem(
+            'language'
+        ) || 'id';
+
+
+    setLanguage(
+        savedLanguage
+    );
+
+
+    /* =====================================================
+       MAKE FUNCTION GLOBAL
+    ====================================================== */
+
+    window.setLanguage =
+        setLanguage;
+
+});
