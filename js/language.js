@@ -8,40 +8,35 @@ document.addEventListener('DOMContentLoaded', () => {
         id: {
 
             search: 'Cari produk...',
+
             category: 'Kategori Produk',
+
             cart: 'Keranjang Belanja',
+
             back: '← Kembali ke Kategori',
+
             order: 'Pesan (WA)',
+
             clear: 'Kosongkan',
+
             emptyCart: 'Keranjang masih kosong',
+
             total: 'Total Keseluruhan:',
+
             home: 'Home',
+
             catalog: 'Katalog',
+
             size: 'Ukuran',
+
             buy: 'Beli Sekarang',
+
             addCart: '+ Keranjang',
+
             searchResult: 'Hasil Pencarian:',
+
             product: 'Produk:',
-            heroButton: 'Lihat Katalog',
-            loadingCategories: 'Memuat kategori...',
-            loadingProducts: 'Memuat produk...',
-            footerDescription:
-                'Temukan produk terbaik kami dengan harga yang terjangkau. Belanja aman, mudah, dan terpercaya.',
-            findUs: 'Temukan Kami di',
-            variant: 'Varian',
-            color: 'Warna',
-            quantity: 'Jumlah',
-            price: 'Harga',
-            description: 'Deskripsi',
-            selectSize: 'Pilih Ukuran',
-            selectVariant: 'Pilih Varian',
-            addToCart: 'Tambah ke Keranjang',
-            continueShopping: 'Lanjut Belanja',
-            noProducts: 'Tidak ada produk ditemukan.',
-            chooseProduct: 'Pilih Produk',
-            available: 'Tersedia',
-            outOfStock: 'Stok Habis',
-            loading: 'Memuat...',
+
             sold: 'Terjual'
 
         },
@@ -49,40 +44,35 @@ document.addEventListener('DOMContentLoaded', () => {
         en: {
 
             search: 'Search products...',
+
             category: 'Product Categories',
+
             cart: 'Shopping Cart',
+
             back: '← Back to Categories',
+
             order: 'Order (WA)',
+
             clear: 'Clear',
+
             emptyCart: 'Cart is empty',
+
             total: 'Grand Total:',
+
             home: 'Home',
+
             catalog: 'Catalog',
+
             size: 'Size',
+
             buy: 'Buy Now',
+
             addCart: '+ Cart',
+
             searchResult: 'Search Results:',
+
             product: 'Product:',
-            heroButton: 'View Catalog',
-            loadingCategories: 'Loading categories...',
-            loadingProducts: 'Loading products...',
-            footerDescription:
-                'Find our best products at affordable prices. Shop safely, easily, and confidently.',
-            findUs: 'Find Us On',
-            variant: 'Variant',
-            color: 'Color',
-            quantity: 'Quantity',
-            price: 'Price',
-            description: 'Description',
-            selectSize: 'Select Size',
-            selectVariant: 'Select Variant',
-            addToCart: 'Add to Cart',
-            continueShopping: 'Continue Shopping',
-            noProducts: 'No products found.',
-            chooseProduct: 'Choose Product',
-            available: 'Available',
-            outOfStock: 'Out of Stock',
-            loading: 'Loading...',
+
             sold: 'Sold'
 
         }
@@ -92,37 +82,73 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function setLanguage(lang) {
 
+        /*
+        ==========================================
+        PASTIKAN BAHASA VALID
+        ==========================================
+        */
+
         if (!translations[lang]) {
             lang = 'id';
         }
+
+
+        /*
+        ==========================================
+        SIMPAN BAHASA
+        ==========================================
+        */
 
         localStorage.setItem(
             'language',
             lang
         );
 
+
         const t =
             translations[lang];
 
+
         /*
         ==========================================
-        NAVBAR
+        SIMPAN KE GLOBAL
+        ==========================================
+        */
+
+        window.currentLanguage = t;
+
+
+        /*
+        ==========================================
+        NAVBAR - HOME
         ==========================================
         */
 
         const navHome =
-            document.getElementById('nav-home');
+            document.getElementById(
+                'nav-home'
+            );
 
         if (navHome) {
-            navHome.textContent = t.home;
+            navHome.textContent =
+                t.home;
         }
 
 
+        /*
+        ==========================================
+        NAVBAR - KATALOG
+        ==========================================
+        */
+
         const navCatalog =
-            document.getElementById('nav-catalog');
+            document.getElementById(
+                'nav-catalog'
+            );
 
         if (navCatalog) {
-            navCatalog.textContent = t.catalog;
+            navCatalog.textContent =
+                t.catalog;
         }
 
 
@@ -133,45 +159,53 @@ document.addEventListener('DOMContentLoaded', () => {
         */
 
         const searchInput =
-            document.getElementById('search-input');
-
-        if (searchInput) {
-            searchInput.placeholder =
-                t.search;
-        }
-
-
-        /*
-        ==========================================
-        HERO
-        ==========================================
-        */
-
-        const heroButton =
             document.getElementById(
-                'hero-catalog-button'
+                'search-input'
             );
 
-        if (heroButton) {
-            heroButton.textContent =
-                t.heroButton;
+        if (searchInput) {
+
+            searchInput.placeholder =
+                t.search;
+
         }
 
 
         /*
         ==========================================
-        CATEGORY
+        CATEGORY TITLE
         ==========================================
         */
 
-        const categoryTitle =
+        const categoriesTitle =
             document.querySelector(
                 '#categories-section .section-title'
             );
 
-        if (categoryTitle) {
-            categoryTitle.textContent =
+        if (categoriesTitle) {
+
+            categoriesTitle.textContent =
                 t.category;
+
+        }
+
+
+        /*
+        ==========================================
+        CART TITLE
+        ==========================================
+        */
+
+        const cartTitle =
+            document.querySelector(
+                '#cart-section .section-title'
+            );
+
+        if (cartTitle) {
+
+            cartTitle.textContent =
+                t.cart;
+
         }
 
 
@@ -187,49 +221,18 @@ document.addEventListener('DOMContentLoaded', () => {
             );
 
         if (backButton) {
+
             backButton.textContent =
                 t.back;
+
         }
 
 
         /*
         ==========================================
-        CART
+        CLEAR CART
         ==========================================
         */
-
-        const cartTitle =
-            document.querySelector(
-                '#cart-section .section-title'
-            );
-
-        if (cartTitle) {
-            cartTitle.textContent =
-                t.cart;
-        }
-
-
-        const emptyCart =
-            document.getElementById(
-                'cart-empty-text'
-            );
-
-        if (emptyCart) {
-            emptyCart.textContent =
-                t.emptyCart;
-        }
-
-
-        const totalLabel =
-            document.getElementById(
-                'cart-total-label'
-            );
-
-        if (totalLabel) {
-            totalLabel.textContent =
-                t.total;
-        }
-
 
         const clearCart =
             document.getElementById(
@@ -237,14 +240,16 @@ document.addEventListener('DOMContentLoaded', () => {
             );
 
         if (clearCart) {
+
             clearCart.textContent =
                 t.clear;
+
         }
 
 
         /*
         ==========================================
-        WHATSAPP BUTTON
+        WHATSAPP CHECKOUT
         ==========================================
         */
 
@@ -255,7 +260,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (checkout) {
 
-            let textNode = null;
+            /*
+            Cari text node yang berisi
+            "Pesan (WA)"
+            */
 
             checkout.childNodes.forEach(
                 node => {
@@ -269,7 +277,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             node.textContent.trim()
                         ) {
 
-                            textNode = node;
+                            node.textContent =
+                                ` ${t.order}`;
 
                         }
 
@@ -278,10 +287,53 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             );
 
-            if (textNode) {
+        }
 
-                textNode.textContent =
-                    ` ${t.order}`;
+
+        /*
+        ==========================================
+        ACTIVE LANGUAGE BUTTON
+        ==========================================
+        */
+
+        if (langId) {
+
+            langId.classList.remove(
+                'active'
+            );
+
+        }
+
+
+        if (langEn) {
+
+            langEn.classList.remove(
+                'active'
+            );
+
+        }
+
+
+        if (lang === 'id') {
+
+            if (langId) {
+
+                langId.classList.add(
+                    'active'
+                );
+
+            }
+
+        }
+
+
+        if (lang === 'en') {
+
+            if (langEn) {
+
+                langEn.classList.add(
+                    'active'
+                );
 
             }
 
@@ -290,52 +342,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         /*
         ==========================================
-        FOOTER
-        ==========================================
-        */
-
-        const footerDescription =
-            document.querySelector(
-                '.footer-brand p'
-            );
-
-        if (footerDescription) {
-            footerDescription.textContent =
-                t.footerDescription;
-        }
-
-
-        const findUs =
-            document.querySelector(
-                '.footer-social h4'
-            );
-
-        if (findUs) {
-            findUs.textContent =
-                t.findUs;
-        }
-
-
-        /*
-        ==========================================
-        GLOBAL LANGUAGE
-        ==========================================
-        */
-
-        window.currentLanguage =
-            t;
-
-        window.currentLanguageCode =
-            lang;
-
-        window.translations =
-            translations;
-
-
-        /*
-        ==========================================
         REFRESH CATALOG
         ==========================================
+        */
+
+        /*
+        Kalau catalog.js sudah selesai
+        dibuat, refresh katalog.
+
+        Kalau belum selesai, tidak masalah.
         */
 
         if (
@@ -366,81 +381,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         }
 
-
-        /*
-        ==========================================
-        ACTIVE BUTTON
-        ==========================================
-        */
-
-        if (langId) {
-            langId.classList.remove('active');
-        }
-
-        if (langEn) {
-            langEn.classList.remove('active');
-        }
-
-        if (lang === 'id') {
-
-            if (langId) {
-                langId.classList.add('active');
-            }
-
-        } else {
-
-            if (langEn) {
-                langEn.classList.add('active');
-            }
-
-        }
-
     }
 
 
     /*
-    ==========================================
-    BUTTON EVENTS
-    ==========================================
-    */
-
-    if (langId) {
-
-        langId.addEventListener(
-            'click',
-            () => {
-                setLanguage('id');
-            }
-        );
-
-    }
-
-
-    if (langEn) {
-
-        langEn.addEventListener(
-            'click',
-            () => {
-                setLanguage('en');
-            }
-        );
-
-    }
-
-
-    /*
-    ==========================================
-    INITIAL LANGUAGE
-    ==========================================
-    */
-
-    const savedLanguage =
-        localStorage.getItem(
-            'language'
-        ) || 'id';
-
-    setLanguage(
-        savedLanguage
-    );
-
-});
+    ==============================================
+    BUTTON INDONESIA
+   
