@@ -30,35 +30,39 @@ export class Catalog {
 
         this.cart = new Cart();
 
-        /* =========================================
-           GLOBAL CATALOG
-        ========================================= */
-
-        window.catalog = this;
-
-        /* =========================================
-           CURRENT VIEW
-        ========================================= */
-
+        // Menyimpan halaman yang sedang dibuka
         this.currentView = 'categories';
+
+        this.currentProducts = [];
 
         this.currentCategoryId = null;
 
         this.currentCategoryName = '';
 
-        this.currentSearchResults = [];
-
         this.currentSearchQuery = '';
 
+        // Supaya language.js bisa mengakses catalog
+        window.catalog = this;
+
         this.initEvents();
+
+        /*
+         * Kalau bahasa diganti, catalog akan refresh.
+         */
+        window.addEventListener(
+            'languageChanged',
+            () => {
+                this.refreshCurrentView();
+            }
+        );
     }
 
 
-    /* =============================================
-       TRANSLATION HELPER
-    ============================================= */
+    /* =====================================================
+       GET TRANSLATION
+    ====================================================== */
 
-    getText(key, fallback) {
+    getTranslation(key, fallback = '') {
 
         if (
             window.currentLanguage &&
@@ -71,14 +75,13 @@ export class Catalog {
     }
 
 
-    /* =============================================
+    /* =====================================================
        EVENTS
-    ============================================= */
+    ====================================================== */
 
     initEvents() {
 
-        /* Back button */
-
+        // Tombol kembali
         if (this.backButton) {
 
             this.backButton.addEventListener(
@@ -89,8 +92,7 @@ export class Catalog {
         }
 
 
-        /* Search */
-
+        // Search
         if (this.searchInput) {
 
             this.searchInput.addEventListener(
@@ -107,8 +109,7 @@ export class Catalog {
         }
 
 
-        /* Image modal */
-
+        // Close image modal
         const modal =
             document.getElementById(
                 'imageModal'
@@ -132,15 +133,14 @@ export class Catalog {
     }
 
 
-    /* =============================================
+    /* =====================================================
        SEARCH
-    ============================================= */
+    ====================================================== */
 
     handleSearch(query) {
 
         const searchTerm =
             query.toLowerCase().trim();
-
 
         if (searchTerm.length === 0) {
 
@@ -167,16 +167,6 @@ export class Catalog {
             );
 
 
-        this.currentView =
-            'search';
-
-        this.currentSearchResults =
-            results;
-
-        this.currentSearchQuery =
-            searchTerm;
-
-
         this.showSearchResults(
             results,
             searchTerm
@@ -185,14 +175,24 @@ export class Catalog {
     }
 
 
-    /* =============================================
+    /* =====================================================
        SEARCH RESULTS
-    ============================================= */
+    ====================================================== */
 
     showSearchResults(
         results,
         query
     ) {
+
+        this.currentView =
+            'search';
+
+        this.currentProducts =
+            results;
+
+        this.currentSearchQuery =
+            query;
+
 
         this.categoriesSection
             .classList.add(
@@ -211,15 +211,15 @@ export class Catalog {
             );
 
 
-        const searchText =
-            this.getText(
+        const searchResult =
+            this.getTranslation(
                 'searchResult',
                 'Hasil Pencarian:'
             );
 
 
         this.categoryTitle.textContent =
-            `${searchText} "${query}"`;
+            `${searchResult} "${query}"`;
 
 
         this.renderProducts(
@@ -229,9 +229,9 @@ export class Catalog {
     }
 
 
-    /* =============================================
+    /* =====================================================
        BUILD CATEGORIES
-    ============================================= */
+    ====================================================== */
 
     buildCategories() {
 
@@ -291,16 +291,12 @@ export class Catalog {
         ) {
 
             this.categoriesGrid.innerHTML = `
-
                 <div class="loading">
-
-                    ${this.getText(
+                    ${this.getTranslation(
                         'noProducts',
                         'Tidak ada kategori ditemukan.'
                     )}
-
                 </div>
-
             `;
 
             return;
@@ -322,7 +318,7 @@ export class Catalog {
 
 
                 const soldText =
-                    this.getText(
+                    this.getTranslation(
                         'sold',
                         'Terjual'
                     );
@@ -335,10 +331,7 @@ export class Catalog {
                         <img
                             src="assets/categories/${category.image}"
                             alt="${category.name}"
-
-                            onerror="
-                                this.src='https://placehold.co/400x300?text=${encodeURIComponent(category.name)}'
-                            "
+                            onerror="this.src='https://placehold.co/400x300?text=${encodeURIComponent(category.name)}'"
                         >
 
                     </div>
@@ -370,7 +363,6 @@ export class Catalog {
                             |
 
                             ${category.sold || 0}
-
                             ${soldText}
 
                         </div>
@@ -404,9 +396,9 @@ export class Catalog {
     }
 
 
-    /* =============================================
+    /* =====================================================
        SHOW PRODUCTS BY CATEGORY
-    ============================================= */
+    ====================================================== */
 
     showProductsByCategory(
         category_id,
@@ -416,10 +408,8 @@ export class Catalog {
         this.currentView =
             'products';
 
-
         this.currentCategoryId =
             category_id;
-
 
         this.currentCategoryName =
             category_name;
@@ -437,8 +427,14 @@ export class Catalog {
             );
 
 
+        this.backButton
+            .classList.remove(
+                'hidden'
+            );
+
+
         const productText =
-            this.getText(
+            this.getTranslation(
                 'product',
                 'Produk:'
             );
@@ -456,6 +452,10 @@ export class Catalog {
             );
 
 
+        this.currentProducts =
+            products;
+
+
         this.renderProducts(
             products
         );
@@ -463,9 +463,9 @@ export class Catalog {
     }
 
 
-    /* =============================================
+    /* =====================================================
        RENDER PRODUCTS
-    ============================================= */
+    ====================================================== */
 
     renderProducts(products) {
 
@@ -481,7 +481,7 @@ export class Catalog {
 
                 <div class="loading">
 
-                    ${this.getText(
+                    ${this.getTranslation(
                         'noProducts',
                         'Tidak ada produk ditemukan.'
                     )}
@@ -498,367 +498,9 @@ export class Catalog {
         products.forEach(
             product => {
 
-                const formattedPrice =
-                    new Intl.NumberFormat(
-                        'id-ID',
-                        {
-                            style:
-                                'currency',
-
-                            currency:
-                                'IDR',
-
-                            minimumFractionDigits:
-                                0
-                        }
-                    ).format(
-                        product.price
-                    );
-
-
-                const card =
-                    document.createElement(
-                        'div'
-                    );
-
-
-                card.className =
-                    'card';
-
-
-                /* =================================
-                   TRANSLATIONS
-                ================================= */
-
-                const sizeText =
-                    this.getText(
-                        'size',
-                        'Ukuran'
-                    );
-
-
-                const addCartText =
-                    this.getText(
-                        'addCart',
-                        '+ Keranjang'
-                    );
-
-
-                const buyText =
-                    this.getText(
-                        'buy',
-                        'Beli Sekarang'
-                    );
-
-
-                /* =================================
-                   PRODUCT CARD
-                ================================= */
-
-                card.innerHTML = `
-
-                    <div class="card-img-wrapper">
-
-                        <img
-                            src="assets/products/${product.product_image}"
-
-                            alt="${product.product_name}"
-
-                            class="product-image clickable-image"
-
-                            onerror="
-                                this.src='https://placehold.co/400x400?text=${encodeURIComponent(product.product_name)}'
-                            "
-                        >
-
-                    </div>
-
-
-                    <div class="card-content">
-
-                        <h3 class="card-title">
-
-                            ${product.product_name}
-
-                        </h3>
-
-
-                        <div class="card-price">
-
-                            ${formattedPrice}
-
-                        </div>
-
-
-                        <div class="product-rating">
-
-                            ⭐ ${product.rating || 4.8}
-
-                        </div>
-
-
-                        <div class="product-size">
-
-                            <label>
-
-                                ${sizeText}:
-
-                            </label>
-
-
-                            <select class="size-select">
-
-                                <option value="Small (12 cm)">
-                                    Small (12 cm)
-                                </option>
-
-                                <option value="Medium (15 cm)">
-                                    Medium (15 cm)
-                                </option>
-
-                                <option value="Large (20 cm)">
-                                    Large (20 cm)
-                                </option>
-
-                                <option value="Xtra Large (25 cm)">
-                                    Xtra Large (25 cm)
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-                        <div class="card-actions">
-
-
-                            <button
-                                class="btn btn-cart add-to-cart-btn"
-                            >
-
-                                ${addCartText}
-
-                            </button>
-
-
-                            <a
-                                href="#"
-                                target="_blank"
-                                class="btn btn-whatsapp btn-buy-now"
-                            >
-
-                                ${buyText}
-
-                            </a>
-
-
-                        </div>
-
-                    </div>
-
-                `;
-
-
-                /* =================================
-                   SIZE SELECT
-                ================================= */
-
-                const sizeSelect =
-                    card.querySelector(
-                        '.size-select'
-                    );
-
-
-                /* =================================
-                   ADD TO CART
-                ================================= */
-
-                card.querySelector(
-                    '.add-to-cart-btn'
-                )
-                .addEventListener(
-                    'click',
-                    (e) => {
-
-                        e.stopPropagation();
-
-
-                        const selectedSize =
-                            sizeSelect.value;
-
-
-                        let extraPrice =
-                            0;
-
-
-                        if (
-                            selectedSize ===
-                            'Large (20 cm)'
-                        ) {
-
-                            extraPrice =
-                                15000;
-
-                        }
-
-
-                        else if (
-                            selectedSize ===
-                            'Xtra Large (25 cm)'
-                        ) {
-
-                            extraPrice =
-                                30000;
-
-                        }
-
-
-                        this.cart.addItem({
-
-                            ...product,
-
-                            selectedSize,
-
-                            price:
-                                parseFloat(
-                                    product.price
-                                ) +
-                                extraPrice
-
-                        });
-
-                    }
+                this.renderProductCard(
+                    product
                 );
-
-
-                /* =================================
-                   WHATSAPP BUY NOW
-                ================================= */
-
-                const buyButton =
-                    card.querySelector(
-                        '.btn-buy-now'
-                    );
-
-
-                const updateWhatsApp =
-                    () => {
-
-                        const selectedSize =
-                            sizeSelect.value;
-
-
-                        let extraPrice =
-                            0;
-
-
-                        if (
-                            selectedSize ===
-                            'Large (20 cm)'
-                        ) {
-
-                            extraPrice =
-                                15000;
-
-                        }
-
-
-                        else if (
-                            selectedSize ===
-                            'Xtra Large (25 cm)'
-                        ) {
-
-                            extraPrice =
-                                30000;
-
-                        }
-
-
-                        const finalPrice =
-                            parseFloat(
-                                product.price
-                            ) +
-                            extraPrice;
-
-
-                        const number =
-                            STORE_CONFIG
-                                .whatsappNumber;
-
-
-                        const message =
-                            `Halo, saya tertarik membeli ${product.product_name}. ` +
-                            `Ukuran: ${selectedSize}. ` +
-                            `Harga: Rp ${finalPrice.toLocaleString('id-ID')}`;
-
-
-                        buyButton.href =
-                            `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
-
-                    };
-
-
-                updateWhatsApp();
-
-
-                sizeSelect.addEventListener(
-                    'change',
-                    updateWhatsApp
-                );
-
-
-                /* =================================
-                   IMAGE ZOOM
-                ================================= */
-
-                const image =
-                    card.querySelector(
-                        '.clickable-image'
-                    );
-
-
-                image.addEventListener(
-                    'click',
-                    () => {
-
-                        const modal =
-                            document.getElementById(
-                                'imageModal'
-                            );
-
-
-                        const modalImage =
-                            document.getElementById(
-                                'modalImage'
-                            );
-
-
-                        if (
-                            modal &&
-                            modalImage
-                        ) {
-
-                            modalImage.src =
-                                `assets/products/${product.product_image}`;
-
-                            modal.classList.add(
-                                'show'
-                            );
-
-                        }
-
-                    }
-                );
-
-
-                /* =================================
-                   ADD CARD
-                ================================= */
-
-                this.productsGrid
-                    .appendChild(
-                        card
-                    );
 
             }
         );
@@ -866,15 +508,387 @@ export class Catalog {
     }
 
 
-    /* =============================================
-       REFRESH LANGUAGE
-    ============================================= */
+    /* =====================================================
+       PRODUCT CARD
+    ====================================================== */
 
-    refreshLanguage() {
+    renderProductCard(product) {
 
-        /*
-         * Sedang melihat kategori
-         */
+        const formattedPrice =
+            new Intl.NumberFormat(
+                'id-ID',
+                {
+                    style:
+                        'currency',
+
+                    currency:
+                        'IDR',
+
+                    minimumFractionDigits:
+                        0
+                }
+            ).format(
+                product.price
+            );
+
+
+        const card =
+            document.createElement(
+                'div'
+            );
+
+
+        card.className =
+            'card';
+
+
+        /* =================================================
+           TRANSLATION
+        ================================================= */
+
+        const sizeText =
+            this.getTranslation(
+                'size',
+                'Ukuran'
+            );
+
+
+        const addCartText =
+            this.getTranslation(
+                'addCart',
+                '+ Keranjang'
+            );
+
+
+        const buyText =
+            this.getTranslation(
+                'buy',
+                'Beli Sekarang'
+            );
+
+
+        /* =================================================
+           PRODUCT HTML
+        ================================================= */
+
+        card.innerHTML = `
+
+            <div class="card-img-wrapper">
+
+                <img
+                    src="assets/products/${product.product_image}"
+                    alt="${product.product_name}"
+                    class="product-image clickable-image"
+
+                    onerror="
+                        this.src='https://placehold.co/400x400?text=${encodeURIComponent(product.product_name)}'
+                    "
+                >
+
+            </div>
+
+
+            <div class="card-content">
+
+                <h3 class="card-title">
+
+                    ${product.product_name}
+
+                </h3>
+
+
+                <div class="card-price">
+
+                    ${formattedPrice}
+
+                </div>
+
+
+                <div class="product-rating">
+
+                    ⭐ ${product.rating || 4.8}
+
+                </div>
+
+
+                <div class="product-size">
+
+                    <label class="size-label">
+
+                        ${sizeText}:
+
+                    </label>
+
+
+                    <select class="size-select">
+
+                        <option value="Small (12 cm)">
+
+                            Small (12 cm)
+
+                        </option>
+
+
+                        <option value="Medium (15 cm)">
+
+                            Medium (15 cm)
+
+                        </option>
+
+
+                        <option value="Large (20 cm)">
+
+                            Large (20 cm)
+
+                        </option>
+
+
+                        <option value="Xtra Large (25 cm)">
+
+                            Xtra Large (25 cm)
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="card-actions">
+
+                    <button
+                        class="btn btn-cart add-to-cart-btn"
+                    >
+
+                        ${addCartText}
+
+                    </button>
+
+
+                    <a
+                        href="#"
+                        target="_blank"
+                        class="btn btn-whatsapp btn-buy-now"
+                    >
+
+                        ${buyText}
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        /* =================================================
+           SIZE SELECT
+        ====================================================== */
+
+        const sizeSelect =
+            card.querySelector(
+                '.size-select'
+            );
+
+
+        /* =================================================
+           ADD TO CART
+        ====================================================== */
+
+        card.querySelector(
+            '.add-to-cart-btn'
+        )
+        .addEventListener(
+            'click',
+            (e) => {
+
+                e.stopPropagation();
+
+
+                const selectedSize =
+                    sizeSelect.value;
+
+
+                let extraPrice =
+                    0;
+
+
+                if (
+                    selectedSize ===
+                    'Large (20 cm)'
+                ) {
+
+                    extraPrice =
+                        15000;
+
+                }
+
+                else if (
+                    selectedSize ===
+                    'Xtra Large (25 cm)'
+                ) {
+
+                    extraPrice =
+                        30000;
+
+                }
+
+
+                this.cart.addItem({
+
+                    ...product,
+
+                    selectedSize,
+
+                    price:
+                        parseFloat(
+                            product.price
+                        ) +
+                        extraPrice
+
+                });
+
+            }
+        );
+
+
+        /* =================================================
+           BUY NOW
+        ====================================================== */
+
+        const buyButton =
+            card.querySelector(
+                '.btn-buy-now'
+            );
+
+
+        const updateWhatsApp =
+            () => {
+
+                const selectedSize =
+                    sizeSelect.value;
+
+
+                let extraPrice =
+                    0;
+
+
+                if (
+                    selectedSize ===
+                    'Large (20 cm)'
+                ) {
+
+                    extraPrice =
+                        15000;
+
+                }
+
+                else if (
+                    selectedSize ===
+                    'Xtra Large (25 cm)'
+                ) {
+
+                    extraPrice =
+                        30000;
+
+                }
+
+
+                const finalPrice =
+                    parseFloat(
+                        product.price
+                    ) +
+                    extraPrice;
+
+
+                const number =
+                    STORE_CONFIG
+                        .whatsappNumber;
+
+
+                const message =
+                    `Halo, saya tertarik membeli ${product.product_name}. ` +
+                    `Ukuran: ${selectedSize}. ` +
+                    `Harga: Rp ${finalPrice.toLocaleString('id-ID')}`;
+
+
+                const encodedMessage =
+                    encodeURIComponent(
+                        message
+                    );
+
+
+                buyButton.href =
+                    `https://wa.me/${number}?text=${encodedMessage}`;
+
+            };
+
+
+        updateWhatsApp();
+
+
+        sizeSelect.addEventListener(
+            'change',
+            updateWhatsApp
+        );
+
+
+        /* =================================================
+           IMAGE ZOOM
+        ====================================================== */
+
+        const image =
+            card.querySelector(
+                '.clickable-image'
+            );
+
+
+        image.addEventListener(
+            'click',
+            () => {
+
+                const modal =
+                    document.getElementById(
+                        'imageModal'
+                    );
+
+
+                const modalImage =
+                    document.getElementById(
+                        'modalImage'
+                    );
+
+
+                modalImage.src =
+                    `assets/products/${product.product_image}`;
+
+
+                modal.classList.add(
+                    'show'
+                );
+
+            }
+        );
+
+
+        /* =================================================
+           APPEND CARD
+        ====================================================== */
+
+        this.productsGrid
+            .appendChild(
+                card
+            );
+
+    }
+
+
+    /* =====================================================
+       REFRESH CURRENT VIEW
+    ====================================================== */
+
+    refreshCurrentView() {
 
         if (
             this.currentView ===
@@ -888,25 +902,13 @@ export class Catalog {
         }
 
 
-        /*
-         * Sedang melihat produk
-         */
-
         if (
             this.currentView ===
             'products'
         ) {
 
-            const products =
-                this.data.filter(
-                    item =>
-                        item.category_id ===
-                        this.currentCategoryId
-                );
-
-
             const productText =
-                this.getText(
+                this.getTranslation(
                     'product',
                     'Produk:'
                 );
@@ -917,7 +919,7 @@ export class Catalog {
 
 
             this.renderProducts(
-                products
+                this.currentProducts
             );
 
             return;
@@ -925,28 +927,24 @@ export class Catalog {
         }
 
 
-        /*
-         * Sedang search
-         */
-
         if (
             this.currentView ===
             'search'
         ) {
 
-            const searchText =
-                this.getText(
+            const searchResult =
+                this.getTranslation(
                     'searchResult',
                     'Hasil Pencarian:'
                 );
 
 
             this.categoryTitle.textContent =
-                `${searchText} "${this.currentSearchQuery}"`;
+                `${searchResult} "${this.currentSearchQuery}"`;
 
 
             this.renderProducts(
-                this.currentSearchResults
+                this.currentProducts
             );
 
         }
@@ -954,9 +952,9 @@ export class Catalog {
     }
 
 
-    /* =============================================
+    /* =====================================================
        SHOW CATEGORIES
-    ============================================= */
+    ====================================================== */
 
     showCategories() {
 
@@ -991,9 +989,9 @@ export class Catalog {
     }
 
 
-    /* =============================================
-       WHATSAPP LINK
-    ============================================= */
+    /* =====================================================
+       WHATSAPP
+    ====================================================== */
 
     createWhatsAppLink(
         productName
@@ -1008,7 +1006,13 @@ export class Catalog {
             `Halo, saya tertarik membeli ${productName}`;
 
 
-        return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+        const encodedMessage =
+            encodeURIComponent(
+                message
+            );
+
+
+        return `https://wa.me/${number}?text=${encodedMessage}`;
 
     }
 
