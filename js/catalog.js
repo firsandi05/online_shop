@@ -960,7 +960,7 @@ console.log(
                 ) {
 
                     const USD_RATE =
-                        25000;
+                        10000;
 
 
                     const usdPrice =
