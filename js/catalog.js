@@ -160,8 +160,8 @@ export class Catalog {
         // ENGLISH / USD
         // =================================================
 
-        // 1 USD = Rp25.000
-        const USD_RATE = 25000;
+        // 1 USD = Rp10.000
+        const USD_RATE = 10000;
 
         const usdPrice =
             numericPrice / USD_RATE;
