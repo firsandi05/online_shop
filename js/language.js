@@ -4,9 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const langEn = document.getElementById('lang-en');
 
 
-    /* =====================================================
-       TRANSLATIONS
-    ====================================================== */
+    // =====================================================
+    // TRANSLATIONS
+    // =====================================================
 
     const translations = {
 
@@ -42,9 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
             catalog:
                 'Katalog',
 
-            size:
-                'Ukuran',
-
             buy:
                 'Beli Sekarang',
 
@@ -55,10 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Hasil Pencarian:',
 
             product:
-                'Produk:',
-
-            sold:
-                'Terjual'
+                'Produk:'
 
         },
 
@@ -95,9 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
             catalog:
                 'Catalog',
 
-            size:
-                'Size',
-
             buy:
                 'Buy Now',
 
@@ -108,62 +99,47 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Search Results:',
 
             product:
-                'Product:',
-
-            sold:
-                'Sold'
+                'Product:'
 
         }
 
     };
 
 
-    /* =====================================================
-       SET LANGUAGE
-    ====================================================== */
+    // =====================================================
+    // SET LANGUAGE
+    // =====================================================
 
     function setLanguage(lang) {
 
-        /*
-         * Pastikan language valid
-         */
-
+        // Pastikan bahasa valid
         if (!translations[lang]) {
+
             lang = 'id';
+
         }
 
 
-        /*
-         * Simpan language
-         */
-
+        // Simpan pilihan bahasa
         localStorage.setItem(
             'language',
             lang
         );
 
 
-        /*
-         * Ambil translation
-         */
-
+        // Ambil translation
         const t =
             translations[lang];
 
 
-        /*
-         * Simpan global
-         *
-         * catalog.js akan membaca ini
-         */
-
+        // Simpan secara global
         window.currentLanguage =
             t;
 
 
-        /* =================================================
-           NAVBAR
-        ================================================= */
+        // =================================================
+        // NAVBAR - HOME
+        // =================================================
 
         const navHome =
             document.getElementById(
@@ -178,6 +154,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
 
+        // =================================================
+        // NAVBAR - CATALOG
+        // =================================================
+
         const navCatalog =
             document.getElementById(
                 'nav-catalog'
@@ -191,9 +171,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
 
-        /* =================================================
-           SEARCH
-        ================================================= */
+        // =================================================
+        // SEARCH
+        // =================================================
 
         const searchInput =
             document.getElementById(
@@ -208,26 +188,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
 
-        /* =================================================
-           CATEGORY TITLE
-        ================================================= */
+        // =================================================
+        // CATEGORY TITLE
+        // =================================================
 
-        const categoryTitle =
+        const categoriesTitle =
             document.querySelector(
                 '#categories-section .section-title'
             );
 
-        if (categoryTitle) {
+        if (categoriesTitle) {
 
-            categoryTitle.textContent =
+            categoriesTitle.textContent =
                 t.category;
 
         }
 
 
-        /* =================================================
-           CART TITLE
-        ================================================= */
+        // =================================================
+        // CART TITLE
+        // =================================================
 
         const cartTitle =
             document.querySelector(
@@ -242,9 +222,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
 
-        /* =================================================
-           BACK BUTTON
-        ================================================= */
+        // =================================================
+        // BACK BUTTON
+        // =================================================
 
         const backButton =
             document.getElementById(
@@ -259,9 +239,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
 
-        /* =================================================
-           CLEAR CART
-        ================================================= */
+        // =================================================
+        // CLEAR CART
+        // =================================================
 
         const clearCart =
             document.getElementById(
@@ -276,9 +256,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
 
-        /* =================================================
-           WHATSAPP CHECKOUT
-        ================================================= */
+        // =================================================
+        // WHATSAPP CHECKOUT
+        // =================================================
 
         const checkout =
             document.getElementById(
@@ -286,13 +266,6 @@ document.addEventListener('DOMContentLoaded', () => {
             );
 
         if (checkout) {
-
-            /*
-             * Jangan gunakan innerHTML karena
-             * tombol punya SVG.
-             *
-             * Cari text node setelah SVG.
-             */
 
             checkout.childNodes.forEach(
                 node => {
@@ -319,9 +292,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
 
-        /* =================================================
-           LANGUAGE BUTTON
-        ================================================= */
+        // =================================================
+        // LANGUAGE BUTTON - RESET
+        // =================================================
 
         if (langId) {
 
@@ -340,6 +313,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         }
 
+
+        // =================================================
+        // LANGUAGE BUTTON - ACTIVE
+        // =================================================
 
         if (lang === 'id') {
 
@@ -367,9 +344,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
 
-        /* =================================================
-           BERITAHU CATALOG.JS
-        ================================================= */
+        // =================================================
+        // NOTIFY CATALOG.JS
+        // =================================================
 
         window.dispatchEvent(
             new Event(
@@ -380,9 +357,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    /* =====================================================
-       INDONESIA BUTTON
-    ====================================================== */
+    // =====================================================
+    // INDONESIA BUTTON
+    // =====================================================
 
     if (langId) {
 
@@ -398,9 +375,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    /* =====================================================
-       ENGLISH BUTTON
-    ====================================================== */
+    // =====================================================
+    // ENGLISH BUTTON
+    // =====================================================
 
     if (langEn) {
 
@@ -416,9 +393,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    /* =====================================================
-       LOAD SAVED LANGUAGE
-    ====================================================== */
+    // =====================================================
+    // LOAD SAVED LANGUAGE
+    // =====================================================
 
     const savedLanguage =
         localStorage.getItem(
