@@ -4,45 +4,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <meta name="description" content="Katalog produk XWing Project">
+
     <title>Katalog Produk</title>
+
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"
+        rel="stylesheet"
+    >
 </head>
 
+
 <body>
+
+    <!-- =====================================================
+         NAVBAR
+    ====================================================== -->
+
     <header class="navbar">
+
         <div class="container navbar-content">
-            <a href="index.html" class="brand">XWing Project</a>
+
+            <a href="index.html" class="brand">
+                XWing Project
+            </a>
+
+
             <nav>
-                <a href="index.html">Home</a>
-                <a href="products.html" class="active">Katalog</a>
+
+                <a
+                    href="index.html"
+                    id="nav-home"
+                >
+                    Home
+                </a>
+
+
+                <a
+                    href="products.html"
+                    id="nav-catalog"
+                    class="active"
+                >
+                    Katalog
+                </a>
+
             </nav>
+
         </div>
+
     </header>
 
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
     <main class="container">
-        <!-- Level 1: Categories -->
-        <section id="categories-section" class="catalog-section">
-            <h2 class="section-title">Kategori Produk</h2>
-            <div id="categories-grid" class="grid-container">
-                <div class="loading">Memuat kategori...</div>
+
+
+        <!-- =================================================
+             LEVEL 1 : CATEGORIES
+        ================================================== -->
+
+        <section
+            id="categories-section"
+            class="catalog-section"
+        >
+
+            <h2 class="section-title">
+                Kategori Produk
+            </h2>
+
+
+            <div
+                id="categories-grid"
+                class="grid-container"
+            >
+
+                <div
+                    id="categories-loading"
+                    class="loading"
+                >
+                    Memuat kategori...
+                </div>
+
             </div>
+
         </section>
 
-        <!-- Level 2: Products -->
-        <section id="products-section" class="catalog-section hidden">
+
+
+        <!-- =================================================
+             LEVEL 2 : PRODUCTS
+        ================================================== -->
+
+        <section
+            id="products-section"
+            class="catalog-section hidden"
+        >
+
+
+            <!-- =============================================
+                 SECTION HEADER
+            ============================================== -->
+
             <div class="section-header">
-                <button id="back-button" class="btn btn-secondary">&larr; Kembali ke Kategori</button>
-                <h2 id="category-title" class="section-title">Produk</h2>
+
+                <button
+                    id="back-button"
+                    class="btn btn-secondary"
+                >
+                    ← Kembali ke Kategori
+                </button>
+
+
+                <h2
+                    id="category-title"
+                    class="section-title"
+                >
+                    Produk
+                </h2>
+
             </div>
-            <div id="products-grid" class="grid-container">
-                <div class="loading">Memuat produk...</div>
+
+
+
+            <!-- =============================================
+                 PRODUCTS
+            ============================================== -->
+
+            <div
+                id="products-grid"
+                class="grid-container"
+            >
+
+                <div
+                    id="products-loading"
+                    class="loading"
+                >
+                    Memuat produk...
+                </div>
+
             </div>
+
+
+
+            <!-- =============================================
+                 CATEGORY DESCRIPTION
+                 
+                 Description akan muncul DI SINI,
+                 setelah semua produk kategori.
+            ============================================== -->
+
+            <div
+                id="category-description"
+                class="category-description hidden"
+            >
+
+                <div id="category-description-content"></div>
+
+            </div>
+
+
         </section>
+
     </main>
 
-    <script type="module" src="js/app.js"></script>
+
+
+    <!-- =====================================================
+         SCRIPT
+    ====================================================== -->
+
+    <script
+        type="module"
+        src="js/app.js"
+    ></script>
+
 </body>
 
 </html>
