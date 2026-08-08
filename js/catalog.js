@@ -1,11 +1,16 @@
 import { STORE_CONFIG } from '../config/config.js';
 import { Cart } from './cart.js';
 
+
 export class Catalog {
 
     constructor(data) {
 
-        this.data = data;
+        this.data = data || [];
+
+        // ==========================================
+        // HTML ELEMENTS
+        // ==========================================
 
         this.categoriesSection =
             document.getElementById('categories-section');
@@ -28,9 +33,18 @@ export class Catalog {
         this.searchInput =
             document.getElementById('search-input');
 
+
+        // ==========================================
+        // CART
+        // ==========================================
+
         this.cart = new Cart();
 
-        // Menyimpan halaman yang sedang dibuka
+
+        // ==========================================
+        // CURRENT PAGE STATE
+        // ==========================================
+
         this.currentView = 'categories';
 
         this.currentProducts = [];
@@ -41,66 +55,110 @@ export class Catalog {
 
         this.currentSearchQuery = '';
 
-        // Supaya language.js bisa mengakses catalog
+
+        // ==========================================
+        // MAKE CATALOG AVAILABLE GLOBALLY
+        // ==========================================
+
         window.catalog = this;
+
+
+        // ==========================================
+        // EVENTS
+        // ==========================================
 
         this.initEvents();
 
-        /*
-         * Kalau bahasa diganti, catalog akan refresh.
-         */
+
+        // ==========================================
+        // LANGUAGE CHANGE
+        // ==========================================
+
         window.addEventListener(
             'languageChanged',
             () => {
+
                 this.refreshCurrentView();
+
             }
         );
+
     }
 
 
-    /* =====================================================
-       GET TRANSLATION
-    ====================================================== */
+    // =================================================
+    // LANGUAGE
+    // =================================================
 
-    getTranslation(key, fallback = '') {
+    getLanguage() {
 
-        if (
-            window.currentLanguage &&
-            window.currentLanguage[key]
-        ) {
-            return window.currentLanguage[key];
+        return (
+            localStorage.getItem('language')
+            || 'id'
+        );
+
+    }
+
+
+    getTranslation(
+        key,
+        idText,
+        enText
+    ) {
+
+        const lang =
+            this.getLanguage();
+
+
+        if (lang === 'en') {
+
+            return enText;
+
         }
 
-        return fallback;
+
+        return idText;
+
     }
 
 
-    /* =====================================================
-       EVENTS
-    ====================================================== */
+    // =================================================
+    // EVENTS
+    // =================================================
 
     initEvents() {
 
-        // Tombol kembali
+
+        // ---------------------------------------------
+        // BACK BUTTON
+        // ---------------------------------------------
+
         if (this.backButton) {
 
             this.backButton.addEventListener(
                 'click',
-                () => this.showCategories()
+                () => {
+
+                    this.showCategories();
+
+                }
             );
 
         }
 
 
-        // Search
+        // ---------------------------------------------
+        // SEARCH
+        // ---------------------------------------------
+
         if (this.searchInput) {
 
             this.searchInput.addEventListener(
                 'input',
-                (e) => {
+                (event) => {
 
                     this.handleSearch(
-                        e.target.value
+                        event.target.value
                     );
 
                 }
@@ -109,11 +167,15 @@ export class Catalog {
         }
 
 
-        // Close image modal
+        // ---------------------------------------------
+        // IMAGE MODAL
+        // ---------------------------------------------
+
         const modal =
             document.getElementById(
                 'imageModal'
             );
+
 
         if (modal) {
 
@@ -133,16 +195,19 @@ export class Catalog {
     }
 
 
-    /* =====================================================
-       SEARCH
-    ====================================================== */
+    // =================================================
+    // SEARCH
+    // =================================================
 
     handleSearch(query) {
 
         const searchTerm =
-            query.toLowerCase().trim();
+            String(query)
+                .toLowerCase()
+                .trim();
 
-        if (searchTerm.length === 0) {
+
+        if (!searchTerm) {
 
             this.showCategories();
 
@@ -152,18 +217,32 @@ export class Catalog {
 
 
         const results =
-            this.data.filter(product =>
+            this.data.filter(
+                product => {
 
-                product.product_name
-                    .toLowerCase()
-                    .includes(searchTerm)
+                    const productName =
+                        String(
+                            product.product_name || ''
+                        ).toLowerCase();
 
-                ||
 
-                product.category_name
-                    .toLowerCase()
-                    .includes(searchTerm)
+                    const categoryName =
+                        String(
+                            product.category_name || ''
+                        ).toLowerCase();
 
+
+                    return (
+                        productName.includes(
+                            searchTerm
+                        )
+                        ||
+                        categoryName.includes(
+                            searchTerm
+                        )
+                    );
+
+                }
             );
 
 
@@ -175,9 +254,9 @@ export class Catalog {
     }
 
 
-    /* =====================================================
-       SEARCH RESULTS
-    ====================================================== */
+    // =================================================
+    // SEARCH RESULTS
+    // =================================================
 
     showSearchResults(
         results,
@@ -187,39 +266,53 @@ export class Catalog {
         this.currentView =
             'search';
 
+
         this.currentProducts =
             results;
+
 
         this.currentSearchQuery =
             query;
 
 
-        this.categoriesSection
-            .classList.add(
-                'hidden'
-            );
+        if (this.categoriesSection) {
 
-        this.productsSection
-            .classList.remove(
-                'hidden'
-            );
+            this.categoriesSection
+                .classList.add('hidden');
+
+        }
 
 
-        this.backButton
-            .classList.remove(
-                'hidden'
-            );
+        if (this.productsSection) {
+
+            this.productsSection
+                .classList.remove('hidden');
+
+        }
 
 
-        const searchResult =
-            this.getTranslation(
-                'searchResult',
-                'Hasil Pencarian:'
-            );
+        if (this.backButton) {
+
+            this.backButton
+                .classList.remove('hidden');
+
+        }
 
 
-        this.categoryTitle.textContent =
-            `${searchResult} "${query}"`;
+        if (this.categoryTitle) {
+
+            const title =
+                this.getTranslation(
+                    'searchResult',
+                    'Hasil Pencarian:',
+                    'Search Results:'
+                );
+
+
+            this.categoryTitle.textContent =
+                `${title} "${query}"`;
+
+        }
 
 
         this.renderProducts(
@@ -229,9 +322,9 @@ export class Catalog {
     }
 
 
-    /* =====================================================
-       BUILD CATEGORIES
-    ====================================================== */
+    // =================================================
+    // BUILD CATEGORIES
+    // =================================================
 
     buildCategories() {
 
@@ -239,45 +332,62 @@ export class Catalog {
             'categories';
 
 
+        if (!this.categoriesGrid) {
+
+            return;
+
+        }
+
+
         this.categoriesGrid.innerHTML =
             '';
 
+
+        // ---------------------------------------------
+        // CREATE UNIQUE CATEGORY LIST
+        // ---------------------------------------------
 
         const categoriesMap =
             new Map();
 
 
-        this.data.forEach(item => {
+        this.data.forEach(
+            item => {
 
-            if (
-                !categoriesMap.has(
-                    item.category_id
-                )
-            ) {
+                const id =
+                    item.category_id;
 
-                categoriesMap.set(
-                    item.category_id,
-                    {
-                        id:
-                            item.category_id,
 
-                        name:
-                            item.category_name,
+                if (
+                    !categoriesMap.has(id)
+                ) {
 
-                        image:
-                            item.category_image,
+                    categoriesMap.set(
+                        id,
+                        {
 
-                        rating:
-                            item.category_rating,
+                            id:
+                                id,
 
-                        sold:
-                            item.category_sold
-                    }
-                );
+                            name:
+                                item.category_name,
+
+                            image:
+                                item.category_image,
+
+                            rating:
+                                item.category_rating,
+
+                            sold:
+                                item.category_sold
+
+                        }
+                    );
+
+                }
 
             }
-
-        });
+        );
 
 
         const categories =
@@ -286,23 +396,37 @@ export class Catalog {
             );
 
 
+        // ---------------------------------------------
+        // EMPTY CATEGORY
+        // ---------------------------------------------
+
         if (
             categories.length === 0
         ) {
 
+            const emptyText =
+                this.getTranslation(
+                    'noCategory',
+                    'Tidak ada kategori ditemukan.',
+                    'No categories found.'
+                );
+
+
             this.categoriesGrid.innerHTML = `
                 <div class="loading">
-                    ${this.getTranslation(
-                        'noProducts',
-                        'Tidak ada kategori ditemukan.'
-                    )}
+                    ${emptyText}
                 </div>
             `;
+
 
             return;
 
         }
 
+
+        // ---------------------------------------------
+        // CATEGORY CARD
+        // ---------------------------------------------
 
         categories.forEach(
             category => {
@@ -317,10 +441,23 @@ export class Catalog {
                     'card';
 
 
+                // Rating
+                const rating =
+                    category.rating ||
+                    0;
+
+
+                // Sold
+                const sold =
+                    category.sold ||
+                    0;
+
+
                 const soldText =
                     this.getTranslation(
                         'sold',
-                        'Terjual'
+                        'Terjual',
+                        'Sold'
                     );
 
 
@@ -331,7 +468,9 @@ export class Catalog {
                         <img
                             src="assets/categories/${category.image}"
                             alt="${category.name}"
-                            onerror="this.src='https://placehold.co/400x300?text=${encodeURIComponent(category.name)}'"
+                            onerror="
+                                this.src='https://placehold.co/400x300?text=${encodeURIComponent(category.name)}'
+                            "
                         >
 
                     </div>
@@ -352,17 +491,19 @@ export class Catalog {
                                 font-size:1.5rem;
                             "
                         >
+
                             ${category.name}
+
                         </h3>
 
 
                         <div class="category-rating">
 
-                            ⭐ ${category.rating || 0}
+                            ⭐ ${rating}
 
                             |
 
-                            ${category.sold || 0}
+                            ${sold}
                             ${soldText}
 
                         </div>
@@ -371,6 +512,10 @@ export class Catalog {
 
                 `;
 
+
+                // -------------------------------------
+                // CLICK CATEGORY
+                // -------------------------------------
 
                 card.addEventListener(
                     'click',
@@ -396,59 +541,76 @@ export class Catalog {
     }
 
 
-    /* =====================================================
-       SHOW PRODUCTS BY CATEGORY
-    ====================================================== */
+    // =================================================
+    // SHOW PRODUCTS BY CATEGORY
+    // =================================================
 
     showProductsByCategory(
-        category_id,
-        category_name
+        categoryId,
+        categoryName
     ) {
 
         this.currentView =
             'products';
 
+
         this.currentCategoryId =
-            category_id;
+            categoryId;
+
 
         this.currentCategoryName =
-            category_name;
+            categoryName;
 
 
-        this.categoriesSection
-            .classList.add(
-                'hidden'
-            );
+        if (this.categoriesSection) {
+
+            this.categoriesSection
+                .classList.add('hidden');
+
+        }
 
 
-        this.productsSection
-            .classList.remove(
-                'hidden'
-            );
+        if (this.productsSection) {
+
+            this.productsSection
+                .classList.remove('hidden');
+
+        }
 
 
-        this.backButton
-            .classList.remove(
-                'hidden'
-            );
+        if (this.backButton) {
+
+            this.backButton
+                .classList.remove('hidden');
+
+        }
 
 
         const productText =
             this.getTranslation(
                 'product',
-                'Produk:'
+                'Produk:',
+                'Product:'
             );
 
 
-        this.categoryTitle.textContent =
-            `${productText} ${category_name}`;
+        if (this.categoryTitle) {
+
+            this.categoryTitle.textContent =
+                `${productText} ${categoryName}`;
+
+        }
 
 
         const products =
             this.data.filter(
                 item =>
-                    item.category_id ===
-                    category_id
+                    String(
+                        item.category_id
+                    ) ===
+                    String(
+                        categoryId
+                    )
             );
 
 
@@ -463,32 +625,42 @@ export class Catalog {
     }
 
 
-    /* =====================================================
-       RENDER PRODUCTS
-    ====================================================== */
+    // =================================================
+    // RENDER PRODUCTS
+    // =================================================
 
     renderProducts(products) {
+
+        if (!this.productsGrid) {
+
+            return;
+
+        }
+
 
         this.productsGrid.innerHTML =
             '';
 
 
         if (
+            !products ||
             products.length === 0
         ) {
 
+            const emptyText =
+                this.getTranslation(
+                    'noProduct',
+                    'Tidak ada produk ditemukan.',
+                    'No products found.'
+                );
+
+
             this.productsGrid.innerHTML = `
-
                 <div class="loading">
-
-                    ${this.getTranslation(
-                        'noProducts',
-                        'Tidak ada produk ditemukan.'
-                    )}
-
+                    ${emptyText}
                 </div>
-
             `;
+
 
             return;
 
@@ -508,29 +680,79 @@ export class Catalog {
     }
 
 
-    /* =====================================================
-       PRODUCT CARD
-    ====================================================== */
+    // =================================================
+    // PRODUCT CARD
+    // =================================================
 
     renderProductCard(product) {
 
-        const formattedPrice =
-            new Intl.NumberFormat(
-                'id-ID',
-                {
-                    style:
-                        'currency',
 
-                    currency:
-                        'IDR',
+        // ---------------------------------------------
+        // PRODUCT DATA
+        // ---------------------------------------------
 
-                    minimumFractionDigits:
-                        0
-                }
-            ).format(
+        const productName =
+            product.product_name ||
+            'Product';
+
+
+        const image =
+            product.product_image ||
+            '';
+
+
+        const basePrice =
+            parseFloat(
                 product.price
+            ) || 0;
+
+
+        const rating =
+            product.rating ||
+            4.8;
+
+
+        // ---------------------------------------------
+        // TRANSLATION
+        // ---------------------------------------------
+
+        const sizeText =
+            this.getTranslation(
+                'size',
+                'Ukuran',
+                'Size'
             );
 
+
+        const addCartText =
+            this.getTranslation(
+                'addCart',
+                '+ Keranjang',
+                '+ Cart'
+            );
+
+
+        const buyText =
+            this.getTranslation(
+                'buy',
+                'Beli Sekarang',
+                'Buy Now'
+            );
+
+
+        // ---------------------------------------------
+        // PRICE
+        // ---------------------------------------------
+
+        const formattedPrice =
+            this.formatPrice(
+                basePrice
+            );
+
+
+        // ---------------------------------------------
+        // CARD
+        // ---------------------------------------------
 
         const card =
             document.createElement(
@@ -542,46 +764,17 @@ export class Catalog {
             'card';
 
 
-        /* =================================================
-           TRANSLATION
-        ================================================= */
-
-        const sizeText =
-            this.getTranslation(
-                'size',
-                'Ukuran'
-            );
-
-
-        const addCartText =
-            this.getTranslation(
-                'addCart',
-                '+ Keranjang'
-            );
-
-
-        const buyText =
-            this.getTranslation(
-                'buy',
-                'Beli Sekarang'
-            );
-
-
-        /* =================================================
-           PRODUCT HTML
-        ================================================= */
-
         card.innerHTML = `
 
             <div class="card-img-wrapper">
 
                 <img
-                    src="assets/products/${product.product_image}"
-                    alt="${product.product_name}"
+                    src="assets/products/${image}"
+                    alt="${productName}"
                     class="product-image clickable-image"
 
                     onerror="
-                        this.src='https://placehold.co/400x400?text=${encodeURIComponent(product.product_name)}'
+                        this.src='https://placehold.co/400x400?text=${encodeURIComponent(productName)}'
                     "
                 >
 
@@ -590,9 +783,10 @@ export class Catalog {
 
             <div class="card-content">
 
+
                 <h3 class="card-title">
 
-                    ${product.product_name}
+                    ${productName}
 
                 </h3>
 
@@ -606,12 +800,13 @@ export class Catalog {
 
                 <div class="product-rating">
 
-                    ⭐ ${product.rating || 4.8}
+                    ⭐ ${rating}
 
                 </div>
 
 
                 <div class="product-size">
+
 
                     <label class="size-label">
 
@@ -622,42 +817,54 @@ export class Catalog {
 
                     <select class="size-select">
 
-                        <option value="Small (12 cm)">
 
+                        <option
+                            value="Small"
+                            data-extra="0"
+                        >
                             Small (12 cm)
-
                         </option>
 
 
-                        <option value="Medium (15 cm)">
-
+                        <option
+                            value="Medium"
+                            data-extra="0"
+                        >
                             Medium (15 cm)
-
                         </option>
 
 
-                        <option value="Large (20 cm)">
-
+                        <option
+                            value="Large"
+                            data-extra="15000"
+                        >
                             Large (20 cm)
-
                         </option>
 
 
-                        <option value="Xtra Large (25 cm)">
-
+                        <option
+                            value="Xtra Large"
+                            data-extra="30000"
+                        >
                             Xtra Large (25 cm)
-
                         </option>
+
 
                     </select>
+
 
                 </div>
 
 
                 <div class="card-actions">
 
+
                     <button
-                        class="btn btn-cart add-to-cart-btn"
+                        class="
+                            btn
+                            btn-cart
+                            add-to-cart-btn
+                        "
                     >
 
                         ${addCartText}
@@ -668,23 +875,29 @@ export class Catalog {
                     <a
                         href="#"
                         target="_blank"
-                        class="btn btn-whatsapp btn-buy-now"
+                        class="
+                            btn
+                            btn-whatsapp
+                            btn-buy-now
+                        "
                     >
 
                         ${buyText}
 
                     </a>
 
+
                 </div>
+
 
             </div>
 
         `;
 
 
-        /* =================================================
-           SIZE SELECT
-        ====================================================== */
+        // =================================================
+        // SIZE SELECT
+        // =================================================
 
         const sizeSelect =
             card.querySelector(
@@ -692,70 +905,96 @@ export class Catalog {
             );
 
 
-        /* =================================================
-           ADD TO CART
-        ====================================================== */
+        // =================================================
+        // GET SELECTED PRICE
+        // =================================================
 
-        card.querySelector(
-            '.add-to-cart-btn'
-        )
-        .addEventListener(
-            'click',
-            (e) => {
+        const getSelectedSize =
+            () => {
 
-                e.stopPropagation();
+                return (
+                    sizeSelect
+                        .options[
+                            sizeSelect.selectedIndex
+                        ]
+                );
 
-
-                const selectedSize =
-                    sizeSelect.value;
-
-
-                let extraPrice =
-                    0;
+            };
 
 
-                if (
-                    selectedSize ===
-                    'Large (20 cm)'
-                ) {
+        const getSelectedExtraPrice =
+            () => {
 
-                    extraPrice =
-                        15000;
+                const option =
+                    getSelectedSize();
+
+
+                return parseFloat(
+                    option.dataset.extra
+                ) || 0;
+
+            };
+
+
+        // =================================================
+        // ADD TO CART
+        // =================================================
+
+        const addCartButton =
+            card.querySelector(
+                '.add-to-cart-btn'
+            );
+
+
+        if (addCartButton) {
+
+            addCartButton.addEventListener(
+                'click',
+                event => {
+
+                    event.stopPropagation();
+
+
+                    const option =
+                        getSelectedSize();
+
+
+                    const selectedSize =
+                        option.value;
+
+
+                    const extraPrice =
+                        getSelectedExtraPrice();
+
+
+                    const finalPrice =
+                        basePrice +
+                        extraPrice;
+
+
+                    this.cart.addItem({
+
+                        ...product,
+
+                        selectedSize:
+
+                            selectedSize,
+
+                        price:
+
+                            finalPrice
+
+                    });
 
                 }
+            );
 
-                else if (
-                    selectedSize ===
-                    'Xtra Large (25 cm)'
-                ) {
-
-                    extraPrice =
-                        30000;
-
-                }
+        }
 
 
-                this.cart.addItem({
-
-                    ...product,
-
-                    selectedSize,
-
-                    price:
-                        parseFloat(
-                            product.price
-                        ) +
-                        extraPrice
-
-                });
-
-            }
-        );
-
-
-        /* =================================================
-           BUY NOW
-        ====================================================== */
+        // =================================================
+        // BUY NOW
+        // =================================================
 
         const buyButton =
             card.querySelector(
@@ -766,39 +1005,20 @@ export class Catalog {
         const updateWhatsApp =
             () => {
 
+                const option =
+                    getSelectedSize();
+
+
                 const selectedSize =
-                    sizeSelect.value;
+                    option.value;
 
 
-                let extraPrice =
-                    0;
-
-
-                if (
-                    selectedSize ===
-                    'Large (20 cm)'
-                ) {
-
-                    extraPrice =
-                        15000;
-
-                }
-
-                else if (
-                    selectedSize ===
-                    'Xtra Large (25 cm)'
-                ) {
-
-                    extraPrice =
-                        30000;
-
-                }
+                const extraPrice =
+                    getSelectedExtraPrice();
 
 
                 const finalPrice =
-                    parseFloat(
-                        product.price
-                    ) +
+                    basePrice +
                     extraPrice;
 
 
@@ -808,19 +1028,23 @@ export class Catalog {
 
 
                 const message =
-                    `Halo, saya tertarik membeli ${product.product_name}. ` +
+                    `Halo, saya tertarik membeli ${productName}. ` +
                     `Ukuran: ${selectedSize}. ` +
                     `Harga: Rp ${finalPrice.toLocaleString('id-ID')}`;
 
 
-                const encodedMessage =
+                const encoded =
                     encodeURIComponent(
                         message
                     );
 
 
-                buyButton.href =
-                    `https://wa.me/${number}?text=${encodedMessage}`;
+                if (buyButton) {
+
+                    buyButton.href =
+                        `https://wa.me/${number}?text=${encoded}`;
+
+                }
 
             };
 
@@ -834,47 +1058,60 @@ export class Catalog {
         );
 
 
-        /* =================================================
-           IMAGE ZOOM
-        ====================================================== */
+        // =================================================
+        // IMAGE ZOOM
+        // =================================================
 
-        const image =
+        const imageElement =
             card.querySelector(
                 '.clickable-image'
             );
 
 
-        image.addEventListener(
-            'click',
-            () => {
+        if (imageElement) {
 
-                const modal =
-                    document.getElementById(
-                        'imageModal'
-                    );
+            imageElement.addEventListener(
+                'click',
+                event => {
 
-
-                const modalImage =
-                    document.getElementById(
-                        'modalImage'
-                    );
+                    event.stopPropagation();
 
 
-                modalImage.src =
-                    `assets/products/${product.product_image}`;
+                    const modal =
+                        document.getElementById(
+                            'imageModal'
+                        );
 
 
-                modal.classList.add(
-                    'show'
-                );
-
-            }
-        );
+                    const modalImage =
+                        document.getElementById(
+                            'modalImage'
+                        );
 
 
-        /* =================================================
-           APPEND CARD
-        ====================================================== */
+                    if (
+                        modal &&
+                        modalImage
+                    ) {
+
+                        modalImage.src =
+                            `assets/products/${image}`;
+
+                        modal.classList.add(
+                            'show'
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        // =================================================
+        // APPEND
+        // =================================================
 
         this.productsGrid
             .appendChild(
@@ -884,11 +1121,41 @@ export class Catalog {
     }
 
 
-    /* =====================================================
-       REFRESH CURRENT VIEW
-    ====================================================== */
+    // =================================================
+    // FORMAT PRICE
+    // =================================================
+
+    formatPrice(price) {
+
+        return new Intl.NumberFormat(
+            'id-ID',
+            {
+                style:
+                    'currency',
+
+                currency:
+                    'IDR',
+
+                minimumFractionDigits:
+                    0
+            }
+        ).format(
+            price
+        );
+
+    }
+
+
+    // =================================================
+    // REFRESH CURRENT VIEW
+    // =================================================
 
     refreshCurrentView() {
+
+
+        // ---------------------------------------------
+        // CATEGORY PAGE
+        // ---------------------------------------------
 
         if (
             this.currentView ===
@@ -902,6 +1169,10 @@ export class Catalog {
         }
 
 
+        // ---------------------------------------------
+        // PRODUCT PAGE
+        // ---------------------------------------------
+
         if (
             this.currentView ===
             'products'
@@ -910,37 +1181,52 @@ export class Catalog {
             const productText =
                 this.getTranslation(
                     'product',
-                    'Produk:'
+                    'Produk:',
+                    'Product:'
                 );
 
 
-            this.categoryTitle.textContent =
-                `${productText} ${this.currentCategoryName}`;
+            if (this.categoryTitle) {
+
+                this.categoryTitle.textContent =
+                    `${productText} ${this.currentCategoryName}`;
+
+            }
 
 
             this.renderProducts(
                 this.currentProducts
             );
 
+
             return;
 
         }
 
+
+        // ---------------------------------------------
+        // SEARCH PAGE
+        // ---------------------------------------------
 
         if (
             this.currentView ===
             'search'
         ) {
 
-            const searchResult =
+            const searchText =
                 this.getTranslation(
                     'searchResult',
-                    'Hasil Pencarian:'
+                    'Hasil Pencarian:',
+                    'Search Results:'
                 );
 
 
-            this.categoryTitle.textContent =
-                `${searchResult} "${this.currentSearchQuery}"`;
+            if (this.categoryTitle) {
+
+                this.categoryTitle.textContent =
+                    `${searchText} "${this.currentSearchQuery}"`;
+
+            }
 
 
             this.renderProducts(
@@ -952,9 +1238,9 @@ export class Catalog {
     }
 
 
-    /* =====================================================
-       SHOW CATEGORIES
-    ====================================================== */
+    // =================================================
+    // SHOW CATEGORIES
+    // =================================================
 
     showCategories() {
 
@@ -962,21 +1248,23 @@ export class Catalog {
             'categories';
 
 
-        this.productsSection
-            .classList.add(
-                'hidden'
-            );
+        if (this.productsSection) {
+
+            this.productsSection
+                .classList.add('hidden');
+
+        }
 
 
-        this.categoriesSection
-            .classList.remove(
-                'hidden'
-            );
+        if (this.categoriesSection) {
+
+            this.categoriesSection
+                .classList.remove('hidden');
+
+        }
 
 
-        if (
-            this.searchInput
-        ) {
+        if (this.searchInput) {
 
             this.searchInput.value =
                 '';
@@ -989,9 +1277,9 @@ export class Catalog {
     }
 
 
-    /* =====================================================
-       WHATSAPP
-    ====================================================== */
+    // =================================================
+    // WHATSAPP LINK
+    // =================================================
 
     createWhatsAppLink(
         productName
@@ -1006,13 +1294,10 @@ export class Catalog {
             `Halo, saya tertarik membeli ${productName}`;
 
 
-        const encodedMessage =
-            encodeURIComponent(
-                message
-            );
-
-
-        return `https://wa.me/${number}?text=${encodedMessage}`;
+        return (
+            `https://wa.me/${number}?text=` +
+            encodeURIComponent(message)
+        );
 
     }
 
