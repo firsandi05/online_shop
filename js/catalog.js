@@ -1,16 +1,15 @@
 import { STORE_CONFIG } from '../config/config.js';
 import { Cart } from './cart.js';
 
-
 export class Catalog {
 
     constructor(data) {
 
-        this.data = data || [];
+        this.data = data;
 
-        // ==========================================
-        // HTML ELEMENTS
-        // ==========================================
+        // =====================================================
+        // ELEMENTS
+        // =====================================================
 
         this.categoriesSection =
             document.getElementById('categories-section');
@@ -34,16 +33,16 @@ export class Catalog {
             document.getElementById('search-input');
 
 
-        // ==========================================
+        // =====================================================
         // CART
-        // ==========================================
+        // =====================================================
 
         this.cart = new Cart();
 
 
-        // ==========================================
-        // CURRENT PAGE STATE
-        // ==========================================
+        // =====================================================
+        // CURRENT VIEW
+        // =====================================================
 
         this.currentView = 'categories';
 
@@ -56,23 +55,23 @@ export class Catalog {
         this.currentSearchQuery = '';
 
 
-        // ==========================================
-        // MAKE CATALOG AVAILABLE GLOBALLY
-        // ==========================================
+        // =====================================================
+        // GLOBAL CATALOG
+        // =====================================================
 
         window.catalog = this;
 
 
-        // ==========================================
+        // =====================================================
         // EVENTS
-        // ==========================================
+        // =====================================================
 
         this.initEvents();
 
 
-        // ==========================================
+        // =====================================================
         // LANGUAGE CHANGE
-        // ==========================================
+        // =====================================================
 
         window.addEventListener(
             'languageChanged',
@@ -86,11 +85,34 @@ export class Catalog {
     }
 
 
-    // =================================================
-    // LANGUAGE
-    // =================================================
+    // =====================================================
+    // TRANSLATION
+    // =====================================================
 
-    getLanguage() {
+    getTranslation(
+        key,
+        fallback = ''
+    ) {
+
+        if (
+            window.currentLanguage &&
+            window.currentLanguage[key]
+        ) {
+
+            return window.currentLanguage[key];
+
+        }
+
+        return fallback;
+
+    }
+
+
+    // =====================================================
+    // CURRENT LANGUAGE
+    // =====================================================
+
+    getCurrentLanguage() {
 
         return (
             localStorage.getItem('language')
@@ -100,39 +122,113 @@ export class Catalog {
     }
 
 
-    getTranslation(
-        key,
-        idText,
-        enText
-    ) {
+    // =====================================================
+    // FORMAT PRICE
+    // =====================================================
 
-        const lang =
-            this.getLanguage();
+    formatPrice(price) {
+
+        const numericPrice =
+            parseFloat(price) || 0;
+
+        const language =
+            this.getCurrentLanguage();
 
 
-        if (lang === 'en') {
+        // =================================================
+        // INDONESIAN
+        // =================================================
 
-            return enText;
+        if (language === 'id') {
+
+            return new Intl.NumberFormat(
+                'id-ID',
+                {
+                    style: 'currency',
+                    currency: 'IDR',
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0
+                }
+            ).format(
+                numericPrice
+            );
 
         }
 
 
-        return idText;
+        // =================================================
+        // ENGLISH / USD
+        // =================================================
+
+        // 1 USD = Rp25.000
+        const USD_RATE = 25000;
+
+        const usdPrice =
+            numericPrice / USD_RATE;
+
+
+        return new Intl.NumberFormat(
+            'en-US',
+            {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }
+        ).format(
+            usdPrice
+        );
 
     }
 
 
-    // =================================================
+    // =====================================================
+    // GET RAW PRICE
+    // =====================================================
+
+    getPriceWithSize(
+        basePrice,
+        selectedSize
+    ) {
+
+        let extraPrice = 0;
+
+
+        if (
+            selectedSize ===
+            'Large (20 cm)'
+        ) {
+
+            extraPrice = 15000;
+
+        }
+
+
+        else if (
+            selectedSize ===
+            'Xtra Large (25 cm)'
+        ) {
+
+            extraPrice = 30000;
+
+        }
+
+
+        return (
+            parseFloat(basePrice) +
+            extraPrice
+        );
+
+    }
+
+
+    // =====================================================
     // EVENTS
-    // =================================================
+    // =====================================================
 
     initEvents() {
 
-
-        // ---------------------------------------------
         // BACK BUTTON
-        // ---------------------------------------------
-
         if (this.backButton) {
 
             this.backButton.addEventListener(
@@ -147,18 +243,15 @@ export class Catalog {
         }
 
 
-        // ---------------------------------------------
         // SEARCH
-        // ---------------------------------------------
-
         if (this.searchInput) {
 
             this.searchInput.addEventListener(
                 'input',
-                (event) => {
+                (e) => {
 
                     this.handleSearch(
-                        event.target.value
+                        e.target.value
                     );
 
                 }
@@ -167,15 +260,11 @@ export class Catalog {
         }
 
 
-        // ---------------------------------------------
         // IMAGE MODAL
-        // ---------------------------------------------
-
         const modal =
             document.getElementById(
                 'imageModal'
             );
-
 
         if (modal) {
 
@@ -195,19 +284,21 @@ export class Catalog {
     }
 
 
-    // =================================================
+    // =====================================================
     // SEARCH
-    // =================================================
+    // =====================================================
 
     handleSearch(query) {
 
         const searchTerm =
-            String(query)
+            query
                 .toLowerCase()
                 .trim();
 
 
-        if (!searchTerm) {
+        if (
+            searchTerm.length === 0
+        ) {
 
             this.showCategories();
 
@@ -254,9 +345,9 @@ export class Catalog {
     }
 
 
-    // =================================================
+    // =====================================================
     // SEARCH RESULTS
-    // =================================================
+    // =====================================================
 
     showSearchResults(
         results,
@@ -275,44 +366,37 @@ export class Catalog {
             query;
 
 
-        if (this.categoriesSection) {
-
-            this.categoriesSection
-                .classList.add('hidden');
-
-        }
+        this.categoriesSection
+            .classList.add(
+                'hidden'
+            );
 
 
-        if (this.productsSection) {
-
-            this.productsSection
-                .classList.remove('hidden');
-
-        }
+        this.productsSection
+            .classList.remove(
+                'hidden'
+            );
 
 
         if (this.backButton) {
 
             this.backButton
-                .classList.remove('hidden');
-
-        }
-
-
-        if (this.categoryTitle) {
-
-            const title =
-                this.getTranslation(
-                    'searchResult',
-                    'Hasil Pencarian:',
-                    'Search Results:'
+                .classList.remove(
+                    'hidden'
                 );
 
-
-            this.categoryTitle.textContent =
-                `${title} "${query}"`;
-
         }
+
+
+        const searchResult =
+            this.getTranslation(
+                'searchResult',
+                'Hasil Pencarian:'
+            );
+
+
+        this.categoryTitle.textContent =
+            `${searchResult} "${query}"`;
 
 
         this.renderProducts(
@@ -322,9 +406,9 @@ export class Catalog {
     }
 
 
-    // =================================================
+    // =====================================================
     // BUILD CATEGORIES
-    // =================================================
+    // =====================================================
 
     buildCategories() {
 
@@ -332,20 +416,9 @@ export class Catalog {
             'categories';
 
 
-        if (!this.categoriesGrid) {
-
-            return;
-
-        }
-
-
         this.categoriesGrid.innerHTML =
             '';
 
-
-        // ---------------------------------------------
-        // CREATE UNIQUE CATEGORY LIST
-        // ---------------------------------------------
 
         const categoriesMap =
             new Map();
@@ -354,20 +427,18 @@ export class Catalog {
         this.data.forEach(
             item => {
 
-                const id =
-                    item.category_id;
-
-
                 if (
-                    !categoriesMap.has(id)
+                    !categoriesMap.has(
+                        item.category_id
+                    )
                 ) {
 
                     categoriesMap.set(
-                        id,
+                        item.category_id,
                         {
 
                             id:
-                                id,
+                                item.category_id,
 
                             name:
                                 item.category_name,
@@ -396,37 +467,24 @@ export class Catalog {
             );
 
 
-        // ---------------------------------------------
-        // EMPTY CATEGORY
-        // ---------------------------------------------
-
         if (
             categories.length === 0
         ) {
 
-            const emptyText =
-                this.getTranslation(
-                    'noCategory',
-                    'Tidak ada kategori ditemukan.',
-                    'No categories found.'
-                );
-
-
             this.categoriesGrid.innerHTML = `
-                <div class="loading">
-                    ${emptyText}
-                </div>
-            `;
 
+                <div class="loading">
+
+                    Tidak ada kategori ditemukan.
+
+                </div>
+
+            `;
 
             return;
 
         }
 
-
-        // ---------------------------------------------
-        // CATEGORY CARD
-        // ---------------------------------------------
 
         categories.forEach(
             category => {
@@ -441,33 +499,15 @@ export class Catalog {
                     'card';
 
 
-                // Rating
-                const rating =
-                    category.rating ||
-                    0;
-
-
-                // Sold
-                const sold =
-                    category.sold ||
-                    0;
-
-
-                const soldText =
-                    this.getTranslation(
-                        'sold',
-                        'Terjual',
-                        'Sold'
-                    );
-
-
                 card.innerHTML = `
 
                     <div class="card-img-wrapper">
 
                         <img
                             src="assets/categories/${category.image}"
+
                             alt="${category.name}"
+
                             onerror="
                                 this.src='https://placehold.co/400x300?text=${encodeURIComponent(category.name)}'
                             "
@@ -499,12 +539,13 @@ export class Catalog {
 
                         <div class="category-rating">
 
-                            ⭐ ${rating}
+                            ⭐ ${category.rating || 0}
 
                             |
 
-                            ${sold}
-                            ${soldText}
+                            ${category.sold || 0}
+
+                            Sold
 
                         </div>
 
@@ -512,10 +553,6 @@ export class Catalog {
 
                 `;
 
-
-                // -------------------------------------
-                // CLICK CATEGORY
-                // -------------------------------------
 
                 card.addEventListener(
                     'click',
@@ -541,13 +578,13 @@ export class Catalog {
     }
 
 
-    // =================================================
+    // =====================================================
     // SHOW PRODUCTS BY CATEGORY
-    // =================================================
+    // =====================================================
 
     showProductsByCategory(
-        categoryId,
-        categoryName
+        category_id,
+        category_name
     ) {
 
         this.currentView =
@@ -555,33 +592,31 @@ export class Catalog {
 
 
         this.currentCategoryId =
-            categoryId;
+            category_id;
 
 
         this.currentCategoryName =
-            categoryName;
+            category_name;
 
 
-        if (this.categoriesSection) {
-
-            this.categoriesSection
-                .classList.add('hidden');
-
-        }
+        this.categoriesSection
+            .classList.add(
+                'hidden'
+            );
 
 
-        if (this.productsSection) {
-
-            this.productsSection
-                .classList.remove('hidden');
-
-        }
+        this.productsSection
+            .classList.remove(
+                'hidden'
+            );
 
 
         if (this.backButton) {
 
             this.backButton
-                .classList.remove('hidden');
+                .classList.remove(
+                    'hidden'
+                );
 
         }
 
@@ -589,28 +624,19 @@ export class Catalog {
         const productText =
             this.getTranslation(
                 'product',
-                'Produk:',
-                'Product:'
+                'Produk:'
             );
 
 
-        if (this.categoryTitle) {
-
-            this.categoryTitle.textContent =
-                `${productText} ${categoryName}`;
-
-        }
+        this.categoryTitle.textContent =
+            `${productText} ${category_name}`;
 
 
         const products =
             this.data.filter(
                 item =>
-                    String(
-                        item.category_id
-                    ) ===
-                    String(
-                        categoryId
-                    )
+                    item.category_id ===
+                    category_id
             );
 
 
@@ -625,42 +651,31 @@ export class Catalog {
     }
 
 
-    // =================================================
+    // =====================================================
     // RENDER PRODUCTS
-    // =================================================
+    // =====================================================
 
-    renderProducts(products) {
-
-        if (!this.productsGrid) {
-
-            return;
-
-        }
-
+    renderProducts(
+        products
+    ) {
 
         this.productsGrid.innerHTML =
             '';
 
 
         if (
-            !products ||
             products.length === 0
         ) {
 
-            const emptyText =
-                this.getTranslation(
-                    'noProduct',
-                    'Tidak ada produk ditemukan.',
-                    'No products found.'
-                );
-
-
             this.productsGrid.innerHTML = `
-                <div class="loading">
-                    ${emptyText}
-                </div>
-            `;
 
+                <div class="loading">
+
+                    Tidak ada produk ditemukan.
+
+                </div>
+
+            `;
 
             return;
 
@@ -680,79 +695,19 @@ export class Catalog {
     }
 
 
-    // =================================================
+    // =====================================================
     // PRODUCT CARD
-    // =================================================
+    // =====================================================
 
-    renderProductCard(product) {
-
-
-        // ---------------------------------------------
-        // PRODUCT DATA
-        // ---------------------------------------------
-
-        const productName =
-            product.product_name ||
-            'Product';
-
-
-        const image =
-            product.product_image ||
-            '';
-
-
-        const basePrice =
-            parseFloat(
-                product.price
-            ) || 0;
-
-
-        const rating =
-            product.rating ||
-            4.8;
-
-
-        // ---------------------------------------------
-        // TRANSLATION
-        // ---------------------------------------------
-
-        const sizeText =
-            this.getTranslation(
-                'size',
-                'Ukuran',
-                'Size'
-            );
-
-
-        const addCartText =
-            this.getTranslation(
-                'addCart',
-                '+ Keranjang',
-                '+ Cart'
-            );
-
-
-        const buyText =
-            this.getTranslation(
-                'buy',
-                'Beli Sekarang',
-                'Buy Now'
-            );
-
-
-        // ---------------------------------------------
-        // PRICE
-        // ---------------------------------------------
+    renderProductCard(
+        product
+    ) {
 
         const formattedPrice =
             this.formatPrice(
-                basePrice
+                product.price
             );
 
-
-        // ---------------------------------------------
-        // CARD
-        // ---------------------------------------------
 
         const card =
             document.createElement(
@@ -764,17 +719,48 @@ export class Catalog {
             'card';
 
 
+        // =================================================
+        // TRANSLATIONS
+        // =================================================
+
+        const sizeText =
+            this.getTranslation(
+                'size',
+                'Size'
+            );
+
+
+        const addCartText =
+            this.getTranslation(
+                'addCart',
+                '+ Cart'
+            );
+
+
+        const buyText =
+            this.getTranslation(
+                'buy',
+                'Buy Now'
+            );
+
+
+        // =================================================
+        // PRODUCT HTML
+        // =================================================
+
         card.innerHTML = `
 
             <div class="card-img-wrapper">
 
                 <img
-                    src="assets/products/${image}"
-                    alt="${productName}"
+                    src="assets/products/${product.product_image}"
+
+                    alt="${product.product_name}"
+
                     class="product-image clickable-image"
 
                     onerror="
-                        this.src='https://placehold.co/400x400?text=${encodeURIComponent(productName)}'
+                        this.src='https://placehold.co/400x400?text=${encodeURIComponent(product.product_name)}'
                     "
                 >
 
@@ -783,10 +769,9 @@ export class Catalog {
 
             <div class="card-content">
 
-
                 <h3 class="card-title">
 
-                    ${productName}
+                    ${product.product_name}
 
                 </h3>
 
@@ -800,13 +785,12 @@ export class Catalog {
 
                 <div class="product-rating">
 
-                    ⭐ ${rating}
+                    ⭐ ${product.rating || 4.8}
 
                 </div>
 
 
                 <div class="product-size">
-
 
                     <label class="size-label">
 
@@ -817,54 +801,42 @@ export class Catalog {
 
                     <select class="size-select">
 
+                        <option value="Small (12 cm)">
 
-                        <option
-                            value="Small"
-                            data-extra="0"
-                        >
                             Small (12 cm)
+
                         </option>
 
 
-                        <option
-                            value="Medium"
-                            data-extra="0"
-                        >
+                        <option value="Medium (15 cm)">
+
                             Medium (15 cm)
+
                         </option>
 
 
-                        <option
-                            value="Large"
-                            data-extra="15000"
-                        >
+                        <option value="Large (20 cm)">
+
                             Large (20 cm)
+
                         </option>
 
 
-                        <option
-                            value="Xtra Large"
-                            data-extra="30000"
-                        >
+                        <option value="Xtra Large (25 cm)">
+
                             Xtra Large (25 cm)
-                        </option>
 
+                        </option>
 
                     </select>
-
 
                 </div>
 
 
                 <div class="card-actions">
 
-
                     <button
-                        class="
-                            btn
-                            btn-cart
-                            add-to-cart-btn
-                        "
+                        class="btn btn-cart add-to-cart-btn"
                     >
 
                         ${addCartText}
@@ -875,20 +847,15 @@ export class Catalog {
                     <a
                         href="#"
                         target="_blank"
-                        class="
-                            btn
-                            btn-whatsapp
-                            btn-buy-now
-                        "
+                        rel="noopener"
+                        class="btn btn-whatsapp btn-buy-now"
                     >
 
                         ${buyText}
 
                     </a>
 
-
                 </div>
-
 
             </div>
 
@@ -906,90 +873,43 @@ export class Catalog {
 
 
         // =================================================
-        // GET SELECTED PRICE
-        // =================================================
-
-        const getSelectedSize =
-            () => {
-
-                return (
-                    sizeSelect
-                        .options[
-                            sizeSelect.selectedIndex
-                        ]
-                );
-
-            };
-
-
-        const getSelectedExtraPrice =
-            () => {
-
-                const option =
-                    getSelectedSize();
-
-
-                return parseFloat(
-                    option.dataset.extra
-                ) || 0;
-
-            };
-
-
-        // =================================================
         // ADD TO CART
         // =================================================
 
-        const addCartButton =
-            card.querySelector(
-                '.add-to-cart-btn'
-            );
+        card.querySelector(
+            '.add-to-cart-btn'
+        )
+        .addEventListener(
+            'click',
+            (e) => {
+
+                e.stopPropagation();
 
 
-        if (addCartButton) {
-
-            addCartButton.addEventListener(
-                'click',
-                event => {
-
-                    event.stopPropagation();
+                const selectedSize =
+                    sizeSelect.value;
 
 
-                    const option =
-                        getSelectedSize();
+                const finalPrice =
+                    this.getPriceWithSize(
+                        product.price,
+                        selectedSize
+                    );
 
 
-                    const selectedSize =
-                        option.value;
+                this.cart.addItem({
 
+                    ...product,
 
-                    const extraPrice =
-                        getSelectedExtraPrice();
+                    selectedSize,
 
+                    price:
+                        finalPrice
 
-                    const finalPrice =
-                        basePrice +
-                        extraPrice;
+                });
 
-
-                    this.cart.addItem({
-
-                        ...product,
-
-                        selectedSize:
-
-                            selectedSize,
-
-                        price:
-
-                            finalPrice
-
-                    });
-
-                }
-            );
-
-        }
+            }
+        );
 
 
         // =================================================
@@ -1005,21 +925,15 @@ export class Catalog {
         const updateWhatsApp =
             () => {
 
-                const option =
-                    getSelectedSize();
-
-
                 const selectedSize =
-                    option.value;
-
-
-                const extraPrice =
-                    getSelectedExtraPrice();
+                    sizeSelect.value;
 
 
                 const finalPrice =
-                    basePrice +
-                    extraPrice;
+                    this.getPriceWithSize(
+                        product.price,
+                        selectedSize
+                    );
 
 
                 const number =
@@ -1027,24 +941,67 @@ export class Catalog {
                         .whatsappNumber;
 
 
+                const language =
+                    this.getCurrentLanguage();
+
+
+                let priceText;
+
+
+                if (
+                    language === 'en'
+                ) {
+
+                    const USD_RATE =
+                        25000;
+
+
+                    const usdPrice =
+                        finalPrice /
+                        USD_RATE;
+
+
+                    priceText =
+                        new Intl.NumberFormat(
+                            'en-US',
+                            {
+                                style:
+                                    'currency',
+
+                                currency:
+                                    'USD',
+
+                                minimumFractionDigits:
+                                    2
+                            }
+                        ).format(
+                            usdPrice
+                        );
+
+                } else {
+
+                    priceText =
+                        this.formatPrice(
+                            finalPrice
+                        );
+
+                }
+
+
                 const message =
-                    `Halo, saya tertarik membeli ${productName}. ` +
-                    `Ukuran: ${selectedSize}. ` +
-                    `Harga: Rp ${finalPrice.toLocaleString('id-ID')}`;
+                    `Halo, saya tertarik membeli ${product.product_name}. ` +
+                    `Size: ${selectedSize}. ` +
+                    `Harga: ${priceText}`;
 
 
-                const encoded =
+                const encodedMessage =
                     encodeURIComponent(
                         message
                     );
 
 
-                if (buyButton) {
-
-                    buyButton.href =
-                        `https://wa.me/${number}?text=${encoded}`;
-
-                }
+                buyButton.href =
+                    `https://wa.me/${number}?text=${encodedMessage}`;
 
             };
 
@@ -1062,51 +1019,45 @@ export class Catalog {
         // IMAGE ZOOM
         // =================================================
 
-        const imageElement =
+        const image =
             card.querySelector(
                 '.clickable-image'
             );
 
 
-        if (imageElement) {
+        image.addEventListener(
+            'click',
+            () => {
 
-            imageElement.addEventListener(
-                'click',
-                event => {
-
-                    event.stopPropagation();
-
-
-                    const modal =
-                        document.getElementById(
-                            'imageModal'
-                        );
+                const modal =
+                    document.getElementById(
+                        'imageModal'
+                    );
 
 
-                    const modalImage =
-                        document.getElementById(
-                            'modalImage'
-                        );
+                const modalImage =
+                    document.getElementById(
+                        'modalImage'
+                    );
 
 
-                    if (
-                        modal &&
-                        modalImage
-                    ) {
+                if (
+                    modal &&
+                    modalImage
+                ) {
 
-                        modalImage.src =
-                            `assets/products/${image}`;
+                    modalImage.src =
+                        `assets/products/${product.product_image}`;
 
-                        modal.classList.add(
-                            'show'
-                        );
 
-                    }
+                    modal.classList.add(
+                        'show'
+                    );
 
                 }
-            );
 
-        }
+            }
+        );
 
 
         // =================================================
@@ -1121,41 +1072,11 @@ export class Catalog {
     }
 
 
-    // =================================================
-    // FORMAT PRICE
-    // =================================================
-
-    formatPrice(price) {
-
-        return new Intl.NumberFormat(
-            'id-ID',
-            {
-                style:
-                    'currency',
-
-                currency:
-                    'IDR',
-
-                minimumFractionDigits:
-                    0
-            }
-        ).format(
-            price
-        );
-
-    }
-
-
-    // =================================================
-    // REFRESH CURRENT VIEW
-    // =================================================
+    // =====================================================
+    // REFRESH AFTER LANGUAGE CHANGE
+    // =====================================================
 
     refreshCurrentView() {
-
-
-        // ---------------------------------------------
-        // CATEGORY PAGE
-        // ---------------------------------------------
 
         if (
             this.currentView ===
@@ -1169,10 +1090,6 @@ export class Catalog {
         }
 
 
-        // ---------------------------------------------
-        // PRODUCT PAGE
-        // ---------------------------------------------
-
         if (
             this.currentView ===
             'products'
@@ -1181,52 +1098,37 @@ export class Catalog {
             const productText =
                 this.getTranslation(
                     'product',
-                    'Produk:',
                     'Product:'
                 );
 
 
-            if (this.categoryTitle) {
-
-                this.categoryTitle.textContent =
-                    `${productText} ${this.currentCategoryName}`;
-
-            }
+            this.categoryTitle.textContent =
+                `${productText} ${this.currentCategoryName}`;
 
 
             this.renderProducts(
                 this.currentProducts
             );
 
-
             return;
 
         }
 
-
-        // ---------------------------------------------
-        // SEARCH PAGE
-        // ---------------------------------------------
 
         if (
             this.currentView ===
             'search'
         ) {
 
-            const searchText =
+            const searchResult =
                 this.getTranslation(
                     'searchResult',
-                    'Hasil Pencarian:',
                     'Search Results:'
                 );
 
 
-            if (this.categoryTitle) {
-
-                this.categoryTitle.textContent =
-                    `${searchText} "${this.currentSearchQuery}"`;
-
-            }
+            this.categoryTitle.textContent =
+                `${searchResult} "${this.currentSearchQuery}"`;
 
 
             this.renderProducts(
@@ -1238,9 +1140,9 @@ export class Catalog {
     }
 
 
-    // =================================================
+    // =====================================================
     // SHOW CATEGORIES
-    // =================================================
+    // =====================================================
 
     showCategories() {
 
@@ -1248,23 +1150,21 @@ export class Catalog {
             'categories';
 
 
-        if (this.productsSection) {
-
-            this.productsSection
-                .classList.add('hidden');
-
-        }
+        this.productsSection
+            .classList.add(
+                'hidden'
+            );
 
 
-        if (this.categoriesSection) {
-
-            this.categoriesSection
-                .classList.remove('hidden');
-
-        }
+        this.categoriesSection
+            .classList.remove(
+                'hidden'
+            );
 
 
-        if (this.searchInput) {
+        if (
+            this.searchInput
+        ) {
 
             this.searchInput.value =
                 '';
@@ -1277,9 +1177,9 @@ export class Catalog {
     }
 
 
-    // =================================================
+    // =====================================================
     // WHATSAPP LINK
-    // =================================================
+    // =====================================================
 
     createWhatsAppLink(
         productName
@@ -1294,10 +1194,13 @@ export class Catalog {
             `Halo, saya tertarik membeli ${productName}`;
 
 
-        return (
-            `https://wa.me/${number}?text=` +
-            encodeURIComponent(message)
-        );
+        const encodedMessage =
+            encodeURIComponent(
+                message
+            );
+
+
+        return `https://wa.me/${number}?text=${encodedMessage}`;
 
     }
 
