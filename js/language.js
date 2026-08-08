@@ -589,7 +589,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         window.translations =
             translations;
-
+window.dispatchEvent(
+    new Event('languageChanged')
+);
 
         /* =================================================
            REFRESH CART
