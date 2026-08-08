@@ -52,7 +52,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Hasil Pencarian:',
 
             product:
-                'Produk:'
+                'Produk:',
+
+            heroDescription:
+                'Xwing Project menghadirkan jam tangan unik dengan strap brick yang colorful dan customizable. Kombinasikan warna, tambahkan karakter, dan buat jam tangan yang benar-benar mencerminkan gaya kamu.',
+
+            heroCatalog:
+                'Lihat Katalog',
+
+            footerDescription:
+                'Temukan produk terbaik kami dengan harga yang terjangkau. Belanja aman, mudah, dan terpercaya.',
+
+            footerFindUs:
+                'Temukan Kami di',
+
+            loadingCategory:
+                'Memuat kategori...',
+
+            loadingProduct:
+                'Memuat produk...',
+
+            noCategory:
+                'Tidak ada kategori ditemukan.',
+
+            noProduct:
+                'Tidak ada produk ditemukan.'
 
         },
 
@@ -99,11 +123,136 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Search Results:',
 
             product:
-                'Product:'
+                'Product:',
+
+            heroDescription:
+                'Xwing Project offers unique watches with colorful and customizable brick straps. Mix colors, add characters, and create a watch that truly reflects your style.',
+
+            heroCatalog:
+                'View Catalog',
+
+            footerDescription:
+                'Discover our best products at affordable prices. Shop safely, easily, and confidently.',
+
+            footerFindUs:
+                'Find Us On',
+
+            loadingCategory:
+                'Loading categories...',
+
+            loadingProduct:
+                'Loading products...',
+
+            noCategory:
+                'No categories found.',
+
+            noProduct:
+                'No products found.'
 
         }
 
     };
+
+
+    // =====================================================
+    // HELPER
+    // =====================================================
+
+    function setText(id, text) {
+
+        const element =
+            document.getElementById(id);
+
+        if (element) {
+
+            element.textContent =
+                text;
+
+        }
+
+    }
+
+
+    // =====================================================
+    // TRANSLATE DYNAMIC TEXT
+    // =====================================================
+
+    function translateExistingText(t) {
+
+        /*
+         * CART EMPTY
+         */
+
+        const cartEmpty =
+            document.getElementById(
+                'cart-empty-text'
+            );
+
+        if (cartEmpty) {
+
+            cartEmpty.textContent =
+                t.emptyCart;
+
+        }
+
+
+        /*
+         * TOTAL
+         */
+
+        setText(
+            'cart-total-label',
+            t.total
+        );
+
+
+        /*
+         * HERO
+         */
+
+        setText(
+            'hero-description',
+            t.heroDescription
+        );
+
+
+        setText(
+            'hero-catalog-button',
+            t.heroCatalog
+        );
+
+
+        /*
+         * FOOTER
+         */
+
+        setText(
+            'footer-description',
+            t.footerDescription
+        );
+
+
+        setText(
+            'footer-find-us',
+            t.footerFindUs
+        );
+
+
+        /*
+         * LOADING
+         */
+
+        setText(
+            'categories-loading',
+            t.loadingCategory
+        );
+
+        setText(
+            'products-loading',
+            t.loadingProduct
+        );
+
+    }
 
 
     // =====================================================
@@ -112,7 +261,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function setLanguage(lang) {
 
-        // Pastikan bahasa valid
+        /*
+         * Validasi
+         */
+
         if (!translations[lang]) {
 
             lang = 'id';
@@ -120,55 +272,55 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
 
-        // Simpan pilihan bahasa
+        /*
+         * Save language
+         */
+
         localStorage.setItem(
             'language',
             lang
         );
 
 
-        // Ambil translation
+        /*
+         * Translation object
+         */
+
         const t =
             translations[lang];
 
 
-        // Simpan secara global
+        /*
+         * Global language
+         *
+         * catalog.js akan membaca ini
+         */
+
         window.currentLanguage =
             t;
 
 
-        // =================================================
-        // NAVBAR - HOME
-        // =================================================
+        /*
+         * HTML LANG
+         */
 
-        const navHome =
-            document.getElementById(
-                'nav-home'
-            );
-
-        if (navHome) {
-
-            navHome.textContent =
-                t.home;
-
-        }
+        document.documentElement.lang =
+            lang;
 
 
         // =================================================
-        // NAVBAR - CATALOG
+        // NAVBAR
         // =================================================
 
-        const navCatalog =
-            document.getElementById(
-                'nav-catalog'
-            );
+        setText(
+            'nav-home',
+            t.home
+        );
 
-        if (navCatalog) {
-
-            navCatalog.textContent =
-                t.catalog;
-
-        }
+        setText(
+            'nav-catalog',
+            t.catalog
+        );
 
 
         // =================================================
@@ -189,24 +341,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         // =================================================
-        // CATEGORY TITLE
+        // CATEGORY
         // =================================================
 
-        const categoriesTitle =
+        const categoryTitle =
             document.querySelector(
                 '#categories-section .section-title'
             );
 
-        if (categoriesTitle) {
+        if (categoryTitle) {
 
-            categoriesTitle.textContent =
+            categoryTitle.textContent =
                 t.category;
 
         }
 
 
         // =================================================
-        // CART TITLE
+        // CART
         // =================================================
 
         const cartTitle =
@@ -226,74 +378,41 @@ document.addEventListener('DOMContentLoaded', () => {
         // BACK BUTTON
         // =================================================
 
-        const backButton =
-            document.getElementById(
-                'back-button'
-            );
-
-        if (backButton) {
-
-            backButton.textContent =
-                t.back;
-
-        }
+        setText(
+            'back-button',
+            t.back
+        );
 
 
         // =================================================
         // CLEAR CART
         // =================================================
 
-        const clearCart =
-            document.getElementById(
-                'clear-cart'
-            );
-
-        if (clearCart) {
-
-            clearCart.textContent =
-                t.clear;
-
-        }
+        setText(
+            'clear-cart',
+            t.clear
+        );
 
 
         // =================================================
-        // WHATSAPP CHECKOUT
+        // WHATSAPP
         // =================================================
 
-        const checkout =
-            document.getElementById(
-                'checkout-whatsapp'
-            );
-
-        if (checkout) {
-
-            checkout.childNodes.forEach(
-                node => {
-
-                    if (
-                        node.nodeType ===
-                        Node.TEXT_NODE
-                    ) {
-
-                        if (
-                            node.textContent.trim()
-                        ) {
-
-                            node.textContent =
-                                ` ${t.order}`;
-
-                        }
-
-                    }
-
-                }
-            );
-
-        }
+        setText(
+            'checkout-text',
+            t.order
+        );
 
 
         // =================================================
-        // LANGUAGE BUTTON - RESET
+        // OTHER STATIC TEXT
+        // =================================================
+
+        translateExistingText(t);
+
+
+        // =================================================
+        // LANGUAGE BUTTON
         // =================================================
 
         if (langId) {
@@ -313,10 +432,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         }
 
-
-        // =================================================
-        // LANGUAGE BUTTON - ACTIVE
-        // =================================================
 
         if (lang === 'id') {
 
@@ -345,7 +460,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         // =================================================
-        // NOTIFY CATALOG.JS
+        // REFRESH CART
+        // =================================================
+
+        if (
+            window.catalog &&
+            window.catalog.cart &&
+            typeof window.catalog.cart.updateUI ===
+            'function'
+        ) {
+
+            window.catalog.cart.updateUI();
+
+        }
+
+
+        // =================================================
+        // REFRESH CATALOG
         // =================================================
 
         window.dispatchEvent(
@@ -358,7 +489,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // =====================================================
-    // INDONESIA BUTTON
+    // ID BUTTON
     // =====================================================
 
     if (langId) {
@@ -376,7 +507,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // =====================================================
-    // ENGLISH BUTTON
+    // EN BUTTON
     // =====================================================
 
     if (langEn) {
