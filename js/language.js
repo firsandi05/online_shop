@@ -1,7 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    const langId = document.getElementById('lang-id');
-    const langEn = document.getElementById('lang-en');
+
+    // =====================================================
+    // LANGUAGE BUTTON
+    // =====================================================
+
+    const langId =
+        document.getElementById('lang-id');
+
+
+    const langEn =
+        document.getElementById('lang-en');
+
 
 
     // =====================================================
@@ -10,70 +20,103 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const translations = {
 
+        // =================================================
+        // INDONESIAN
+        // =================================================
+
         id: {
 
             search:
                 'Cari produk...',
 
+
             category:
                 'Kategori Produk',
+
 
             cart:
                 'Keranjang Belanja',
 
+
             back:
                 '← Kembali ke Kategori',
+
 
             order:
                 'Pesan (WA)',
 
+
             clear:
                 'Kosongkan',
+
 
             emptyCart:
                 'Keranjang masih kosong',
 
+
             total:
                 'Total Keseluruhan:',
+
 
             home:
                 'Home',
 
+
             catalog:
                 'Katalog',
+
 
             buy:
                 'Beli Sekarang',
 
+
             addCart:
                 '+ Keranjang',
+
 
             searchResult:
                 'Hasil Pencarian:',
 
+
             product:
                 'Produk:',
+
+
+            size:
+                'Ukuran',
+
+
+            categoryDescription:
+                'Tentang Kategori Ini',
+
 
             heroDescription:
                 'Xwing Project menghadirkan jam tangan unik dengan strap brick yang colorful dan customizable. Kombinasikan warna, tambahkan karakter, dan buat jam tangan yang benar-benar mencerminkan gaya kamu.',
 
+
             heroCatalog:
                 'Lihat Katalog',
+
 
             footerDescription:
                 'Temukan produk terbaik kami dengan harga yang terjangkau. Belanja aman, mudah, dan terpercaya.',
 
+
             footerFindUs:
                 'Temukan Kami di',
+
 
             loadingCategory:
                 'Memuat kategori...',
 
+
             loadingProduct:
                 'Memuat produk...',
 
+
             noCategory:
                 'Tidak ada kategori ditemukan.',
+
 
             noProduct:
                 'Tidak ada produk ditemukan.'
@@ -81,70 +124,104 @@ document.addEventListener('DOMContentLoaded', () => {
         },
 
 
+
+        // =================================================
+        // ENGLISH
+        // =================================================
+
         en: {
 
             search:
                 'Search products...',
 
+
             category:
                 'Product Categories',
+
 
             cart:
                 'Shopping Cart',
 
+
             back:
                 '← Back to Categories',
+
 
             order:
                 'Order (WA)',
 
+
             clear:
                 'Clear',
+
 
             emptyCart:
                 'Cart is empty',
 
+
             total:
                 'Grand Total:',
+
 
             home:
                 'Home',
 
+
             catalog:
                 'Catalog',
+
 
             buy:
                 'Buy Now',
 
+
             addCart:
                 '+ Cart',
+
 
             searchResult:
                 'Search Results:',
 
+
             product:
                 'Product:',
+
+
+            size:
+                'Size',
+
+
+            categoryDescription:
+                'About This Category',
+
 
             heroDescription:
                 'Xwing Project offers unique watches with colorful and customizable brick straps. Mix colors, add characters, and create a watch that truly reflects your style.',
 
+
             heroCatalog:
                 'View Catalog',
+
 
             footerDescription:
                 'Discover our best products at affordable prices. Shop safely, easily, and confidently.',
 
+
             footerFindUs:
                 'Find Us On',
+
 
             loadingCategory:
                 'Loading categories...',
 
+
             loadingProduct:
                 'Loading products...',
 
+
             noCategory:
                 'No categories found.',
+
 
             noProduct:
                 'No products found.'
@@ -154,14 +231,19 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
 
+
     // =====================================================
     // HELPER
     // =====================================================
 
-    function setText(id, text) {
+    function setText(
+        id,
+        text
+    ) {
 
         const element =
             document.getElementById(id);
+
 
         if (element) {
 
@@ -173,20 +255,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
+
     // =====================================================
-    // TRANSLATE DYNAMIC TEXT
+    // TRANSLATE EXISTING TEXT
     // =====================================================
 
     function translateExistingText(t) {
 
-        /*
-         * CART EMPTY
-         */
+
+        // =================================================
+        // CART EMPTY
+        // =================================================
 
         const cartEmpty =
             document.getElementById(
                 'cart-empty-text'
             );
+
 
         if (cartEmpty) {
 
@@ -196,9 +281,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
 
-        /*
-         * TOTAL
-         */
+
+        // =================================================
+        // TOTAL
+        // =================================================
 
         setText(
             'cart-total-label',
@@ -206,9 +292,10 @@ document.addEventListener('DOMContentLoaded', () => {
         );
 
 
-        /*
-         * HERO
-         */
+
+        // =================================================
+        // HERO
+        // =================================================
 
         setText(
             'hero-description',
@@ -222,9 +309,10 @@ document.addEventListener('DOMContentLoaded', () => {
         );
 
 
-        /*
-         * FOOTER
-         */
+
+        // =================================================
+        // FOOTER
+        // =================================================
 
         setText(
             'footer-description',
@@ -238,14 +326,16 @@ document.addEventListener('DOMContentLoaded', () => {
         );
 
 
-        /*
-         * LOADING
-         */
+
+        // =================================================
+        // LOADING
+        // =================================================
 
         setText(
             'categories-loading',
             t.loadingCategory
         );
+
 
         setText(
             'products-loading',
@@ -255,15 +345,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
+
     // =====================================================
     // SET LANGUAGE
     // =====================================================
 
     function setLanguage(lang) {
 
-        /*
-         * Validasi
-         */
+
+        // =================================================
+        // VALIDATION
+        // =================================================
 
         if (!translations[lang]) {
 
@@ -272,9 +364,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
 
-        /*
-         * Save language
-         */
+
+        // =================================================
+        // SAVE LANGUAGE
+        // =================================================
 
         localStorage.setItem(
             'language',
@@ -282,30 +375,32 @@ document.addEventListener('DOMContentLoaded', () => {
         );
 
 
-        /*
-         * Translation object
-         */
+
+        // =================================================
+        // TRANSLATION OBJECT
+        // =================================================
 
         const t =
             translations[lang];
 
 
-        /*
-         * Global language
-         *
-         * catalog.js akan membaca ini
-         */
+
+        // =================================================
+        // GLOBAL LANGUAGE
+        // =================================================
 
         window.currentLanguage =
             t;
 
 
-        /*
-         * HTML LANG
-         */
+
+        // =================================================
+        // HTML LANG
+        // =================================================
 
         document.documentElement.lang =
             lang;
+
 
 
         // =================================================
@@ -317,10 +412,12 @@ document.addEventListener('DOMContentLoaded', () => {
             t.home
         );
 
+
         setText(
             'nav-catalog',
             t.catalog
         );
+
 
 
         // =================================================
@@ -332,12 +429,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 'search-input'
             );
 
+
         if (searchInput) {
 
             searchInput.placeholder =
                 t.search;
 
         }
+
 
 
         // =================================================
@@ -349,12 +448,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 '#categories-section .section-title'
             );
 
+
         if (categoryTitle) {
 
             categoryTitle.textContent =
                 t.category;
 
         }
+
 
 
         // =================================================
@@ -366,12 +467,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 '#cart-section .section-title'
             );
 
+
         if (cartTitle) {
 
             cartTitle.textContent =
                 t.cart;
 
         }
+
 
 
         // =================================================
@@ -384,6 +487,7 @@ document.addEventListener('DOMContentLoaded', () => {
         );
 
 
+
         // =================================================
         // CLEAR CART
         // =================================================
@@ -392,6 +496,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'clear-cart',
             t.clear
         );
+
 
 
         // =================================================
@@ -404,11 +509,13 @@ document.addEventListener('DOMContentLoaded', () => {
         );
 
 
+
         // =================================================
         // OTHER STATIC TEXT
         // =================================================
 
         translateExistingText(t);
+
 
 
         // =================================================
@@ -433,6 +540,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
 
+
         if (lang === 'id') {
 
             if (langId) {
@@ -446,6 +554,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
 
+
         if (lang === 'en') {
 
             if (langEn) {
@@ -457,6 +566,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
         }
+
 
 
         // =================================================
@@ -475,6 +585,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
 
+
         // =================================================
         // REFRESH CATALOG
         // =================================================
@@ -486,6 +597,7 @@ document.addEventListener('DOMContentLoaded', () => {
         );
 
     }
+
 
 
     // =====================================================
@@ -506,6 +618,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
+
     // =====================================================
     // EN BUTTON
     // =====================================================
@@ -522,6 +635,7 @@ document.addEventListener('DOMContentLoaded', () => {
         );
 
     }
+
 
 
     // =====================================================
