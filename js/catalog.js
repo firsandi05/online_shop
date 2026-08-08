@@ -707,7 +707,14 @@ export class Catalog {
             this.formatPrice(
                 product.price
             );
-
+console.log(
+    'LANGUAGE:',
+    localStorage.getItem('language'),
+    'PRICE:',
+    product.price,
+    'FORMATTED:',
+    formattedPrice
+);
 
         const card =
             document.createElement(
