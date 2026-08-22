@@ -1,295 +1,191 @@
 import { STORE_CONFIG } from '../config/config.js';
+
 import { Cart } from './cart.js';
 
-
-// =========================================================
-// CATEGORY DESCRIPTIONS
-// 1 DESKRIPSI UNTUK 1 KATEGORI
-// Tidak perlu dimasukkan ke CSV.
-// =========================================================
-
-const CATEGORY_DESCRIPTIONS = {
-
-    1: {
-        id: {
-            title: 'Q&Q Analog Replica',
-            text: 'Koleksi Q&Q Analog Replica menghadirkan desain jam analog bergaya klasik dengan berbagai pilihan warna dan strap brick yang unik. Cocok untuk penggunaan sehari-hari maupun sebagai aksesori fashion yang playful dan berbeda.'
-        },
-        en: {
-            title: 'Q&Q Analog Replica',
-            text: 'The Q&Q Analog Replica collection features classic analog-style watch designs combined with unique brick straps. Available in various colors, these watches are suitable for everyday use or as a playful and distinctive fashion accessory.'
-        }
-    },
-
-    2: {
-        id: {
-            title: 'Casio Digital Replica',
-            text: 'Koleksi Casio Digital Replica mengusung tampilan digital yang simpel dan sporty. Desainnya cocok untuk kamu yang menyukai gaya retro, casual, dan praktis dengan karakter strap brick yang colorful.'
-        },
-        en: {
-            title: 'Casio Digital Replica',
-            text: 'The Casio Digital Replica collection features a simple and sporty digital watch design. It is ideal for those who enjoy a retro, casual, and practical style combined with a colorful brick strap.'
-        }
-    },
-
-    3: {
-        id: {
-            title: 'Casio F91W Original',
-            text: 'Koleksi Casio F91W Original menghadirkan Casio F91W original dengan desain digital klasik yang ikonik. Pilihan yang cocok untuk kamu yang menginginkan jam original dengan tampilan retro dan strap brick yang unik.'
-        },
-        en: {
-            title: 'Casio F91W Original',
-            text: 'The Casio F91W Original collection features the iconic original Casio F91W with its classic digital design. A great choice for those who want an original watch with a retro look and a unique brick strap.'
-        }
-    },
-
-    4: {
-        id: {
-            title: 'Swatch Replica',
-            text: 'Koleksi Swatch Replica menawarkan desain yang colorful dan playful dengan karakter strap brick khas XWing Project. Cocok untuk melengkapi outfit casual dan memberikan tampilan yang lebih colorful.'
-        },
-        en: {
-            title: 'Swatch Replica',
-            text: 'The Swatch Replica collection offers colorful and playful designs combined with XWing Project’s distinctive brick strap. These watches are ideal for casual outfits and adding a more colorful touch to your style.'
-        }
-    },
-
-    5: {
-        id: {
-            title: 'Casio Analog Replica',
-            text: 'Koleksi Casio Analog Replica menggunakan desain analog yang clean dan versatile. Dipadukan dengan strap brick, koleksi ini cocok digunakan untuk gaya casual maupun aktivitas sehari-hari.'
-        },
-        en: {
-            title: 'Casio Analog Replica',
-            text: 'The Casio Analog Replica collection features clean and versatile analog designs. Combined with a brick strap, these watches are suitable for casual styles and everyday activities.'
-        }
-    },
-
-    6: {
-        id: {
-            title: 'Q&Q Trans Original',
-            text: 'Koleksi Q&Q Trans Original menghadirkan jam Q&Q original dengan desain yang ringan dan colorful. Strap brick memberikan karakter yang berbeda dan dapat menjadi pilihan menarik untuk penggunaan sehari-hari.'
-        },
-        en: {
-            title: 'Q&Q Trans Original',
-            text: 'The Q&Q Trans Original collection features original Q&Q watches with lightweight and colorful designs. The brick strap adds a distinctive character, making them an interesting choice for everyday use.'
-        }
-    },
-
-    7: {
-        id: {
-            title: 'Casio Digital Replica V2',
-            text: 'Casio Digital Replica V2 merupakan variasi lain dari koleksi digital dengan tampilan yang sporty dan retro. Dipadukan dengan strap brick colorful untuk memberikan pilihan style yang lebih playful dan unik.'
-        },
-        en: {
-            title: 'Casio Digital Replica V2',
-            text: 'The Casio Digital Replica V2 collection offers another digital watch variation with a sporty and retro appearance. Combined with a colorful brick strap, it provides a more playful and distinctive style.'
-        }
-    },
-
-    8: {
-        id: {
-            title: 'Q&Q For Kids Original',
-            text: 'Koleksi Q&Q For Kids Original dirancang untuk memberikan tampilan jam yang colorful dan playful. Menggunakan jam Q&Q original dengan strap brick yang menarik, koleksi ini cocok untuk gaya anak-anak dan pengguna yang menyukai desain colorful.'
-        },
-        en: {
-            title: 'Q&Q For Kids Original',
-            text: 'The Q&Q For Kids Original collection offers colorful and playful watch designs. Featuring original Q&Q watches with attractive brick straps, this collection is suitable for kids and anyone who enjoys colorful designs.'
-        }
-    },
-
-    9: {
-        id: {
-            title: 'Casio LA20WH Original',
-            text: 'Koleksi Casio LA20WH Original menghadirkan jam Casio original dengan desain digital yang compact dan stylish. Dipadukan dengan strap brick untuk memberikan tampilan yang lebih unik dan berbeda.'
-        },
-        en: {
-            title: 'Casio LA20WH Original',
-            text: 'The Casio LA20WH Original collection features compact and stylish original Casio digital watches. Combined with a brick strap, the design becomes more unique and distinctive.'
-        }
-    },
-
-    10: {
-        id: {
-            title: 'Q&Q Mini Elegance Original',
-            text: 'Koleksi Q&Q Mini Elegance Original menawarkan desain yang compact dan elegan. Cocok untuk pengguna yang menyukai ukuran jam yang lebih kecil dengan tampilan yang simple dan stylish.'
-        },
-        en: {
-            title: 'Q&Q Mini Elegance Original',
-            text: 'The Q&Q Mini Elegance Original collection offers a compact and elegant design. It is suitable for users who prefer smaller watches with a simple and stylish appearance.'
-        }
-    },
-
-    11: {
-        id: {
-            title: 'Q&Q Mini Elegance Original V2',
-            text: 'Versi kedua dari Q&Q Mini Elegance Original dengan pilihan desain yang berbeda namun tetap mempertahankan karakter compact dan elegan. Cocok untuk penggunaan sehari-hari maupun sebagai aksesori fashion.'
-        },
-        en: {
-            title: 'Q&Q Mini Elegance Original V2',
-            text: 'The second version of the Q&Q Mini Elegance Original collection offers different design options while maintaining its compact and elegant character. Suitable for everyday use or as a fashion accessory.'
-        }
-    },
-
-    12: {
-        id: {
-            title: 'SKMEI Trans Original',
-            text: 'Koleksi SKMEI Trans Original menghadirkan jam SKMEI original dengan desain colorful dan modern. Strap brick memberikan sentuhan unik sehingga jam lebih mudah dipadukan dengan berbagai gaya.'
-        },
-        en: {
-            title: 'SKMEI Trans Original',
-            text: 'The SKMEI Trans Original collection features original SKMEI watches with colorful and modern designs. The brick strap adds a unique touch that makes the watches easy to pair with different styles.'
-        }
-    },
-
-    13: {
-        id: {
-            title: 'SKMEI Small Original',
-            text: 'Koleksi SKMEI Small Original menawarkan ukuran yang lebih compact dengan desain yang simple dan stylish. Cocok untuk pengguna yang menyukai jam berukuran kecil dan nyaman digunakan sehari-hari.'
-        },
-        en: {
-            title: 'SKMEI Small Original',
-            text: 'The SKMEI Small Original collection offers a more compact size with a simple and stylish design. It is ideal for users who prefer smaller watches that are comfortable for everyday use.'
-        }
-    },
-
-    14: {
-        id: {
-            title: 'SKMEI Elegance Original',
-            text: 'Koleksi SKMEI Elegance Original mengutamakan tampilan yang lebih clean dan elegan. Jam original SKMEI dipadukan dengan strap brick untuk menghasilkan kombinasi antara gaya elegan dan playful.'
-        },
-        en: {
-            title: 'SKMEI Elegance Original',
-            text: 'The SKMEI Elegance Original collection focuses on a clean and elegant appearance. Original SKMEI watches are combined with brick straps to create a balance between elegant and playful styling.'
-        }
-    },
-
-    15: {
-        id: {
-            title: 'Q&Q Elegance Original',
-            text: 'Koleksi Q&Q Elegance Original menawarkan desain yang clean dan elegan untuk penggunaan sehari-hari maupun acara tertentu. Dipadukan dengan strap brick khas XWing Project untuk memberikan karakter yang lebih unik.'
-        },
-        en: {
-            title: 'Q&Q Elegance Original',
-            text: 'The Q&Q Elegance Original collection offers a clean and elegant design suitable for everyday use and various occasions. The distinctive XWing Project brick strap adds a unique character to the watch.'
-        }
-    }
-
-};
+import {
+    CATEGORY_DESCRIPTIONS
+} from './categoryDescriptions.js';
 
 
-// =========================================================
-// CATALOG CLASS
-// =========================================================
 
 export class Catalog {
 
+
     constructor(data) {
 
-        this.data = Array.isArray(data) ? data : [];
 
-        // =================================================
+        this.data = data;
+
+
+        // =====================================================
         // ELEMENTS
-        // =================================================
+        // =====================================================
 
         this.categoriesSection =
-            document.getElementById('categories-section');
+            document.getElementById(
+                'categories-section'
+            );
+
 
         this.productsSection =
-            document.getElementById('products-section');
+            document.getElementById(
+                'products-section'
+            );
+
 
         this.categoriesGrid =
-            document.getElementById('categories-grid');
+            document.getElementById(
+                'categories-grid'
+            );
+
 
         this.productsGrid =
-            document.getElementById('products-grid');
+            document.getElementById(
+                'products-grid'
+            );
+
 
         this.categoryTitle =
-            document.getElementById('category-title');
+            document.getElementById(
+                'category-title'
+            );
+
 
         this.backButton =
-            document.getElementById('back-button');
+            document.getElementById(
+                'back-button'
+            );
+
 
         this.searchInput =
-            document.getElementById('search-input');
+            document.getElementById(
+                'search-input'
+            );
 
 
-        // =================================================
-        // CATEGORY DESCRIPTION ELEMENTS
-        // =================================================
+        // =====================================================
+        // CATEGORY DESCRIPTION
+        // =====================================================
 
         this.categoryDescription =
-            document.getElementById('category-description');
+            document.getElementById(
+                'category-description'
+            );
 
-        this.categoryDescriptionContent =
-            document.getElementById('category-description-content');
+
+        this.categoryDescriptionLabel =
+            document.getElementById(
+                'category-description-label'
+            );
 
 
-        // =================================================
+        this.categoryDescriptionTitle =
+            document.getElementById(
+                'category-description-title'
+            );
+
+
+        this.categoryDescriptionText =
+            document.getElementById(
+                'category-description-text'
+            );
+
+
+
+        // =====================================================
         // CART
-        // =================================================
+        // =====================================================
 
-        this.cart = new Cart();
+        this.cart =
+            new Cart();
 
 
-        // =================================================
+
+        // =====================================================
         // CURRENT VIEW
-        // =================================================
+        // =====================================================
 
-        this.currentView = 'categories';
-
-        this.currentProducts = [];
-
-        this.currentCategoryId = null;
-
-        this.currentCategoryName = '';
-
-        this.currentSearchQuery = '';
+        this.currentView =
+            'categories';
 
 
-        // =================================================
-        // GLOBAL CATALOG
-        // =================================================
-
-        window.catalog = this;
+        this.currentProducts =
+            [];
 
 
-        // =================================================
+        this.currentCategoryId =
+            null;
+
+
+        this.currentCategoryName =
+            '';
+
+
+        this.currentSearchQuery =
+            '';
+
+
+
+        // =====================================================
+        // GLOBAL
+        // =====================================================
+
+        window.catalog =
+            this;
+
+
+
+        // =====================================================
         // EVENTS
-        // =================================================
+        // =====================================================
 
         this.initEvents();
 
 
-        // =================================================
+
+        // =====================================================
         // LANGUAGE CHANGE
-        // =================================================
+        // =====================================================
 
         window.addEventListener(
             'languageChanged',
             () => {
+
                 this.refreshCurrentView();
+
             }
         );
 
     }
 
 
+
     // =====================================================
     // TRANSLATION
     // =====================================================
 
-    getTranslation(key, fallback = '') {
+    getTranslation(
+        key,
+        fallback = ''
+    ) {
+
 
         if (
             window.currentLanguage &&
             window.currentLanguage[key]
         ) {
-            return window.currentLanguage[key];
+
+            return (
+                window.currentLanguage[key]
+            );
+
         }
 
+
         return fallback;
+
     }
+
 
 
     // =====================================================
@@ -298,11 +194,19 @@ export class Catalog {
 
     getCurrentLanguage() {
 
+
         return (
-            localStorage.getItem('language') || 'id'
+
+            localStorage.getItem(
+                'language'
+            )
+
+            || 'id'
+
         );
 
     }
+
 
 
     // =====================================================
@@ -311,49 +215,90 @@ export class Catalog {
 
     formatPrice(price) {
 
+
         const numericPrice =
             parseFloat(price) || 0;
+
 
         const language =
             this.getCurrentLanguage();
 
 
-        if (language === 'id') {
+
+        // =================================================
+        // INDONESIAN
+        // =================================================
+
+        if (
+            language === 'id'
+        ) {
+
 
             return new Intl.NumberFormat(
                 'id-ID',
                 {
-                    style: 'currency',
-                    currency: 'IDR',
-                    minimumFractionDigits: 0,
-                    maximumFractionDigits: 0
+
+                    style:
+                        'currency',
+
+                    currency:
+                        'IDR',
+
+                    minimumFractionDigits:
+                        0,
+
+                    maximumFractionDigits:
+                        0
+
                 }
-            ).format(numericPrice);
+            ).format(
+                numericPrice
+            );
 
         }
 
 
-        const USD_RATE = 15000;
+
+        // =================================================
+        // ENGLISH / USD
+        // =================================================
+
+        const USD_RATE =
+            15000;
+
 
         const usdPrice =
-            numericPrice / USD_RATE;
+            numericPrice /
+            USD_RATE;
 
 
         return new Intl.NumberFormat(
             'en-US',
             {
-                style: 'currency',
-                currency: 'USD',
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
+
+                style:
+                    'currency',
+
+                currency:
+                    'USD',
+
+                minimumFractionDigits:
+                    2,
+
+                maximumFractionDigits:
+                    2
+
             }
-        ).format(usdPrice);
+        ).format(
+            usdPrice
+        );
 
     }
 
 
+
     // =====================================================
-    // GET PRICE WITH SIZE
+    // PRICE WITH SIZE
     // =====================================================
 
     getPriceWithSize(
@@ -361,31 +306,45 @@ export class Catalog {
         selectedSize
     ) {
 
-        let extraPrice = 0;
+
+        let extraPrice =
+            0;
 
 
         if (
-            selectedSize === 'Large (20 cm)'
+            selectedSize ===
+            'Large (20 cm)'
         ) {
 
-            extraPrice = 15000;
+            extraPrice =
+                15000;
 
         }
 
+
         else if (
-            selectedSize === 'Xtra Large (25 cm)'
+            selectedSize ===
+            'Xtra Large (25 cm)'
         ) {
 
-            extraPrice = 30000;
+            extraPrice =
+                30000;
 
         }
 
 
         return (
-            parseFloat(basePrice) + extraPrice
+
+            parseFloat(
+                basePrice
+            )
+
+            + extraPrice
+
         );
 
     }
+
 
 
     // =====================================================
@@ -394,51 +353,65 @@ export class Catalog {
 
     initEvents() {
 
-        // =================================================
-        // BACK BUTTON
-        // =================================================
 
-        if (this.backButton) {
+        // BACK
+
+        if (
+            this.backButton
+        ) {
 
             this.backButton.addEventListener(
                 'click',
                 () => {
+
                     this.showCategories();
+
                 }
             );
 
         }
 
 
-        // =================================================
-        // SEARCH
-        // =================================================
 
-        if (this.searchInput) {
+        // SEARCH
+
+        if (
+            this.searchInput
+        ) {
 
             this.searchInput.addEventListener(
                 'input',
                 (e) => {
-                    this.handleSearch(e.target.value);
+
+                    this.handleSearch(
+                        e.target.value
+                    );
+
                 }
             );
 
         }
 
 
-        // =================================================
+
         // IMAGE MODAL
-        // =================================================
 
         const modal =
-            document.getElementById('imageModal');
+            document.getElementById(
+                'imageModal'
+            );
+
 
         if (modal) {
 
             modal.addEventListener(
                 'click',
                 () => {
-                    modal.classList.remove('show');
+
+                    modal.classList.remove(
+                        'show'
+                    );
+
                 }
             );
 
@@ -447,14 +420,16 @@ export class Catalog {
     }
 
 
+
     // =====================================================
     // SEARCH
     // =====================================================
 
     handleSearch(query) {
 
+
         const searchTerm =
-            String(query)
+            query
                 .toLowerCase()
                 .trim();
 
@@ -474,21 +449,35 @@ export class Catalog {
             this.data.filter(
                 product => {
 
+
                     const productName =
                         String(
-                            product.product_name || ''
-                        ).toLowerCase();
+                            product.product_name ||
+                            ''
+                        )
+                        .toLowerCase();
 
 
                     const categoryName =
                         String(
-                            product.category_name || ''
-                        ).toLowerCase();
+                            product.category_name ||
+                            ''
+                        )
+                        .toLowerCase();
 
 
                     return (
-                        productName.includes(searchTerm) ||
-                        categoryName.includes(searchTerm)
+
+                        productName.includes(
+                            searchTerm
+                        )
+
+                        ||
+
+                        categoryName.includes(
+                            searchTerm
+                        )
+
                     );
 
                 }
@@ -503,6 +492,7 @@ export class Catalog {
     }
 
 
+
     // =====================================================
     // SEARCH RESULTS
     // =====================================================
@@ -512,30 +502,43 @@ export class Catalog {
         query
     ) {
 
-        this.currentView = 'search';
 
-        this.currentProducts = results;
-
-        this.currentSearchQuery = query;
+        this.currentView =
+            'search';
 
 
-        this.categoriesSection.classList.add(
-            'hidden'
-        );
+        this.currentProducts =
+            results;
 
-        this.productsSection.classList.remove(
-            'hidden'
-        );
+
+        this.currentSearchQuery =
+            query;
+
+
+        this.categoriesSection
+            .classList.add(
+                'hidden'
+            );
+
+
+        this.productsSection
+            .classList.remove(
+                'hidden'
+            );
 
 
         this.hideCategoryDescription();
 
 
-        if (this.backButton) {
 
-            this.backButton.classList.remove(
-                'hidden'
-            );
+        if (
+            this.backButton
+        ) {
+
+            this.backButton
+                .classList.remove(
+                    'hidden'
+                );
 
         }
 
@@ -543,7 +546,7 @@ export class Catalog {
         const searchResult =
             this.getTranslation(
                 'searchResult',
-                'Hasil Pencarian:'
+                'Search Results:'
             );
 
 
@@ -551,9 +554,12 @@ export class Catalog {
             `${searchResult} "${query}"`;
 
 
-        this.renderProducts(results);
+        this.renderProducts(
+            results
+        );
 
     }
+
 
 
     // =====================================================
@@ -562,25 +568,23 @@ export class Catalog {
 
     buildCategories() {
 
-        this.currentView = 'categories';
 
-        this.hideCategoryDescription();
-
-
-        if (!this.categoriesGrid) {
-            return;
-        }
+        this.currentView =
+            'categories';
 
 
-        this.categoriesGrid.innerHTML = '';
+        this.categoriesGrid.innerHTML =
+            '';
 
 
         const categoriesMap =
             new Map();
 
 
+
         this.data.forEach(
             item => {
+
 
                 if (
                     !categoriesMap.has(
@@ -588,14 +592,26 @@ export class Catalog {
                     )
                 ) {
 
+
                     categoriesMap.set(
                         item.category_id,
                         {
-                            id: item.category_id,
-                            name: item.category_name,
-                            image: item.category_image,
-                            rating: item.category_rating,
-                            sold: item.category_sold
+
+                            id:
+                                item.category_id,
+
+                            name:
+                                item.category_name,
+
+                            image:
+                                item.category_image,
+
+                            rating:
+                                item.category_rating,
+
+                            sold:
+                                item.category_sold
+
                         }
                     );
 
@@ -605,50 +621,59 @@ export class Catalog {
         );
 
 
+
         const categories =
             Array.from(
                 categoriesMap.values()
             );
 
 
+
         if (
             categories.length === 0
         ) {
 
-            const noCategory =
-                this.getTranslation(
-                    'noCategory',
-                    'Tidak ada kategori ditemukan.'
-                );
-
 
             this.categoriesGrid.innerHTML = `
+
                 <div class="loading">
-                    ${noCategory}
+
+                    Tidak ada kategori ditemukan.
+
                 </div>
+
             `;
+
 
             return;
 
         }
 
 
+
         categories.forEach(
             category => {
 
+
                 const card =
-                    document.createElement('div');
+                    document.createElement(
+                        'div'
+                    );
 
 
-                card.className = 'card';
+                card.className =
+                    'card';
 
 
                 card.innerHTML = `
+
                     <div class="card-img-wrapper">
 
                         <img
                             src="assets/categories/${category.image}"
+
                             alt="${category.name}"
+
                             onerror="
                                 this.src='https://placehold.co/400x300?text=${encodeURIComponent(category.name)}'
                             "
@@ -656,25 +681,42 @@ export class Catalog {
 
                     </div>
 
-                    <div class="card-content category-card-content">
 
-                        <h3 class="card-title">
+                    <div
+                        class="card-content category-card-content"
+                    >
+
+                        <h3
+                            class="card-title"
+                        >
+
                             ${category.name}
+
                         </h3>
 
+
                         <div class="category-rating">
+
                             ⭐ ${category.rating || 0}
+
                             |
-                            ${category.sold || 0} Sold
+
+                            ${category.sold || 0}
+
+                            Sold
+
                         </div>
 
                     </div>
+
                 `;
+
 
 
                 card.addEventListener(
                     'click',
                     () => {
+
 
                         this.showProductsByCategory(
                             category.id,
@@ -685,14 +727,17 @@ export class Catalog {
                 );
 
 
-                this.categoriesGrid.appendChild(
-                    card
-                );
+
+                this.categoriesGrid
+                    .appendChild(
+                        card
+                    );
 
             }
         );
 
     }
+
 
 
     // =====================================================
@@ -704,37 +749,50 @@ export class Catalog {
         category_name
     ) {
 
-        this.currentView = 'products';
+
+        this.currentView =
+            'products';
+
 
         this.currentCategoryId =
             category_id;
+
 
         this.currentCategoryName =
             category_name;
 
 
-        this.categoriesSection.classList.add(
-            'hidden'
-        );
 
-        this.productsSection.classList.remove(
-            'hidden'
-        );
-
-
-        if (this.backButton) {
-
-            this.backButton.classList.remove(
+        this.categoriesSection
+            .classList.add(
                 'hidden'
             );
 
+
+        this.productsSection
+            .classList.remove(
+                'hidden'
+            );
+
+
+
+        if (
+            this.backButton
+        ) {
+
+            this.backButton
+                .classList.remove(
+                    'hidden'
+                );
+
         }
+
 
 
         const productText =
             this.getTranslation(
                 'product',
-                'Produk:'
+                'Product:'
             );
 
 
@@ -742,20 +800,29 @@ export class Catalog {
             `${productText} ${category_name}`;
 
 
+
         const products =
             this.data.filter(
                 item =>
-                    item.category_id === category_id
+                    String(
+                        item.category_id
+                    ) ===
+                    String(
+                        category_id
+                    )
             );
+
 
 
         this.currentProducts =
             products;
 
 
+
         this.renderProducts(
             products
         );
+
 
 
         // =================================================
@@ -770,6 +837,7 @@ export class Catalog {
     }
 
 
+
     // =====================================================
     // RENDER CATEGORY DESCRIPTION
     // =====================================================
@@ -779,9 +847,10 @@ export class Catalog {
         categoryName
     ) {
 
+
         if (
             !this.categoryDescription ||
-            !this.categoryDescriptionContent
+            !this.categoryDescriptionText
         ) {
 
             return;
@@ -789,13 +858,21 @@ export class Catalog {
         }
 
 
-        const categoryData =
+
+        const description =
             CATEGORY_DESCRIPTIONS[
-                String(categoryId)
+                categoryId
             ];
 
 
-        if (!categoryData) {
+
+        // =================================================
+        // NO DESCRIPTION
+        // =================================================
+
+        if (
+            !description
+        ) {
 
             this.hideCategoryDescription();
 
@@ -804,61 +881,85 @@ export class Catalog {
         }
 
 
+
         const language =
             this.getCurrentLanguage();
 
 
-        const description =
-            categoryData[language] ||
-            categoryData.id;
+
+        const text =
+            description[
+                language
+            ]
+            ||
+            description.id
+            ||
+            description.en
+            ||
+            '';
 
 
-        const descriptionTitle =
-            this.getTranslation(
-                'categoryDescription',
-                'Tentang Kategori Ini'
+
+        if (
+            !text.trim()
+        ) {
+
+            this.hideCategoryDescription();
+
+            return;
+
+        }
+
+
+
+        // =================================================
+        // TITLE
+        // =================================================
+
+        const title =
+            language === 'en'
+                ? 'About This Collection'
+                : 'Tentang Koleksi Ini';
+
+
+
+        if (
+            this.categoryDescriptionLabel
+        ) {
+
+            this.categoryDescriptionLabel
+                .textContent =
+                    title;
+
+        }
+
+
+
+        if (
+            this.categoryDescriptionTitle
+        ) {
+
+            this.categoryDescriptionTitle
+                .textContent =
+                    categoryName;
+
+        }
+
+
+
+        this.categoryDescriptionText
+            .textContent =
+                text;
+
+
+
+        this.categoryDescription
+            .classList.remove(
+                'hidden'
             );
 
-
-        this.categoryDescriptionContent.innerHTML = `
-
-            <div class="category-description-header">
-
-                <div class="category-description-icon">
-                    ℹ
-                </div>
-
-                <div>
-
-                    <span class="category-description-label">
-                        ${descriptionTitle}
-                    </span>
-
-                    <h3>
-                        ${description.title || categoryName}
-                    </h3>
-
-                </div>
-
-            </div>
-
-
-            <div class="category-description-text">
-
-                <p>
-                    ${description.text}
-                </p>
-
-            </div>
-
-        `;
-
-
-        this.categoryDescription.classList.remove(
-            'hidden'
-        );
-
     }
+
 
 
     // =====================================================
@@ -867,51 +968,56 @@ export class Catalog {
 
     hideCategoryDescription() {
 
-        if (this.categoryDescription) {
 
-            this.categoryDescription.classList.add(
-                'hidden'
-            );
+        if (
+            this.categoryDescription
+        ) {
+
+            this.categoryDescription
+                .classList.add(
+                    'hidden'
+                );
 
         }
 
     }
 
 
+
     // =====================================================
     // RENDER PRODUCTS
     // =====================================================
 
-    renderProducts(products) {
-
-        if (!this.productsGrid) {
-            return;
-        }
+    renderProducts(
+        products
+    ) {
 
 
-        this.productsGrid.innerHTML = '';
+        this.productsGrid.innerHTML =
+            '';
+
 
 
         if (
             products.length === 0
         ) {
 
-            const noProduct =
-                this.getTranslation(
-                    'noProduct',
-                    'Tidak ada produk ditemukan.'
-                );
-
 
             this.productsGrid.innerHTML = `
+
                 <div class="loading">
-                    ${noProduct}
+
+                    Tidak ada produk ditemukan.
+
                 </div>
+
             `;
+
 
             return;
 
         }
+
 
 
         products.forEach(
@@ -927,16 +1033,32 @@ export class Catalog {
     }
 
 
+
     // =====================================================
     // PRODUCT CARD
     // =====================================================
 
-    renderProductCard(product) {
+    renderProductCard(
+        product
+    ) {
+
 
         const formattedPrice =
             this.formatPrice(
                 product.price
             );
+
+
+
+        const card =
+            document.createElement(
+                'div'
+            );
+
+
+        card.className =
+            'card';
+
 
 
         // =================================================
@@ -964,19 +1086,9 @@ export class Catalog {
             );
 
 
-        // =================================================
-        // CREATE CARD
-        // =================================================
-
-        const card =
-            document.createElement('div');
-
-
-        card.className = 'card';
-
 
         // =================================================
-        // PRODUCT HTML
+        // HTML
         // =================================================
 
         card.innerHTML = `
@@ -985,8 +1097,11 @@ export class Catalog {
 
                 <img
                     src="assets/products/${product.product_image}"
+
                     alt="${product.product_name}"
+
                     class="product-image clickable-image"
+
                     onerror="
                         this.src='https://placehold.co/400x400?text=${encodeURIComponent(product.product_name)}'
                     "
@@ -997,44 +1112,64 @@ export class Catalog {
 
             <div class="card-content">
 
+
                 <h3 class="card-title">
+
                     ${product.product_name}
+
                 </h3>
 
 
                 <div class="card-price">
+
                     ${formattedPrice}
+
                 </div>
 
 
                 <div class="product-rating">
+
                     ⭐ ${product.rating || 4.8}
+
                 </div>
 
 
                 <div class="product-size">
 
                     <label class="size-label">
+
                         ${sizeText}:
+
                     </label>
 
 
                     <select class="size-select">
 
                         <option value="Small (12 cm)">
+
                             Small (12 cm)
+
                         </option>
+
 
                         <option value="Medium (15 cm)">
+
                             Medium (15 cm)
+
                         </option>
+
 
                         <option value="Large (20 cm)">
+
                             Large (20 cm)
+
                         </option>
 
+
                         <option value="Xtra Large (25 cm)">
+
                             Xtra Large (25 cm)
+
                         </option>
 
                     </select>
@@ -1044,10 +1179,13 @@ export class Catalog {
 
                 <div class="card-actions">
 
+
                     <button
                         class="btn btn-cart add-to-cart-btn"
                     >
+
                         ${addCartText}
+
                     </button>
 
 
@@ -1057,18 +1195,23 @@ export class Catalog {
                         rel="noopener"
                         class="btn btn-whatsapp btn-buy-now"
                     >
+
                         ${buyText}
+
                     </a>
 
+
                 </div>
+
 
             </div>
 
         `;
 
 
+
         // =================================================
-        // SIZE SELECT
+        // SIZE
         // =================================================
 
         const sizeSelect =
@@ -1077,15 +1220,18 @@ export class Catalog {
             );
 
 
+
         // =================================================
-        // ADD TO CART
+        // ADD CART
         // =================================================
 
         card.querySelector(
             '.add-to-cart-btn'
-        ).addEventListener(
+        )
+        .addEventListener(
             'click',
             (e) => {
+
 
                 e.stopPropagation();
 
@@ -1116,6 +1262,7 @@ export class Catalog {
         );
 
 
+
         // =================================================
         // BUY NOW
         // =================================================
@@ -1126,8 +1273,10 @@ export class Catalog {
             );
 
 
+
         const updateWhatsApp =
             () => {
+
 
                 const selectedSize =
                     sizeSelect.value;
@@ -1141,7 +1290,8 @@ export class Catalog {
 
 
                 const number =
-                    STORE_CONFIG.whatsappNumber;
+                    STORE_CONFIG
+                        .whatsappNumber;
 
 
                 const language =
@@ -1151,25 +1301,35 @@ export class Catalog {
                 let priceText;
 
 
+
                 if (
                     language === 'en'
                 ) {
+
 
                     const USD_RATE =
                         15000;
 
 
                     const usdPrice =
-                        finalPrice / USD_RATE;
+                        finalPrice /
+                        USD_RATE;
 
 
                     priceText =
                         new Intl.NumberFormat(
                             'en-US',
                             {
-                                style: 'currency',
-                                currency: 'USD',
-                                minimumFractionDigits: 2
+
+                                style:
+                                    'currency',
+
+                                currency:
+                                    'USD',
+
+                                minimumFractionDigits:
+                                    2
+
                             }
                         ).format(
                             usdPrice
@@ -1177,7 +1337,9 @@ export class Catalog {
 
                 }
 
+
                 else {
+
 
                     priceText =
                         this.formatPrice(
@@ -1187,8 +1349,12 @@ export class Catalog {
                 }
 
 
+
                 const message =
-                    `Halo, saya tertarik membeli ${product.product_name}. Size: ${selectedSize}. Harga: ${priceText}`;
+                    `Halo, saya tertarik membeli ${product.product_name}. ` +
+                    `Size: ${selectedSize}. ` +
+                    `Harga: ${priceText}`;
+
 
 
                 const encodedMessage =
@@ -1197,13 +1363,16 @@ export class Catalog {
                     );
 
 
+
                 buyButton.href =
                     `https://wa.me/${number}?text=${encodedMessage}`;
 
             };
 
 
+
         updateWhatsApp();
+
 
 
         sizeSelect.addEventListener(
@@ -1212,8 +1381,9 @@ export class Catalog {
         );
 
 
+
         // =================================================
-        // IMAGE ZOOM
+        // IMAGE MODAL
         // =================================================
 
         const image =
@@ -1222,54 +1392,55 @@ export class Catalog {
             );
 
 
-        if (image) {
-
-            image.addEventListener(
-                'click',
-                () => {
-
-                    const modal =
-                        document.getElementById(
-                            'imageModal'
-                        );
+        image.addEventListener(
+            'click',
+            () => {
 
 
-                    const modalImage =
-                        document.getElementById(
-                            'modalImage'
-                        );
+                const modal =
+                    document.getElementById(
+                        'imageModal'
+                    );
 
 
-                    if (
-                        modal &&
-                        modalImage
-                    ) {
-
-                        modalImage.src =
-                            `assets/products/${product.product_image}`;
+                const modalImage =
+                    document.getElementById(
+                        'modalImage'
+                    );
 
 
-                        modal.classList.add(
-                            'show'
-                        );
+                if (
+                    modal &&
+                    modalImage
+                ) {
 
-                    }
+
+                    modalImage.src =
+                        `assets/products/${product.product_image}`;
+
+
+                    modal.classList.add(
+                        'show'
+                    );
 
                 }
-            );
 
-        }
+            }
+        );
+
 
 
         // =================================================
         // APPEND
         // =================================================
 
-        this.productsGrid.appendChild(
-            card
-        );
+        this.productsGrid
+            .appendChild(
+                card
+            );
 
     }
+
 
 
     // =====================================================
@@ -1278,9 +1449,6 @@ export class Catalog {
 
     refreshCurrentView() {
 
-        // =================================================
-        // CATEGORIES
-        // =================================================
 
         if (
             this.currentView ===
@@ -1294,14 +1462,12 @@ export class Catalog {
         }
 
 
-        // =================================================
-        // PRODUCTS
-        // =================================================
 
         if (
             this.currentView ===
             'products'
         ) {
+
 
             const productText =
                 this.getTranslation(
@@ -1319,6 +1485,9 @@ export class Catalog {
             );
 
 
+
+            // REFRESH DESCRIPTION
+
             this.renderCategoryDescription(
                 this.currentCategoryId,
                 this.currentCategoryName
@@ -1330,14 +1499,12 @@ export class Catalog {
         }
 
 
-        // =================================================
-        // SEARCH
-        // =================================================
 
         if (
             this.currentView ===
             'search'
         ) {
+
 
             const searchResult =
                 this.getTranslation(
@@ -1354,12 +1521,10 @@ export class Catalog {
                 this.currentProducts
             );
 
-
-            this.hideCategoryDescription();
-
         }
 
     }
+
 
 
     // =====================================================
@@ -1368,21 +1533,25 @@ export class Catalog {
 
     showCategories() {
 
+
         this.currentView =
             'categories';
 
 
-        this.productsSection.classList.add(
-            'hidden'
-        );
+        this.productsSection
+            .classList.add(
+                'hidden'
+            );
 
 
-        this.categoriesSection.classList.remove(
-            'hidden'
-        );
+        this.categoriesSection
+            .classList.remove(
+                'hidden'
+            );
 
 
         this.hideCategoryDescription();
+
 
 
         if (
@@ -1400,6 +1569,7 @@ export class Catalog {
     }
 
 
+
     // =====================================================
     // WHATSAPP LINK
     // =====================================================
@@ -1408,8 +1578,10 @@ export class Catalog {
         productName
     ) {
 
+
         const number =
-            STORE_CONFIG.whatsappNumber;
+            STORE_CONFIG
+                .whatsappNumber;
 
 
         const message =
