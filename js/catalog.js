@@ -13,7 +13,49 @@ const CATEGORY_DESCRIPTIONS = {
     1: {
         id: {
             title: 'Q&Q Analog Replica',
-            text: 'Koleksi Q&Q Analog Replica menghadirkan desain jam analog bergaya klasik dengan berbagai pilihan warna dan strap brick yang unik. Cocok untuk penggunaan sehari-hari maupun sebagai aksesori fashion yang playful dan berbeda.'
+            text: 'Ayo dapatkan Jam Tangan Custom brick Exclusive dari Xwing_project !
+
+
+
+Details :
+
+
+
+✔️ Bricks LEG0 ORIGINAL 100%
+
+✔️ Diameter Jam 3.4 cm 
+
+✔️ jam nya QO NON ORIGINAL yaa 
+
+✔️ bonus baterai 1 pc
+
+✔️ Dapat strap jam bawaan 
+
+✔️  Bonus Obeng plus  (+)  
+
+✔️ Kartu ucapan dari Xwing Project 
+
+
+
+
+
+❗️ SIZE:
+
+
+
+ALL SIZE / ADJUSTABLE (bisa dibesar - kecilkan) yaa..
+
+
+
+❗️Standard ukuran SMALL adalah untuk lingkar pergelangan tangan maksimal 12 cm.
+
+❗️Standard ukuran MEDIUM adalah untuk lingkar pergelangan tangan maksimal 15 cm.
+
+❗️Standard ukuran LARGE adalah untuk lingkar pergelangan tangan 15 - 20 cm.
+
+❗️ Standard ukuran XTRA LARGE adalah untuk lingkar pergelangan tangan 20 - 25 cm.
+
+❗️ Harap cantumkan ukuran lingkar tangan yaa bro sistt..'
         },
         en: {
             title: 'Q&Q Analog Replica',
