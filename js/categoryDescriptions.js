@@ -17,7 +17,7 @@ export const CATEGORY_DESCRIPTIONS = {
     1: {
 
         id:
-            '.',
+            'Hello world.',
 
         en:
             'Write the description for the first category here.'
